@@ -13,7 +13,7 @@ body {
 }
 
 /* =========================
-   9:16 ANA OYUN EKRANI
+   16:9 ANA OYUN EKRANI
 ========================= */
 
 #oyunEkrani {
@@ -22,8 +22,8 @@ body {
   top: 50%;
   transform: translate(-50%, -50%);
 
-  width: min(100vw, 56.25vh);
-  height: min(100vh, 177.78vw);
+  width: min(100vw, 177.78vh);
+  height: min(100vh, 56.25vw);
 
   background: #000;
   overflow: hidden;
@@ -75,10 +75,8 @@ body {
   z-index: 5;
 }
 
-/* EU GAMES LOGOSU */
-
 #euLogo {
-  width: 38%;
+  width: 20%;
   max-width: 300px;
 
   opacity: 0;
@@ -87,13 +85,11 @@ body {
   animation-delay: 1s;
 }
 
-/* DEVAM ETMEK İÇİN DOKUN */
-
 #devamButonu {
-  width: 55%;
+  width: 28%;
   max-width: 420px;
 
-  margin-top: 45px;
+  margin-top: 35px;
 
   opacity: 0;
 
@@ -111,8 +107,6 @@ body {
   -webkit-user-drag: none;
 }
 
-/* DEVAM BUTONU BASILDIĞINDA */
-
 #devamButonu:active {
   transform: scale(0.93) translateY(5px);
   filter: brightness(0.82);
@@ -125,8 +119,6 @@ body {
 #anaMenu {
   background: #000;
 }
-
-/* ARKA PLAN */
 
 #anaMenuArkaplan {
   position: absolute;
@@ -148,10 +140,10 @@ body {
 #muzeLogo {
   position: absolute;
 
-  width: 78%;
+  width: 42%;
 
   left: 50%;
-  top: 5%;
+  top: 3%;
 
   transform: translateX(-50%);
 
@@ -168,10 +160,10 @@ body {
 #baslaButonu {
   position: absolute;
 
-  width: 68%;
+  width: 34%;
 
   left: 50%;
-  top: 55%;
+  top: 56%;
 
   transform: translateX(-50%);
 
@@ -187,8 +179,6 @@ body {
   user-select: none;
   -webkit-user-drag: none;
 }
-
-/* BAŞLA BASILDIĞINDA */
 
 #baslaButonu:active {
   transform:
@@ -206,10 +196,10 @@ body {
 #nasilOynanirButonu {
   position: absolute;
 
-  width: 58%;
+  width: 28%;
 
   left: 50%;
-  top: 74%;
+  top: 72%;
 
   transform: translateX(-50%);
 
@@ -225,8 +215,6 @@ body {
   user-select: none;
   -webkit-user-drag: none;
 }
-
-/* NASIL OYNANIR BASILDIĞINDA */
 
 #nasilOynanirButonu:active {
   transform:
@@ -244,7 +232,7 @@ body {
 #altEuLogo {
   position: absolute;
 
-  width: 16%;
+  width: 8%;
 
   left: 50%;
   bottom: 2%;
@@ -264,8 +252,6 @@ body {
 #oynanisEkrani {
   background: #000;
 }
-
-/* OYUN ARKA PLANI */
 
 #oyunArkaplan {
   position: absolute;
@@ -290,7 +276,7 @@ body {
 .sanatciYuva {
   position: absolute;
 
-  width: 18%;
+  width: 9%;
   height: auto;
 
   z-index: 2;
@@ -304,34 +290,34 @@ body {
 
 .bordo1 {
   left: 12%;
-  top: 12%;
+  top: 8%;
 }
 
 .bordo2 {
-  left: 41%;
-  top: 12%;
+  left: 45.5%;
+  top: 8%;
 }
 
 .bordo3 {
-  left: 70%;
-  top: 12%;
+  left: 79%;
+  top: 8%;
 }
 
 /* 1. OYUNCU - LACİVERT */
 
 .lacivert1 {
   left: 12%;
-  top: 70%;
+  top: 66%;
 }
 
 .lacivert2 {
-  left: 41%;
-  top: 70%;
+  left: 45.5%;
+  top: 66%;
 }
 
 .lacivert3 {
-  left: 70%;
-  top: 70%;
+  left: 79%;
+  top: 66%;
 }
 
 /* =========================
