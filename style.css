@@ -487,6 +487,69 @@ body {
 
 
 /* =========================
+   SEÇİM YAZISI
+========================= */
+
+#secimYazisi {
+  position: absolute;
+
+  left: 50%;
+  top: 32%;
+
+  transform: translateX(-50%);
+
+  padding: 12px 28px;
+
+  background:
+    rgba(30, 18, 10, 0.88);
+
+  border:
+    2px solid #c7a15a;
+
+  border-radius: 12px;
+
+  color: #f5e7c4;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(14px, 1.4vw, 26px);
+
+  font-weight: bold;
+
+  letter-spacing: 1px;
+
+  text-align: center;
+
+  box-shadow:
+    0 5px 15px
+    rgba(0, 0, 0, 0.45);
+
+  z-index: 30;
+
+  pointer-events: none;
+}
+
+
+/* =========================
+   UÇAN SANATÇI KARTI
+========================= */
+
+.ucanSanatciKarti {
+  object-fit: fill;
+
+  filter:
+    drop-shadow(0 10px 10px rgba(0, 0, 0, 0.5));
+
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+
+/* =========================
    AÇILIŞ ANİMASYONLARI
 ========================= */
 
