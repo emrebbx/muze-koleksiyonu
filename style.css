@@ -12,6 +12,7 @@ body {
   overflow: hidden;
 }
 
+
 /* =========================
    TAM EKRAN OYUN ALANI
 ========================= */
@@ -26,6 +27,7 @@ body {
   background: #000;
   overflow: hidden;
 }
+
 
 /* =========================
    TÜM EKRANLAR
@@ -51,6 +53,7 @@ body {
   visibility: visible;
 }
 
+
 /* =========================
    AÇILIŞ EKRANI
 ========================= */
@@ -67,9 +70,8 @@ body {
   z-index: 5;
 }
 
-/* =========================
-   AÇILIŞ - EU GAMES LOGOSU
-========================= */
+
+/* EU GAMES LOGOSU */
 
 #euLogo {
   position: absolute;
@@ -92,9 +94,8 @@ body {
   -webkit-user-drag: none;
 }
 
-/* =========================
-   DEVAM ETMEK İÇİN DOKUN
-========================= */
+
+/* DEVAM ETMEK İÇİN DOKUN */
 
 #devamButonu {
   position: absolute;
@@ -133,6 +134,7 @@ body {
   filter: brightness(0.82);
 }
 
+
 /* =========================
    ANA MENÜ
 ========================= */
@@ -147,9 +149,8 @@ body {
   background: #000;
 }
 
-/* =========================
-   ANA MENÜ ARKA PLANI
-========================= */
+
+/* ANA MENÜ ARKA PLANI */
 
 #anaMenuArkaplan {
   position: absolute;
@@ -161,7 +162,6 @@ body {
   object-fit: cover;
   object-position: center;
 
-  /* %30 soluk */
   opacity: 0.7;
 
   z-index: 0;
@@ -171,9 +171,8 @@ body {
   pointer-events: none;
 }
 
-/* =========================
-   MÜZE KOLEKSİYONU LOGOSU
-========================= */
+
+/* MÜZE KOLEKSİYONU LOGOSU */
 
 #muzeLogo {
   position: absolute;
@@ -192,9 +191,8 @@ body {
   -webkit-user-drag: none;
 }
 
-/* =========================
-   BAŞLA BUTONU
-========================= */
+
+/* BAŞLA */
 
 #baslaButonu {
   position: absolute;
@@ -229,9 +227,8 @@ body {
   filter: brightness(0.82);
 }
 
-/* =========================
-   NASIL OYNANIR BUTONU
-========================= */
+
+/* NASIL OYNANIR */
 
 #nasilOynanirButonu {
   position: absolute;
@@ -266,9 +263,8 @@ body {
   filter: brightness(0.82);
 }
 
-/* =========================
-   ALT EU GAMES LOGOSU
-========================= */
+
+/* ALT EU GAMES */
 
 #altEuLogo {
   position: absolute;
@@ -287,6 +283,7 @@ body {
   -webkit-user-drag: none;
 }
 
+
 /* =========================
    OYNANIŞ EKRANI
 ========================= */
@@ -301,9 +298,8 @@ body {
   background: #000;
 }
 
-/* =========================
-   OYUN ARKA PLANI
-========================= */
+
+/* OYUN ARKA PLANI */
 
 #oyunArkaplan {
   position: absolute;
@@ -322,6 +318,7 @@ body {
   pointer-events: none;
 }
 
+
 /* =========================
    SANATÇI YUVALARI
 ========================= */
@@ -339,9 +336,8 @@ body {
   pointer-events: none;
 }
 
-/* =========================
-   2. OYUNCU - BORDO
-========================= */
+
+/* 2. OYUNCU */
 
 .bordo1 {
   left: 12%;
@@ -358,9 +354,8 @@ body {
   top: 8%;
 }
 
-/* =========================
-   1. OYUNCU - LACİVERT
-========================= */
+
+/* 1. OYUNCU */
 
 .lacivert1 {
   left: 12%;
@@ -377,6 +372,120 @@ body {
   top: 66%;
 }
 
+
+/* =========================
+   SANATÇI SEÇİM ALANI
+========================= */
+
+#sanatciSecimAlani {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  z-index: 10;
+
+  pointer-events: none;
+}
+
+
+/* =========================
+   KARIŞTIRMA DESTESİ
+========================= */
+
+#karistirmaDestesi {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 8%;
+
+  transform: translate(-50%, -50%);
+
+  perspective: 1000px;
+}
+
+.karistirmaKarti {
+  position: absolute;
+
+  width: 100%;
+  height: auto;
+
+  left: 0;
+  top: 0;
+
+  transform-origin: center;
+
+  filter:
+    drop-shadow(0 8px 8px rgba(0, 0, 0, 0.4));
+
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+
+/* =========================
+   12 KAPALI KART SIRASI
+========================= */
+
+#kapaliKartSirasi {
+  position: absolute;
+
+  width: 92%;
+
+  left: 4%;
+  top: 42%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+
+  transform: translateY(40px);
+}
+
+#kapaliKartSirasi.goster {
+  opacity: 1;
+  transform: translateY(0);
+
+  pointer-events: auto;
+}
+
+.kapaliSanatciKarti {
+  width: 6.6%;
+  height: auto;
+
+  cursor: pointer;
+
+  filter:
+    drop-shadow(0 7px 6px rgba(0, 0, 0, 0.45));
+
+  transition:
+    transform 0.18s ease,
+    filter 0.18s ease;
+
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.kapaliSanatciKarti:hover {
+  transform: translateY(-12px) scale(1.04);
+
+  filter:
+    brightness(1.08)
+    drop-shadow(0 12px 9px rgba(0, 0, 0, 0.55));
+}
+
+
 /* =========================
    AÇILIŞ ANİMASYONLARI
 ========================= */
@@ -384,6 +493,7 @@ body {
 @keyframes logoBelir {
   from {
     opacity: 0;
+
     transform:
       translateX(-50%)
       scale(0.9);
@@ -391,6 +501,7 @@ body {
 
   to {
     opacity: 1;
+
     transform:
       translateX(-50%)
       scale(1);
