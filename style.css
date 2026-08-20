@@ -12,37 +12,61 @@ body {
   overflow: hidden;
 }
 
+/* 9:16 DİKEY OYUN EKRANI */
 #acilisEkrani {
   position: fixed;
-  inset: 0;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  width: min(100vw, 56.25vh);
+  height: min(100vh, 177.78vw);
+
   background: #000;
 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  overflow: hidden;
+
+  /* İNCE BEYAZ ÇERÇEVE */
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  border-radius: 18px;
+
+  box-shadow:
+    0 0 10px rgba(255, 255, 255, 0.25),
+    0 0 30px rgba(255, 255, 255, 0.10);
 }
 
+/* EU GAMES LOGOSU */
 #euLogo {
   width: 38%;
   max-width: 300px;
+
   opacity: 0;
+
   animation: logoBelir 1.5s ease forwards;
   animation-delay: 1s;
 }
 
+/* DEVAM ETMEK İÇİN DOKUN */
 #devamButonu {
   width: 55%;
   max-width: 420px;
+
   margin-top: 45px;
 
   opacity: 0;
+
   animation: devamBelir 1s ease forwards;
   animation-delay: 2.5s;
 
   cursor: pointer;
 }
 
+/* LOGO BELİRME */
 @keyframes logoBelir {
   from {
     opacity: 0;
@@ -55,6 +79,7 @@ body {
   }
 }
 
+/* DEVAM BUTONU BELİRME */
 @keyframes devamBelir {
   from {
     opacity: 0;
