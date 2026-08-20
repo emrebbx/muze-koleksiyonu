@@ -31,61 +31,49 @@ const karistirmaDestesi =
 const kapaliKartSirasi =
   document.getElementById("kapaliKartSirasi");
 
+const lacivertYuvalar = [
+  document.querySelector(".lacivert1"),
+  document.querySelector(".lacivert2"),
+  document.querySelector(".lacivert3")
+];
+
+const bordoYuvalar = [
+  document.querySelector(".bordo1"),
+  document.querySelector(".bordo2"),
+  document.querySelector(".bordo3")
+];
+
 
 /* =========================
    12 SANATÇI
 ========================= */
 
 const sanatcilar = [
-  {
-    id: "vermeer",
-    dosya: "images/vermeer.png"
-  },
-  {
-    id: "van-gogh",
-    dosya: "images/van-gogh.png"
-  },
-  {
-    id: "velazquez",
-    dosya: "images/velazquez.png"
-  },
-  {
-    id: "monet",
-    dosya: "images/monet.png"
-  },
-  {
-    id: "leonardo",
-    dosya: "images/leonardo.png"
-  },
-  {
-    id: "munch",
-    dosya: "images/munch.png"
-  },
-  {
-    id: "rembrandt",
-    dosya: "images/rembrandt.png"
-  },
-  {
-    id: "osman-hamdi",
-    dosya: "images/osman-hamdi.png"
-  },
-  {
-    id: "cezanne",
-    dosya: "images/cezanne.png"
-  },
-  {
-    id: "mondrian",
-    dosya: "images/mondrian.png"
-  },
-  {
-    id: "durer",
-    dosya: "images/durer.png"
-  },
-  {
-    id: "millet",
-    dosya: "images/millet.png"
-  }
+  { id: "vermeer", dosya: "images/vermeer.png" },
+  { id: "van-gogh", dosya: "images/van-gogh.png" },
+  { id: "velazquez", dosya: "images/velazquez.png" },
+  { id: "monet", dosya: "images/monet.png" },
+  { id: "leonardo", dosya: "images/leonardo.png" },
+  { id: "munch", dosya: "images/munch.png" },
+  { id: "rembrandt", dosya: "images/rembrandt.png" },
+  { id: "osman-hamdi", dosya: "images/osman-hamdi.png" },
+  { id: "cezanne", dosya: "images/cezanne.png" },
+  { id: "mondrian", dosya: "images/mondrian.png" },
+  { id: "durer", dosya: "images/durer.png" },
+  { id: "millet", dosya: "images/millet.png" }
 ];
+
+
+/* =========================
+   OYUN DURUMU
+========================= */
+
+let aktifOyuncu = 1;
+
+let oyuncu1Secimleri = [];
+let oyuncu2Secimleri = [];
+
+let secimKilidi = false;
 
 
 /* =========================
@@ -127,19 +115,16 @@ function butonSesiCal() {
   butonTik.currentTime = 0;
 
   butonTik.play().catch((hata) => {
-
     console.log(
       "Buton sesi çalınamadı:",
       hata
     );
-
   });
 }
 
 
 /* =========================
    RANDOM KARIŞTIRMA
-   FISHER-YATES
 ========================= */
 
 function karistir(dizi) {
@@ -171,7 +156,7 @@ function karistir(dizi) {
 
 
 /* =========================
-   MÜZİĞİ YAVAŞÇA AÇ
+   MÜZİĞİ AÇ
 ========================= */
 
 function muzikAc(
@@ -200,22 +185,16 @@ function muzikAc(
       ilerleme;
 
     if (ilerleme < 1) {
-
-      requestAnimationFrame(
-        animasyon
-      );
-
+      requestAnimationFrame(animasyon);
     }
   }
 
-  requestAnimationFrame(
-    animasyon
-  );
+  requestAnimationFrame(animasyon);
 }
 
 
 /* =========================
-   MÜZİĞİ YAVAŞÇA KAPAT
+   MÜZİĞİ KAPAT
 ========================= */
 
 function muzikKapat(
@@ -245,9 +224,7 @@ function muzikKapat(
 
       if (ilerleme < 1) {
 
-        requestAnimationFrame(
-          animasyon
-        );
+        requestAnimationFrame(animasyon);
 
       } else {
 
@@ -259,15 +236,63 @@ function muzikKapat(
       }
     }
 
-    requestAnimationFrame(
-      animasyon
-    );
+    requestAnimationFrame(animasyon);
   });
 }
 
 
 /* =========================
-   GSAP GERÇEK DESTE SHUFFLE
+   SEÇİM YAZISI
+========================= */
+
+function secimYazisiniOlustur() {
+
+  let yazi =
+    document.getElementById("secimYazisi");
+
+  if (!yazi) {
+
+    yazi =
+      document.createElement("div");
+
+    yazi.id = "secimYazisi";
+
+    oynanisEkrani.appendChild(yazi);
+  }
+
+  return yazi;
+}
+
+
+function secimYazisiGoster(metin) {
+
+  const yazi =
+    secimYazisiniOlustur();
+
+  yazi.textContent = metin;
+
+  gsap.killTweensOf(yazi);
+
+  gsap.fromTo(
+    yazi,
+    {
+      opacity: 0,
+      scale: 0.85,
+      y: -10
+    },
+    {
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      duration: 0.4,
+      ease: "back.out(1.7)"
+    }
+  );
+}
+
+
+/* =========================
+   GSAP DESTE SHUFFLE
 ========================= */
 
 function gsapDesteKaristir(
@@ -281,12 +306,6 @@ function gsapDesteKaristir(
 
     const sagDeste =
       desteKartlari.slice(6, 12);
-
-
-    /*
-      Başlangıç:
-      kartlar tek düzgün deste halinde.
-    */
 
     desteKartlari.forEach(
       (kart, index) => {
@@ -303,7 +322,6 @@ function gsapDesteKaristir(
       }
     );
 
-
     const tl =
       gsap.timeline({
         defaults: {
@@ -311,11 +329,6 @@ function gsapDesteKaristir(
         },
         onComplete: resolve
       });
-
-
-    /*
-      1 — Deste biraz yukarı kalkar.
-    */
 
     tl.to(
       desteKartlari,
@@ -325,11 +338,6 @@ function gsapDesteKaristir(
         stagger: 0.01
       }
     );
-
-
-    /*
-      2 — 6 + 6 iki ayrı deste olur.
-    */
 
     tl.to(
       solDeste,
@@ -347,7 +355,6 @@ function gsapDesteKaristir(
         stagger: 0.025
       }
     );
-
 
     tl.to(
       sagDeste,
@@ -367,12 +374,6 @@ function gsapDesteKaristir(
       "<"
     );
 
-
-    /*
-      3 — İki deste içe doğru eğilir.
-      Riffle öncesi hazırlık.
-    */
-
     tl.to(
       solDeste,
       {
@@ -389,7 +390,6 @@ function gsapDesteKaristir(
         duration: 0.35
       }
     );
-
 
     tl.to(
       sagDeste,
@@ -408,11 +408,6 @@ function gsapDesteKaristir(
       },
       "<"
     );
-
-
-    /*
-      4 — Kartlar sırayla iç içe geçer.
-    */
 
     for (let i = 0; i < 6; i++) {
 
@@ -434,7 +429,6 @@ function gsapDesteKaristir(
         "riffle+=" + (i * 0.055)
       );
 
-
       tl.to(
         sagKart,
         {
@@ -444,16 +438,10 @@ function gsapDesteKaristir(
           duration: 0.18,
           ease: "power1.out"
         },
-        "riffle+=" + (i * 0.055 + 0.028)
+        "riffle+=" +
+          (i * 0.055 + 0.028)
       );
-
     }
-
-
-    /*
-      5 — İç içe geçen kartlar
-      tamamen tek deste olur.
-    */
 
     tl.to(
       desteKartlari,
@@ -477,51 +465,23 @@ function gsapDesteKaristir(
       ">"
     );
 
-
-    /*
-      6 — Deste masaya hafif oturur.
-    */
-
-    tl.to(
-      desteKartlari,
-      {
-        y: (index) =>
-          index * -0.28 + 4,
-
-        duration: 0.12,
-
-        ease: "power2.in"
-      }
-    );
-
-
-    tl.to(
-      desteKartlari,
-      {
-        y: (index) =>
-          index * -0.28,
-
-        duration: 0.14,
-
-        ease: "power2.out"
-      }
-    );
-
   });
 }
 
 
 /* =========================
-   12 SANATÇI KARTINI
-   HAZIRLA VE KARIŞTIR
+   KARTLARI KARIŞTIR
 ========================= */
 
 async function sanatciKartlariniKaristir() {
 
-  /*
-    Sanatçıların gerçek sırası
-    her yeni oyunda random.
-  */
+  aktifOyuncu = 1;
+
+  oyuncu1Secimleri = [];
+  oyuncu2Secimleri = [];
+
+  secimKilidi = false;
+
 
   const karisikSanatcilar =
     karistir(sanatcilar);
@@ -531,17 +491,12 @@ async function sanatciKartlariniKaristir() {
 
 
   karistirmaDestesi.innerHTML = "";
-
   kapaliKartSirasi.innerHTML = "";
 
   kapaliKartSirasi.classList.remove(
     "goster"
   );
 
-
-  /*
-    Ortada kapalı deste oluştur.
-  */
 
   karisikSanatcilar.forEach(
     (sanatci, index) => {
@@ -564,7 +519,6 @@ async function sanatciKartlariniKaristir() {
       karistirmaDestesi.appendChild(
         kart
       );
-
     }
   );
 
@@ -577,27 +531,13 @@ async function sanatciKartlariniKaristir() {
     );
 
 
-  /*
-    GSAP ile gerçek deste karıştırma.
-  */
-
   await gsapDesteKaristir(
     desteKartlari
   );
 
 
-  /*
-    Shuffle tamamlanınca
-    ortadaki deste kaldırılır.
-  */
-
   karistirmaDestesi.innerHTML = "";
 
-
-  /*
-    12 kapalı kart
-    soldan sağa dizilir.
-  */
 
   onIkiKartiDiz(
     karisikSanatcilar
@@ -606,7 +546,7 @@ async function sanatciKartlariniKaristir() {
 
 
 /* =========================
-   12 KARTI YAN YANA DİZ
+   12 KARTI DİZ
 ========================= */
 
 function onIkiKartiDiz(
@@ -637,11 +577,26 @@ function onIkiKartiDiz(
       kart.dataset.sira =
         index;
 
+      kart.dataset.secildi =
+        "hayir";
+
+
+      kart.addEventListener(
+        "click",
+        () => {
+
+          sanatciKartiSec(
+            kart,
+            sanatci
+          );
+
+        }
+      );
+
 
       kapaliKartSirasi.appendChild(
         kart
       );
-
     }
   );
 
@@ -653,6 +608,308 @@ function onIkiKartiDiz(
     );
 
   });
+
+
+  setTimeout(() => {
+
+    secimYazisiGoster(
+      "1. OYUNCU — 3 SANATÇI SEÇ"
+    );
+
+  }, 500);
+}
+
+
+/* =========================
+   SANATÇI KARTINI SEÇ
+========================= */
+
+function sanatciKartiSec(
+  kart,
+  sanatci
+) {
+
+  if (secimKilidi) return;
+
+  if (
+    kart.dataset.secildi === "evet"
+  ) {
+    return;
+  }
+
+
+  secimKilidi = true;
+
+  kart.dataset.secildi =
+    "evet";
+
+
+  /*
+    Kartı önce çevir.
+  */
+
+  gsap.to(
+    kart,
+    {
+      scaleX: 0,
+      duration: 0.2,
+      ease: "power2.in",
+
+      onComplete: () => {
+
+        kart.src =
+          sanatci.dosya;
+
+        gsap.to(
+          kart,
+          {
+            scaleX: 1,
+            duration: 0.22,
+            ease: "back.out(1.5)",
+
+            onComplete: () => {
+
+              setTimeout(() => {
+
+                kartiYuvayaGonder(
+                  kart,
+                  sanatci
+                );
+
+              }, 300);
+            }
+          }
+        );
+      }
+    }
+  );
+}
+
+
+/* =========================
+   KARTI YUVAYA GÖNDER
+========================= */
+
+function kartiYuvayaGonder(
+  kart,
+  sanatci
+) {
+
+  let hedefYuva;
+  let hedefIndex;
+
+
+  if (aktifOyuncu === 1) {
+
+    hedefIndex =
+      oyuncu1Secimleri.length;
+
+    hedefYuva =
+      lacivertYuvalar[
+        hedefIndex
+      ];
+
+  } else {
+
+    hedefIndex =
+      oyuncu2Secimleri.length;
+
+    hedefYuva =
+      bordoYuvalar[
+        hedefIndex
+      ];
+  }
+
+
+  const kartRect =
+    kart.getBoundingClientRect();
+
+  const yuvaRect =
+    hedefYuva.getBoundingClientRect();
+
+
+  /*
+    Uçacak kopyayı oluştur.
+  */
+
+  const ucanKart =
+    document.createElement("img");
+
+  ucanKart.src =
+    sanatci.dosya;
+
+  ucanKart.className =
+    "ucanSanatciKarti";
+
+
+  Object.assign(
+    ucanKart.style,
+    {
+      position: "fixed",
+
+      left:
+        kartRect.left + "px",
+
+      top:
+        kartRect.top + "px",
+
+      width:
+        kartRect.width + "px",
+
+      height:
+        kartRect.height + "px",
+
+      zIndex: 9999,
+
+      pointerEvents: "none"
+    }
+  );
+
+
+  document.body.appendChild(
+    ucanKart
+  );
+
+
+  kart.style.visibility =
+    "hidden";
+
+
+  gsap.to(
+    ucanKart,
+    {
+      left:
+        yuvaRect.left,
+
+      top:
+        yuvaRect.top,
+
+      width:
+        yuvaRect.width,
+
+      height:
+        yuvaRect.height,
+
+      rotation: 0,
+
+      duration: 0.65,
+
+      ease:
+        "power3.inOut",
+
+      onComplete: () => {
+
+        hedefYuva.src =
+          sanatci.dosya;
+
+        ucanKart.remove();
+
+        kart.remove();
+
+
+        if (aktifOyuncu === 1) {
+
+          oyuncu1Secimleri.push(
+            sanatci
+          );
+
+        } else {
+
+          oyuncu2Secimleri.push(
+            sanatci
+          );
+
+        }
+
+
+        secimKilidi = false;
+
+
+        secimDurumunuKontrolEt();
+      }
+    }
+  );
+}
+
+
+/* =========================
+   SEÇİM DURUMU
+========================= */
+
+function secimDurumunuKontrolEt() {
+
+  /*
+    1. oyuncu 3 kart seçti.
+  */
+
+  if (
+    aktifOyuncu === 1 &&
+    oyuncu1Secimleri.length === 3
+  ) {
+
+    aktifOyuncu = 2;
+
+    secimYazisiGoster(
+      "2. OYUNCU — 3 SANATÇI SEÇ"
+    );
+
+    return;
+  }
+
+
+  /*
+    2. oyuncu da 3 kart seçti.
+  */
+
+  if (
+    aktifOyuncu === 2 &&
+    oyuncu2Secimleri.length === 3
+  ) {
+
+    secimKilidi = true;
+
+
+    secimYazisiGoster(
+      "SANATÇILAR SEÇİLDİ"
+    );
+
+
+    /*
+      Kalan 6 kartı kaldır.
+    */
+
+    const kalanKartlar =
+      document.querySelectorAll(
+        ".kapaliSanatciKarti"
+      );
+
+
+    gsap.to(
+      kalanKartlar,
+      {
+        opacity: 0,
+        y: 40,
+        scale: 0.85,
+
+        duration: 0.5,
+
+        stagger: 0.05,
+
+        ease: "power2.in",
+
+        onComplete: () => {
+
+          kapaliKartSirasi.innerHTML =
+            "";
+
+          kapaliKartSirasi.classList.remove(
+            "goster"
+          );
+
+        }
+      }
+    );
+  }
 }
 
 
@@ -677,7 +934,6 @@ devamButonu.addEventListener(
 
 
     anaMenuMuzik.currentTime = 0;
-
     anaMenuMuzik.volume = 0;
 
 
@@ -702,7 +958,6 @@ devamButonu.addEventListener(
         );
 
       });
-
   }
 );
 
@@ -718,12 +973,7 @@ baslaButonu.addEventListener(
     butonSesiCal();
 
 
-    /*
-      Oyun müziğini sessiz başlat.
-    */
-
     oyunMuzik.currentTime = 0;
-
     oyunMuzik.volume = 0;
 
 
@@ -740,19 +990,11 @@ baslaButonu.addEventListener(
       });
 
 
-    /*
-      Menü müziğini yavaşça kapat.
-    */
-
     await muzikKapat(
       anaMenuMuzik,
       1000
     );
 
-
-    /*
-      Oyun ekranına geç.
-    */
 
     anaMenu.classList.remove(
       "aktif"
@@ -763,10 +1005,6 @@ baslaButonu.addEventListener(
     );
 
 
-    /*
-      Oyun müziğini yükselt.
-    */
-
     muzikAc(
       oyunMuzik,
       MUZIK_SESI,
@@ -774,16 +1012,11 @@ baslaButonu.addEventListener(
     );
 
 
-    /*
-      GSAP shuffle başlasın.
-    */
-
     setTimeout(() => {
 
       sanatciKartlariniKaristir();
 
     }, 400);
-
   }
 );
 
@@ -801,6 +1034,5 @@ nasilOynanirButonu.addEventListener(
     console.log(
       "Nasıl Oynanır butonuna basıldı!"
     );
-
   }
 );
