@@ -644,10 +644,6 @@ function sanatciKartiSec(
     "evet";
 
 
-  /*
-    Kartı önce çevir.
-  */
-
   gsap.to(
     kart,
     {
@@ -721,6 +717,13 @@ function kartiYuvayaGonder(
   }
 
 
+  if (!hedefYuva) {
+
+    secimKilidi = false;
+    return;
+  }
+
+
   const kartRect =
     kart.getBoundingClientRect();
 
@@ -728,9 +731,9 @@ function kartiYuvayaGonder(
     hedefYuva.getBoundingClientRect();
 
 
-  /*
-    Uçacak kopyayı oluştur.
-  */
+  /* =========================
+     UÇAN KART
+  ========================= */
 
   const ucanKart =
     document.createElement("img");
@@ -761,7 +764,9 @@ function kartiYuvayaGonder(
 
       zIndex: 9999,
 
-      pointerEvents: "none"
+      pointerEvents: "none",
+
+      opacity: "1"
     }
   );
 
@@ -792,6 +797,8 @@ function kartiYuvayaGonder(
 
       rotation: 0,
 
+      opacity: 1,
+
       duration: 0.65,
 
       ease:
@@ -799,11 +806,64 @@ function kartiYuvayaGonder(
 
       onComplete: () => {
 
-        hedefYuva.src =
+        /* =========================
+           YUVANIN ÜSTÜNE
+           GERÇEK KARTI YERLEŞTİR
+        ========================= */
+
+        const yerlesenKart =
+          document.createElement("img");
+
+        yerlesenKart.src =
           sanatci.dosya;
 
-        ucanKart.remove();
+        yerlesenKart.className =
+          "yerlesenSanatciKarti";
 
+
+        Object.assign(
+          yerlesenKart.style,
+          {
+            position: "fixed",
+
+            left:
+              yuvaRect.left + "px",
+
+            top:
+              yuvaRect.top + "px",
+
+            width:
+              yuvaRect.width + "px",
+
+            height:
+              yuvaRect.height + "px",
+
+            zIndex: 5,
+
+            opacity: "1",
+
+            pointerEvents: "auto",
+
+            objectFit: "fill",
+
+            userSelect: "none",
+
+            WebkitUserDrag: "none"
+          }
+        );
+
+
+        document.body.appendChild(
+          yerlesenKart
+        );
+
+
+        /*
+          YUVA AYNI KALIYOR.
+          hedefYuva.src ARTIK DEĞİŞMİYOR.
+        */
+
+        ucanKart.remove();
         kart.remove();
 
 
@@ -838,10 +898,6 @@ function kartiYuvayaGonder(
 
 function secimDurumunuKontrolEt() {
 
-  /*
-    1. oyuncu 3 kart seçti.
-  */
-
   if (
     aktifOyuncu === 1 &&
     oyuncu1Secimleri.length === 3
@@ -857,10 +913,6 @@ function secimDurumunuKontrolEt() {
   }
 
 
-  /*
-    2. oyuncu da 3 kart seçti.
-  */
-
   if (
     aktifOyuncu === 2 &&
     oyuncu2Secimleri.length === 3
@@ -873,10 +925,6 @@ function secimDurumunuKontrolEt() {
       "SANATÇILAR SEÇİLDİ"
     );
 
-
-    /*
-      Kalan 6 kartı kaldır.
-    */
 
     const kalanKartlar =
       document.querySelectorAll(
