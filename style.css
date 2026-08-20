@@ -13,17 +13,15 @@ body {
 }
 
 /* =========================
-   16:9 ANA OYUN EKRANI
+   TAM EKRAN OYUN ALANI
 ========================= */
 
 #oyunEkrani {
   position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  inset: 0;
 
-  width: min(100vw, 177.78vh);
-  height: min(100vh, 56.25vw);
+  width: 100vw;
+  height: 100vh;
 
   background: #000;
   overflow: hidden;
@@ -113,6 +111,8 @@ body {
   background: #000;
 }
 
+/* ANA MENÜ ARKA PLANI */
+
 #anaMenuArkaplan {
   position: absolute;
   inset: 0;
@@ -121,11 +121,13 @@ body {
   height: 100%;
 
   object-fit: cover;
+  object-position: center;
 
   z-index: 0;
 
   user-select: none;
   -webkit-user-drag: none;
+  pointer-events: none;
 }
 
 /* MÜZE KOLEKSİYONU LOGOSU */
@@ -246,6 +248,8 @@ body {
   background: #000;
 }
 
+/* OYUN ARKA PLANI */
+
 #oyunArkaplan {
   position: absolute;
   inset: 0;
@@ -254,6 +258,7 @@ body {
   height: 100%;
 
   object-fit: cover;
+  object-position: center;
 
   z-index: 0;
 
