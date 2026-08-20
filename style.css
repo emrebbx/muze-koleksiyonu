@@ -161,7 +161,7 @@ body {
   object-fit: cover;
   object-position: center;
 
-  /* Arka plan %30 soluk */
+  /* %30 soluk */
   opacity: 0.7;
 
   z-index: 0;
@@ -178,11 +178,11 @@ body {
 #muzeLogo {
   position: absolute;
 
-  width: 42%;
+  width: 30%;
   height: auto;
 
   left: 50%;
-  top: 3%;
+  top: 10%;
 
   transform: translateX(-50%);
 
@@ -199,11 +199,11 @@ body {
 #baslaButonu {
   position: absolute;
 
-  width: 34%;
+  width: 20%;
   height: auto;
 
   left: 50%;
-  top: 56%;
+  top: 50%;
 
   transform: translateX(-50%);
 
@@ -236,11 +236,11 @@ body {
 #nasilOynanirButonu {
   position: absolute;
 
-  width: 28%;
+  width: 15%;
   height: auto;
 
   left: 50%;
-  top: 72%;
+  top: 70%;
 
   transform: translateX(-50%);
 
