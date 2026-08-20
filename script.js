@@ -1,8 +1,14 @@
+/* =========================
+   EKRANLAR VE BUTONLAR
+========================= */
+
 const acilisEkrani = document.getElementById("acilisEkrani");
 const anaMenu = document.getElementById("anaMenu");
 
 const devamButonu = document.getElementById("devamButonu");
 const baslaButonu = document.getElementById("baslaButonu");
+const nasilOynanirButonu = document.getElementById("nasilOynanirButonu");
+
 
 /* =========================
    MÜZİKLER
@@ -17,11 +23,32 @@ oyunMuzik.loop = true;
 anaMenuMuzik.volume = 0.35;
 oyunMuzik.volume = 0.35;
 
+
 /* =========================
-   AÇILIŞ → ANA MENÜ
+   SES EFEKTLERİ
+========================= */
+
+const butonTik = new Audio("sounds/buton-tik.mp3");
+butonTik.volume = 0.65;
+
+
+/* Her basışta sesi baştan oynat */
+function butonSesiCal() {
+  butonTik.currentTime = 0;
+
+  butonTik.play().catch((hata) => {
+    console.log("Buton sesi çalınamadı:", hata);
+  });
+}
+
+
+/* =========================
+   DEVAM ETMEK İÇİN DOKUN
 ========================= */
 
 devamButonu.addEventListener("click", () => {
+
+  butonSesiCal();
 
   acilisEkrani.classList.remove("aktif");
   anaMenu.classList.add("aktif");
@@ -34,11 +61,14 @@ devamButonu.addEventListener("click", () => {
 
 });
 
+
 /* =========================
-   BAŞLA → OYUN MÜZİĞİ
+   BAŞLA
 ========================= */
 
 baslaButonu.addEventListener("click", () => {
+
+  butonSesiCal();
 
   anaMenuMuzik.pause();
   anaMenuMuzik.currentTime = 0;
@@ -50,5 +80,18 @@ baslaButonu.addEventListener("click", () => {
   });
 
   console.log("Oyun başlatıldı!");
+
+});
+
+
+/* =========================
+   NASIL OYNANIR
+========================= */
+
+nasilOynanirButonu.addEventListener("click", () => {
+
+  butonSesiCal();
+
+  console.log("Nasıl Oynanır butonuna basıldı!");
 
 });
