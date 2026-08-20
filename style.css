@@ -258,6 +258,32 @@ body {
 }
 
 /* =========================
+   OYNANIŞ EKRANI
+========================= */
+
+#oynanisEkrani {
+  background: #000;
+}
+
+/* OYUN ARKA PLANI */
+
+#oyunArkaplan {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  z-index: 0;
+
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
+
+/* =========================
    AÇILIŞ ANİMASYONLARI
 ========================= */
 
