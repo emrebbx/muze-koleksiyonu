@@ -128,6 +128,98 @@ body {
 
   filter: brightness(0.82);
 }
+
+/* =========================
+   ANA MENÜ
+========================= */
+
+#anaMenu {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background: #000;
+}
+
+/* ANA MENÜ ARKA PLANI */
+
+#anaMenuArkaplan {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+
+  z-index: 0;
+
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
+
+/* =========================
+   MÜZE KOLEKSİYONU LOGOSU
+========================= */
+
+#muzeLogo {
+  position: absolute;
+
+  width: 42%;
+  height: auto;
+
+  left: 50%;
+  top: 3%;
+
+  transform: translateX(-50%);
+
+  z-index: 2;
+
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* =========================
+   BAŞLA BUTONU
+========================= */
+
+#baslaButonu {
+  position: absolute;
+
+  width: 34%;
+  height: auto;
+
+  left: 50%;
+  top: 56%;
+
+  transform: translateX(-50%);
+
+  cursor: pointer;
+
+  z-index: 2;
+
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease;
+
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+#baslaButonu:active {
+  transform:
+    translateX(-50%)
+    scale(0.93)
+    translateY(5px);
+
+  filter: brightness(0.82);
+}
+
 /* =========================
    NASIL OYNANIR BUTONU
 ========================= */
@@ -136,6 +228,7 @@ body {
   position: absolute;
 
   width: 28%;
+  height: auto;
 
   left: 50%;
   top: 72%;
@@ -172,6 +265,7 @@ body {
   position: absolute;
 
   width: 8%;
+  height: auto;
 
   left: 50%;
   bottom: 2%;
@@ -189,6 +283,12 @@ body {
 ========================= */
 
 #oynanisEkrani {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
   background: #000;
 }
 
@@ -228,7 +328,9 @@ body {
   pointer-events: none;
 }
 
-/* 2. OYUNCU - BORDO */
+/* =========================
+   2. OYUNCU - BORDO
+========================= */
 
 .bordo1 {
   left: 12%;
@@ -245,7 +347,9 @@ body {
   top: 8%;
 }
 
-/* 1. OYUNCU - LACİVERT */
+/* =========================
+   1. OYUNCU - LACİVERT
+========================= */
 
 .lacivert1 {
   left: 12%;
@@ -277,6 +381,7 @@ body {
     transform: translateX(-50%) scale(1);
   }
 }
+
 @keyframes devamBelir {
   from {
     opacity: 0;
