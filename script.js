@@ -11,7 +11,6 @@ const anaMenu =
 const oynanisEkrani =
   document.getElementById("oynanisEkrani");
 
-
 const devamButonu =
   document.getElementById("devamButonu");
 
@@ -38,67 +37,54 @@ const kapaliKartSirasi =
 ========================= */
 
 const sanatcilar = [
-
   {
     id: "vermeer",
     dosya: "images/vermeer.png"
   },
-
   {
     id: "van-gogh",
     dosya: "images/van-gogh.png"
   },
-
   {
     id: "velazquez",
     dosya: "images/velazquez.png"
   },
-
   {
     id: "monet",
     dosya: "images/monet.png"
   },
-
   {
     id: "leonardo",
     dosya: "images/leonardo.png"
   },
-
   {
     id: "munch",
     dosya: "images/munch.png"
   },
-
   {
     id: "rembrandt",
     dosya: "images/rembrandt.png"
   },
-
   {
     id: "osman-hamdi",
     dosya: "images/osman-hamdi.png"
   },
-
   {
     id: "cezanne",
     dosya: "images/cezanne.png"
   },
-
   {
     id: "mondrian",
     dosya: "images/mondrian.png"
   },
-
   {
     id: "durer",
     dosya: "images/durer.png"
   },
-
   {
     id: "millet",
     dosya: "images/millet.png"
   }
-
 ];
 
 
@@ -120,7 +106,6 @@ const anaMenuMuzik =
 const oyunMuzik =
   new Audio("sounds/oyun-muzik.mp3");
 
-
 anaMenuMuzik.loop = true;
 oyunMuzik.loop = true;
 
@@ -137,18 +122,27 @@ const butonTik =
 
 butonTik.volume = BUTON_SESI;
 
-
 function butonSesiCal() {
 
   butonTik.currentTime = 0;
 
   butonTik.play().catch((hata) => {
-
     console.log(
       "Buton sesi çalınamadı:",
       hata
     );
+  });
+}
 
+
+/* =========================
+   BEKLEME
+========================= */
+
+function bekle(ms) {
+
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
   });
 
 }
@@ -156,7 +150,7 @@ function butonSesiCal() {
 
 /* =========================
    RANDOM KARIŞTIRMA
-   Fisher-Yates
+   FISHER-YATES
 ========================= */
 
 function karistir(dizi) {
@@ -181,7 +175,6 @@ function karistir(dizi) {
       yeniDizi[j],
       yeniDizi[i]
     ];
-
   }
 
   return yeniDizi;
@@ -204,7 +197,6 @@ function muzikAc(
   const baslangicSes =
     muzik.volume;
 
-
   function animasyon(zaman) {
 
     const ilerleme =
@@ -218,22 +210,12 @@ function muzikAc(
       (hedefSes - baslangicSes) *
       ilerleme;
 
-
     if (ilerleme < 1) {
-
-      requestAnimationFrame(
-        animasyon
-      );
-
+      requestAnimationFrame(animasyon);
     }
-
   }
 
-
-  requestAnimationFrame(
-    animasyon
-  );
-
+  requestAnimationFrame(animasyon);
 }
 
 
@@ -252,7 +234,6 @@ function muzikKapat(
   const baslangicSes =
     muzik.volume;
 
-
   return new Promise((resolve) => {
 
     function animasyon(zaman) {
@@ -263,11 +244,9 @@ function muzikKapat(
           1
         );
 
-
       muzik.volume =
         baslangicSes *
         (1 - ilerleme);
-
 
       if (ilerleme < 1) {
 
@@ -275,46 +254,286 @@ function muzikKapat(
           animasyon
         );
 
-      }
-
-      else {
+      } else {
 
         muzik.pause();
-
         muzik.currentTime = 0;
-
         muzik.volume = 0;
 
         resolve();
-
       }
-
     }
 
-
-    requestAnimationFrame(
-      animasyon
-    );
-
+    requestAnimationFrame(animasyon);
   });
+}
+
+
+/* =========================
+   KARTLARI KONUMLANDIR
+========================= */
+
+function kartlariKonumlandir(
+  kartlar,
+  konumFonksiyonu,
+  sure = 300
+) {
+
+  kartlar.forEach(
+    (kart, index) => {
+
+      const konum =
+        konumFonksiyonu(index);
+
+      kart.style.transition =
+        `transform ${sure}ms cubic-bezier(
+          0.22,
+          0.61,
+          0.36,
+          1
+        )`;
+
+      kart.style.transform = `
+        translate(
+          ${konum.x}px,
+          ${konum.y}px
+        )
+        rotate(${konum.aci}deg)
+      `;
+
+      if (konum.z !== undefined) {
+        kart.style.zIndex = konum.z;
+      }
+    }
+  );
 
 }
 
 
 /* =========================
-   12 KARTI KARIŞTIR
+   MASA ÜSTÜ SHUFFLE
 ========================= */
 
-function sanatciKartlariniKaristir() {
+async function masaUstuShuffle(
+  desteKartlari
+) {
 
-  const karisikSanatcilar =
-    karistir(sanatcilar);
+  /*
+    1 — Başlangıçta kartlar
+    hafif dağınık bir deste.
+  */
+
+  kartlariKonumlandir(
+    desteKartlari,
+    (index) => ({
+      x: index * 1.2,
+      y: index * -0.35,
+      aci: (index - 5.5) * 0.25,
+      z: index
+    }),
+    250
+  );
+
+  await bekle(350);
 
 
   /*
-    Bir sonraki seçim aşamasında
-    bu sırayı kullanacağız.
+    2 — Deste iki yana açılır.
+    İlk 6 sola,
+    diğer 6 sağa.
   */
+
+  kartlariKonumlandir(
+    desteKartlari,
+    (index) => {
+
+      const solGrup =
+        index < 6;
+
+      const grupIndex =
+        solGrup
+          ? index
+          : index - 6;
+
+      return {
+        x:
+          solGrup
+            ? -105 - grupIndex * 4
+            : 105 + grupIndex * 4,
+
+        y:
+          grupIndex * 2,
+
+        aci:
+          solGrup
+            ? -5 - grupIndex * 0.5
+            : 5 + grupIndex * 0.5,
+
+        z: index
+      };
+    },
+    320
+  );
+
+  await bekle(380);
+
+
+  /*
+    3 — İki grup birbirinin
+    üzerinden kayarak merkeze gelir.
+  */
+
+  kartlariKonumlandir(
+    desteKartlari,
+    (index) => {
+
+      const solGrup =
+        index < 6;
+
+      const grupIndex =
+        solGrup
+          ? index
+          : index - 6;
+
+      return {
+        x:
+          solGrup
+            ? -25 + grupIndex * 8
+            : 25 - grupIndex * 8,
+
+        y:
+          grupIndex * -1.5,
+
+        aci:
+          solGrup
+            ? -2
+            : 2,
+
+        z:
+          solGrup
+            ? index * 2
+            : index * 2 + 1
+      };
+    },
+    300
+  );
+
+  await bekle(350);
+
+
+  /*
+    4 — Kartlar tekrar
+    iki yana kayar.
+    Bu sefer daha kısa.
+  */
+
+  kartlariKonumlandir(
+    desteKartlari,
+    (index) => {
+
+      const solGrup =
+        index % 2 === 0;
+
+      const grupIndex =
+        Math.floor(index / 2);
+
+      return {
+        x:
+          solGrup
+            ? -70 - grupIndex * 3
+            : 70 + grupIndex * 3,
+
+        y:
+          grupIndex * 1.5,
+
+        aci:
+          solGrup
+            ? -4
+            : 4,
+
+        z: index
+      };
+    },
+    280
+  );
+
+  await bekle(330);
+
+
+  /*
+    5 — Yeniden iç içe geçer.
+  */
+
+  kartlariKonumlandir(
+    desteKartlari,
+    (index) => {
+
+      const solGrup =
+        index % 2 === 0;
+
+      const grupIndex =
+        Math.floor(index / 2);
+
+      return {
+        x:
+          solGrup
+            ? -18 + grupIndex * 5
+            : 18 - grupIndex * 5,
+
+        y:
+          -grupIndex,
+
+        aci:
+          solGrup
+            ? -1.5
+            : 1.5,
+
+        z:
+          solGrup
+            ? index
+            : index + 1
+      };
+    },
+    270
+  );
+
+  await bekle(320);
+
+
+  /*
+    6 — Hepsi düzgün şekilde
+    tek deste olur.
+  */
+
+  kartlariKonumlandir(
+    desteKartlari,
+    (index) => ({
+      x: index * 1.1,
+      y: index * -0.35,
+      aci: 0,
+      z: index
+    }),
+    350
+  );
+
+  await bekle(500);
+}
+
+
+/* =========================
+   12 SANATÇI KARTINI
+   HAZIRLA VE KARIŞTIR
+========================= */
+
+async function sanatciKartlariniKaristir() {
+
+  /*
+    Sanatçıların gerçek sırası
+    burada random oluyor.
+  */
+
+  const karisikSanatcilar =
+    karistir(sanatcilar);
 
   window.karisikSanatcilar =
     karisikSanatcilar;
@@ -328,9 +547,9 @@ function sanatciKartlariniKaristir() {
   );
 
 
-  /* =========================
-     ORTADA 12 KARTLIK DESTE
-  ========================= */
+  /*
+    Ortadaki kapalı desteyi oluştur.
+  */
 
   karisikSanatcilar.forEach(
     (sanatci, index) => {
@@ -338,138 +557,64 @@ function sanatciKartlariniKaristir() {
       const kart =
         document.createElement("img");
 
-
       kart.src =
         "images/kart-arkasi.png";
 
       kart.className =
         "karistirmaKarti";
 
-
-      const rastgeleAci =
-        Math.random() * 30 - 15;
-
-      const rastgeleX =
-        Math.random() * 50 - 25;
-
-      const rastgeleY =
-        Math.random() * 30 - 15;
-
+      kart.dataset.sanatci =
+        sanatci.id;
 
       kart.style.transform = `
         translate(
-          ${rastgeleX}px,
-          ${rastgeleY}px
+          ${index * 1.2}px,
+          ${index * -0.35}px
         )
-        rotate(${rastgeleAci}deg)
       `;
-
 
       kart.style.zIndex =
         index;
 
-
       karistirmaDestesi.appendChild(
         kart
       );
-
     }
   );
 
 
-  /* =========================
-     KARIŞTIRMA HAREKETİ
-  ========================= */
-
   const desteKartlari =
-    document.querySelectorAll(
-      ".karistirmaKarti"
+    Array.from(
+      karistirmaDestesi.querySelectorAll(
+        ".karistirmaKarti"
+      )
     );
 
 
-  let tur = 0;
+  /*
+    Masa üstü karıştırma animasyonu.
+  */
+
+  await masaUstuShuffle(
+    desteKartlari
+  );
 
 
-  const karistirmaAnimasyonu =
-    setInterval(() => {
+  /*
+    Deste kaybolur.
+  */
 
-      desteKartlari.forEach(
-        (kart, index) => {
-
-          const x =
-            Math.random() * 160 - 80;
-
-          const y =
-            Math.random() * 70 - 35;
-
-          const aci =
-            Math.random() * 50 - 25;
+  karistirmaDestesi.innerHTML = "";
 
 
-          kart.style.transition =
-            "transform 0.18s ease";
+  /*
+    12 kart kapalı şekilde
+    soldan sağa dizilir.
+  */
 
-
-          kart.style.transform = `
-            translate(
-              ${x}px,
-              ${y}px
-            )
-            rotate(${aci}deg)
-          `;
-
-        }
-      );
-
-
-      tur++;
-
-
-      if (tur >= 6) {
-
-        clearInterval(
-          karistirmaAnimasyonu
-        );
-
-
-        /* Kartları yeniden ortaya topla */
-
-        desteKartlari.forEach(
-          (kart, index) => {
-
-            kart.style.transform =
-              `
-              translate(
-                ${index * 1.5}px,
-                ${index * -0.5}px
-              )
-              rotate(0deg)
-              `;
-
-          }
-        );
-
-
-        /*
-          Biraz bekle,
-          sonra 12 kapalı kartı diz.
-        */
-
-        setTimeout(() => {
-
-          karistirmaDestesi.innerHTML =
-            "";
-
-          onIkiKartiDiz(
-            karisikSanatcilar
-          );
-
-        }, 450);
-
-      }
-
-    }, 190);
-
+  onIkiKartiDiz(
+    karisikSanatcilar
+  );
 }
 
 
@@ -490,7 +635,6 @@ function onIkiKartiDiz(
       const kart =
         document.createElement("img");
 
-
       kart.src =
         "images/kart-arkasi.png";
 
@@ -499,8 +643,9 @@ function onIkiKartiDiz(
 
 
       /*
-        Kartın kim olduğunu oyuncu görmüyor.
-        Ama JavaScript biliyor.
+        Oyuncu sanatçıyı görmüyor,
+        fakat sistem kartın kim
+        olduğunu biliyor.
       */
 
       kart.dataset.sanatci =
@@ -516,7 +661,6 @@ function onIkiKartiDiz(
       kapaliKartSirasi.appendChild(
         kart
       );
-
     }
   );
 
@@ -528,7 +672,6 @@ function onIkiKartiDiz(
     );
 
   });
-
 }
 
 
@@ -577,7 +720,6 @@ devamButonu.addEventListener(
         );
 
       });
-
   }
 );
 
@@ -594,8 +736,7 @@ baslaButonu.addEventListener(
 
 
     /*
-      Oyun müziğini kullanıcı tıklaması
-      sırasında sessizce başlat.
+      Oyun müziğini sessizce başlat.
     */
 
     oyunMuzik.currentTime = 0;
@@ -616,7 +757,7 @@ baslaButonu.addEventListener(
 
 
     /*
-      Menü müziğini yavaşça kapat.
+      Menü müziğini azalt.
     */
 
     await muzikKapat(
@@ -650,8 +791,7 @@ baslaButonu.addEventListener(
 
 
     /*
-      12 sanatçı kartını
-      her yeni başlangıçta random karıştır.
+      Kart karıştırmayı başlat.
     */
 
     setTimeout(() => {
@@ -659,7 +799,6 @@ baslaButonu.addEventListener(
       sanatciKartlariniKaristir();
 
     }, 400);
-
   }
 );
 
@@ -677,6 +816,5 @@ nasilOynanirButonu.addEventListener(
     console.log(
       "Nasıl Oynanır butonuna basıldı!"
     );
-
   }
 );
