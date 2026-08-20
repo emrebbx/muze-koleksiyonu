@@ -67,7 +67,9 @@ body {
   z-index: 5;
 }
 
-/* EU GAMES LOGOSU */
+/* =========================
+   AÇILIŞ - EU GAMES LOGOSU
+========================= */
 
 #euLogo {
   position: absolute;
@@ -90,7 +92,9 @@ body {
   -webkit-user-drag: none;
 }
 
-/* DEVAM ETMEK İÇİN DOKUN */
+/* =========================
+   DEVAM ETMEK İÇİN DOKUN
+========================= */
 
 #devamButonu {
   position: absolute;
@@ -143,7 +147,9 @@ body {
   background: #000;
 }
 
-/* ANA MENÜ ARKA PLANI */
+/* =========================
+   ANA MENÜ ARKA PLANI
+========================= */
 
 #anaMenuArkaplan {
   position: absolute;
@@ -154,6 +160,9 @@ body {
 
   object-fit: cover;
   object-position: center;
+
+  /* Arka planı %10 soluklaştır */
+  opacity: 0.9;
 
   z-index: 0;
 
@@ -292,7 +301,9 @@ body {
   background: #000;
 }
 
-/* OYUN ARKA PLANI */
+/* =========================
+   OYUN ARKA PLANI
+========================= */
 
 #oyunArkaplan {
   position: absolute;
@@ -373,12 +384,16 @@ body {
 @keyframes logoBelir {
   from {
     opacity: 0;
-    transform: translateX(-50%) scale(0.9);
+    transform:
+      translateX(-50%)
+      scale(0.9);
   }
 
   to {
     opacity: 1;
-    transform: translateX(-50%) scale(1);
+    transform:
+      translateX(-50%)
+      scale(1);
   }
 }
 
