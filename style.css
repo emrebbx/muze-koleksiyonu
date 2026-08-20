@@ -1,72 +1,57 @@
-/* =========================
-   GENEL
-========================= */
-
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html,
 body {
-  margin: 0;
-  padding: 0;
   width: 100%;
   height: 100%;
-  overflow: hidden;
   background: #000;
+  overflow: hidden;
 }
 
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-
-/* =========================
-   OYUN ALANI
-   Sabit tasarım oranı: 9:16
-========================= */
-
+/* 9:16 ANA OYUN EKRANI */
 #oyunEkrani {
-  position: relative;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 
-  width: min(100vw, calc(100vh * 9 / 16));
-  height: min(100vh, calc(100vw * 16 / 9));
+  width: min(100vw, 56.25vh);
+  height: min(100vh, 177.78vw);
 
-  aspect-ratio: 9 / 16;
-
-  overflow: hidden;
   background: #000;
+  overflow: hidden;
 
-  border: 3px solid #fff;
-  border-radius: 22px;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  border-radius: 18px;
 
   box-shadow:
-    0 0 12px rgba(255, 255, 255, 0.55),
-    0 0 28px rgba(255, 255, 255, 0.18);
+    0 0 10px rgba(255, 255, 255, 0.25),
+    0 0 30px rgba(255, 255, 255, 0.10);
 }
 
-
-/* =========================
-   EKRANLAR
-========================= */
-
+/* TÜM EKRANLAR */
 .ekran {
   position: absolute;
   inset: 0;
-
   width: 100%;
   height: 100%;
 
-  display: none;
-  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+
+  transition:
+    opacity 0.7s ease,
+    visibility 0.7s ease;
 }
 
 .ekran.aktif {
-  display: block;
+  opacity: 1;
+  visibility: visible;
 }
-
 
 /* =========================
    AÇILIŞ EKRANI
@@ -74,36 +59,38 @@ body {
 
 #acilisEkrani {
   background: #000;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 5;
 }
 
 #euLogo {
-  position: absolute;
+  width: 38%;
+  max-width: 300px;
 
-  width: 22%;
-  height: auto;
+  opacity: 0;
 
-  left: 50%;
-  top: 31%;
-
-  transform: translateX(-50%);
+  animation: logoBelir 1.5s ease forwards;
+  animation-delay: 1s;
 }
 
 #devamButonu {
-  position: absolute;
+  width: 55%;
+  max-width: 420px;
 
-  width: 46%;
-  height: auto;
+  margin-top: 45px;
 
-  left: 50%;
-  top: 46%;
+  opacity: 0;
 
-  transform: translateX(-50%);
+  animation: devamBelir 1s ease forwards;
+  animation-delay: 2.5s;
 
   cursor: pointer;
-  user-select: none;
-  -webkit-user-drag: none;
 }
-
 
 /* =========================
    ANA MENÜ
@@ -115,7 +102,6 @@ body {
 
 #anaMenuArkaplan {
   position: absolute;
-
   inset: 0;
 
   width: 100%;
@@ -123,107 +109,87 @@ body {
 
   object-fit: cover;
 
-  pointer-events: none;
-  user-select: none;
-  -webkit-user-drag: none;
+  z-index: 0;
 }
-
-
-/* MÜZE KOLEKSİYONU LOGOSU */
 
 #muzeLogo {
   position: absolute;
 
-  width: 86%;
-  height: auto;
+  width: 78%;
 
   left: 50%;
-  top: 4%;
+  top: 5%;
 
   transform: translateX(-50%);
 
   z-index: 2;
-
-  user-select: none;
-  -webkit-user-drag: none;
 }
-
-
-/* BAŞLA */
 
 #baslaButonu {
   position: absolute;
 
-  width: 61%;
-  height: auto;
+  width: 68%;
 
   left: 50%;
-  top: 58%;
+  top: 62%;
 
   transform: translateX(-50%);
 
-  z-index: 2;
-
   cursor: pointer;
-  user-select: none;
-  -webkit-user-drag: none;
+
+  z-index: 2;
 }
-
-
-/* NASIL OYNANIR */
 
 #nasilOynanirButonu {
   position: absolute;
 
-  width: 48%;
-  height: auto;
+  width: 58%;
 
   left: 50%;
-  top: 72%;
+  top: 74%;
 
   transform: translateX(-50%);
 
-  z-index: 2;
-
   cursor: pointer;
-  user-select: none;
-  -webkit-user-drag: none;
+
+  z-index: 2;
 }
-
-
-/* ALT EU GAMES LOGOSU */
 
 #altEuLogo {
   position: absolute;
 
-  width: 15%;
-  height: auto;
+  width: 16%;
 
   left: 50%;
-  bottom: 3%;
+  bottom: 2%;
 
   transform: translateX(-50%);
 
   z-index: 2;
-
-  user-select: none;
-  -webkit-user-drag: none;
 }
 
-
 /* =========================
-   BASMA EFEKTLERİ
+   ANİMASYONLAR
 ========================= */
 
-#devamButonu:active,
-#baslaButonu:active,
-#nasilOynanirButonu:active {
-  transform: translateX(-50%) scale(0.96);
+@keyframes logoBelir {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
+@keyframes devamBelir {
+  from {
+    opacity: 0;
+  }
 
-/* =========================
-   DEPLOY REFRESH
-========================= */
-
-/* deploy refresh */
+  to {
+    opacity: 1;
+  }
+}
