@@ -140,11 +140,9 @@ function butonSesiCal() {
 ========================= */
 
 function bekle(ms) {
-
   return new Promise((resolve) => {
     setTimeout(resolve, ms);
   });
-
 }
 
 
@@ -270,13 +268,13 @@ function muzikKapat(
 
 
 /* =========================
-   KARTLARI KONUMLANDIR
+   KARTLARI HAREKET ETTİR
 ========================= */
 
-function kartlariKonumlandir(
+function kartlariHareketEttir(
   kartlar,
   konumFonksiyonu,
-  sure = 300
+  sure = 350
 ) {
 
   kartlar.forEach(
@@ -301,34 +299,32 @@ function kartlariKonumlandir(
         rotate(${konum.aci}deg)
       `;
 
-      if (konum.z !== undefined) {
-        kart.style.zIndex = konum.z;
-      }
+      kart.style.zIndex =
+        konum.z ?? index;
     }
   );
-
 }
 
 
 /* =========================
-   MASA ÜSTÜ SHUFFLE
+   GERÇEK DESTE KARIŞTIRMA
+   İKİYE AYIR → İÇ İÇE GEÇİR
 ========================= */
 
-async function masaUstuShuffle(
+async function gercekDesteKaristir(
   desteKartlari
 ) {
 
   /*
-    1 — Başlangıçta kartlar
-    hafif dağınık bir deste.
+    1 — Kartlar düzgün tek deste.
   */
 
-  kartlariKonumlandir(
+  kartlariHareketEttir(
     desteKartlari,
     (index) => ({
       x: index * 1.2,
       y: index * -0.35,
-      aci: (index - 5.5) * 0.25,
+      aci: 0,
       z: index
     }),
     250
@@ -338,12 +334,10 @@ async function masaUstuShuffle(
 
 
   /*
-    2 — Deste iki yana açılır.
-    İlk 6 sola,
-    diğer 6 sağa.
+    2 — Deste iki eşit gruba ayrılır.
   */
 
-  kartlariKonumlandir(
+  kartlariHareketEttir(
     desteKartlari,
     (index) => {
 
@@ -358,32 +352,31 @@ async function masaUstuShuffle(
       return {
         x:
           solGrup
-            ? -105 - grupIndex * 4
-            : 105 + grupIndex * 4,
+            ? -120 + grupIndex * 2
+            : 120 + grupIndex * 2,
 
         y:
-          grupIndex * 2,
+          grupIndex * -0.4,
 
         aci:
           solGrup
-            ? -5 - grupIndex * 0.5
-            : 5 + grupIndex * 0.5,
+            ? -3
+            : 3,
 
         z: index
       };
     },
-    320
+    420
   );
 
-  await bekle(380);
+  await bekle(500);
 
 
   /*
-    3 — İki grup birbirinin
-    üzerinden kayarak merkeze gelir.
+    3 — İki grup biraz daha birbirine yaklaşır.
   */
 
-  kartlariKonumlandir(
+  kartlariHareketEttir(
     desteKartlari,
     (index) => {
 
@@ -398,125 +391,133 @@ async function masaUstuShuffle(
       return {
         x:
           solGrup
-            ? -25 + grupIndex * 8
-            : 25 - grupIndex * 8,
+            ? -55 + grupIndex * 1.5
+            : 55 + grupIndex * 1.5,
 
         y:
-          grupIndex * -1.5,
+          grupIndex * -0.4,
 
         aci:
           solGrup
             ? -2
             : 2,
 
-        z:
-          solGrup
-            ? index * 2
-            : index * 2 + 1
-      };
-    },
-    300
-  );
-
-  await bekle(350);
-
-
-  /*
-    4 — Kartlar tekrar
-    iki yana kayar.
-    Bu sefer daha kısa.
-  */
-
-  kartlariKonumlandir(
-    desteKartlari,
-    (index) => {
-
-      const solGrup =
-        index % 2 === 0;
-
-      const grupIndex =
-        Math.floor(index / 2);
-
-      return {
-        x:
-          solGrup
-            ? -70 - grupIndex * 3
-            : 70 + grupIndex * 3,
-
-        y:
-          grupIndex * 1.5,
-
-        aci:
-          solGrup
-            ? -4
-            : 4,
-
         z: index
       };
     },
-    280
+    350
   );
 
-  await bekle(330);
+  await bekle(420);
 
 
   /*
-    5 — Yeniden iç içe geçer.
+    4 — Kartlar sırayla iç içe geçer.
+    Sol 1, sağ 1, sol 2, sağ 2...
   */
 
-  kartlariKonumlandir(
+  const yeniZSirasi = [];
+
+  for (let i = 0; i < 6; i++) {
+    yeniZSirasi.push(i);
+    yeniZSirasi.push(i + 6);
+  }
+
+
+  kartlariHareketEttir(
     desteKartlari,
     (index) => {
 
       const solGrup =
-        index % 2 === 0;
+        index < 6;
 
       const grupIndex =
-        Math.floor(index / 2);
+        solGrup
+          ? index
+          : index - 6;
+
+      const yeniZ =
+        yeniZSirasi.indexOf(index);
 
       return {
         x:
           solGrup
-            ? -18 + grupIndex * 5
-            : 18 - grupIndex * 5,
+            ? -12 + grupIndex * 2.5
+            : 12 - grupIndex * 2.5,
 
         y:
-          -grupIndex,
+          grupIndex * -0.6,
 
         aci:
           solGrup
-            ? -1.5
-            : 1.5,
+            ? -1.2
+            : 1.2,
 
-        z:
-          solGrup
-            ? index
-            : index + 1
+        z: yeniZ
       };
     },
-    270
-  );
-
-  await bekle(320);
-
-
-  /*
-    6 — Hepsi düzgün şekilde
-    tek deste olur.
-  */
-
-  kartlariKonumlandir(
-    desteKartlari,
-    (index) => ({
-      x: index * 1.1,
-      y: index * -0.35,
-      aci: 0,
-      z: index
-    }),
-    350
+    420
   );
 
   await bekle(500);
+
+
+  /*
+    5 — İki yarım deste tam olarak birleşir.
+  */
+
+  kartlariHareketEttir(
+    desteKartlari,
+    (index) => {
+
+      const yeniZ =
+        yeniZSirasi.indexOf(index);
+
+      return {
+        x:
+          yeniZ * 1.15,
+
+        y:
+          yeniZ * -0.35,
+
+        aci: 0,
+
+        z: yeniZ
+      };
+    },
+    380
+  );
+
+  await bekle(450);
+
+
+  /*
+    6 — Bir kez daha hafifçe sıkıştır.
+  */
+
+  kartlariHareketEttir(
+    desteKartlari,
+    (index) => {
+
+      const yeniZ =
+        yeniZSirasi.indexOf(index);
+
+      return {
+        x:
+          yeniZ * 0.8,
+
+        y:
+          yeniZ * -0.25,
+
+        aci: 0,
+
+        z: yeniZ
+      };
+    },
+    220
+  );
+
+  await bekle(350);
 }
 
 
@@ -528,8 +529,8 @@ async function masaUstuShuffle(
 async function sanatciKartlariniKaristir() {
 
   /*
-    Sanatçıların gerçek sırası
-    burada random oluyor.
+    Gerçek kartların sırası
+    her yeni oyunda random.
   */
 
   const karisikSanatcilar =
@@ -548,7 +549,7 @@ async function sanatciKartlariniKaristir() {
 
 
   /*
-    Ortadaki kapalı desteyi oluştur.
+    12 kapalı karttan deste oluştur.
   */
 
   karisikSanatcilar.forEach(
@@ -592,24 +593,23 @@ async function sanatciKartlariniKaristir() {
 
 
   /*
-    Masa üstü karıştırma animasyonu.
+    Gerçek deste karıştırma animasyonu.
   */
 
-  await masaUstuShuffle(
+  await gercekDesteKaristir(
     desteKartlari
   );
 
 
   /*
-    Deste kaybolur.
+    Ortadaki deste kaldırılır.
   */
 
   karistirmaDestesi.innerHTML = "";
 
 
   /*
-    12 kart kapalı şekilde
-    soldan sağa dizilir.
+    12 kapalı kart soldan sağa dizilir.
   */
 
   onIkiKartiDiz(
@@ -641,11 +641,9 @@ function onIkiKartiDiz(
       kart.className =
         "kapaliSanatciKarti";
 
-
       /*
-        Oyuncu sanatçıyı görmüyor,
-        fakat sistem kartın kim
-        olduğunu biliyor.
+        Oyuncu sanatçıyı görmez,
+        JS hangi kart olduğunu bilir.
       */
 
       kart.dataset.sanatci =
@@ -735,10 +733,6 @@ baslaButonu.addEventListener(
     butonSesiCal();
 
 
-    /*
-      Oyun müziğini sessizce başlat.
-    */
-
     oyunMuzik.currentTime = 0;
     oyunMuzik.volume = 0;
 
@@ -757,7 +751,7 @@ baslaButonu.addEventListener(
 
 
     /*
-      Menü müziğini azalt.
+      Menü müziğini yavaşça kapat.
     */
 
     await muzikKapat(
