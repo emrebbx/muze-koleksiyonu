@@ -127,21 +127,12 @@ function butonSesiCal() {
   butonTik.currentTime = 0;
 
   butonTik.play().catch((hata) => {
+
     console.log(
       "Buton sesi çalınamadı:",
       hata
     );
-  });
-}
 
-
-/* =========================
-   BEKLEME
-========================= */
-
-function bekle(ms) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, ms);
   });
 }
 
@@ -209,11 +200,17 @@ function muzikAc(
       ilerleme;
 
     if (ilerleme < 1) {
-      requestAnimationFrame(animasyon);
+
+      requestAnimationFrame(
+        animasyon
+      );
+
     }
   }
 
-  requestAnimationFrame(animasyon);
+  requestAnimationFrame(
+    animasyon
+  );
 }
 
 
@@ -262,262 +259,255 @@ function muzikKapat(
       }
     }
 
-    requestAnimationFrame(animasyon);
+    requestAnimationFrame(
+      animasyon
+    );
   });
 }
 
 
 /* =========================
-   KARTLARI HAREKET ETTİR
+   GSAP GERÇEK DESTE SHUFFLE
 ========================= */
 
-function kartlariHareketEttir(
-  kartlar,
-  konumFonksiyonu,
-  sure = 350
-) {
-
-  kartlar.forEach(
-    (kart, index) => {
-
-      const konum =
-        konumFonksiyonu(index);
-
-      kart.style.transition =
-        `transform ${sure}ms cubic-bezier(
-          0.22,
-          0.61,
-          0.36,
-          1
-        )`;
-
-      kart.style.transform = `
-        translate(
-          ${konum.x}px,
-          ${konum.y}px
-        )
-        rotate(${konum.aci}deg)
-      `;
-
-      kart.style.zIndex =
-        konum.z ?? index;
-    }
-  );
-}
-
-
-/* =========================
-   GERÇEK DESTE KARIŞTIRMA
-   İKİYE AYIR → İÇ İÇE GEÇİR
-========================= */
-
-async function gercekDesteKaristir(
+function gsapDesteKaristir(
   desteKartlari
 ) {
 
-  /*
-    1 — Kartlar düzgün tek deste.
-  */
+  return new Promise((resolve) => {
 
-  kartlariHareketEttir(
-    desteKartlari,
-    (index) => ({
-      x: index * 1.2,
-      y: index * -0.35,
-      aci: 0,
-      z: index
-    }),
-    250
-  );
+    const solDeste =
+      desteKartlari.slice(0, 6);
 
-  await bekle(350);
+    const sagDeste =
+      desteKartlari.slice(6, 12);
 
 
-  /*
-    2 — Deste iki eşit gruba ayrılır.
-  */
+    /*
+      Başlangıç:
+      kartlar tek düzgün deste halinde.
+    */
 
-  kartlariHareketEttir(
-    desteKartlari,
-    (index) => {
+    desteKartlari.forEach(
+      (kart, index) => {
 
-      const solGrup =
-        index < 6;
+        gsap.set(kart, {
+          x: index * 1.2,
+          y: index * -0.35,
+          rotation: 0,
+          scale: 1,
+          transformOrigin: "50% 100%",
+          zIndex: index
+        });
 
-      const grupIndex =
-        solGrup
-          ? index
-          : index - 6;
-
-      return {
-        x:
-          solGrup
-            ? -120 + grupIndex * 2
-            : 120 + grupIndex * 2,
-
-        y:
-          grupIndex * -0.4,
-
-        aci:
-          solGrup
-            ? -3
-            : 3,
-
-        z: index
-      };
-    },
-    420
-  );
-
-  await bekle(500);
+      }
+    );
 
 
-  /*
-    3 — İki grup biraz daha birbirine yaklaşır.
-  */
-
-  kartlariHareketEttir(
-    desteKartlari,
-    (index) => {
-
-      const solGrup =
-        index < 6;
-
-      const grupIndex =
-        solGrup
-          ? index
-          : index - 6;
-
-      return {
-        x:
-          solGrup
-            ? -55 + grupIndex * 1.5
-            : 55 + grupIndex * 1.5,
-
-        y:
-          grupIndex * -0.4,
-
-        aci:
-          solGrup
-            ? -2
-            : 2,
-
-        z: index
-      };
-    },
-    350
-  );
-
-  await bekle(420);
+    const tl =
+      gsap.timeline({
+        defaults: {
+          ease: "power2.inOut"
+        },
+        onComplete: resolve
+      });
 
 
-  /*
-    4 — Kartlar sırayla iç içe geçer.
-    Sol 1, sağ 1, sol 2, sağ 2...
-  */
+    /*
+      1 — Deste biraz yukarı kalkar.
+    */
 
-  const yeniZSirasi = [];
-
-  for (let i = 0; i < 6; i++) {
-    yeniZSirasi.push(i);
-    yeniZSirasi.push(i + 6);
-  }
-
-
-  kartlariHareketEttir(
-    desteKartlari,
-    (index) => {
-
-      const solGrup =
-        index < 6;
-
-      const grupIndex =
-        solGrup
-          ? index
-          : index - 6;
-
-      const yeniZ =
-        yeniZSirasi.indexOf(index);
-
-      return {
-        x:
-          solGrup
-            ? -12 + grupIndex * 2.5
-            : 12 - grupIndex * 2.5,
-
-        y:
-          grupIndex * -0.6,
-
-        aci:
-          solGrup
-            ? -1.2
-            : 1.2,
-
-        z: yeniZ
-      };
-    },
-    420
-  );
-
-  await bekle(500);
+    tl.to(
+      desteKartlari,
+      {
+        y: "-=20",
+        duration: 0.25,
+        stagger: 0.01
+      }
+    );
 
 
-  /*
-    5 — İki yarım deste tam olarak birleşir.
-  */
+    /*
+      2 — 6 + 6 iki ayrı deste olur.
+    */
 
-  kartlariHareketEttir(
-    desteKartlari,
-    (index) => {
+    tl.to(
+      solDeste,
+      {
+        x: (index) =>
+          -145 + index * 2,
 
-      const yeniZ =
-        yeniZSirasi.indexOf(index);
+        y: (index) =>
+          -10 - index * 0.5,
 
-      return {
-        x:
-          yeniZ * 1.15,
+        rotation: -5,
 
-        y:
-          yeniZ * -0.35,
+        duration: 0.45,
 
-        aci: 0,
-
-        z: yeniZ
-      };
-    },
-    380
-  );
-
-  await bekle(450);
+        stagger: 0.025
+      }
+    );
 
 
-  /*
-    6 — Bir kez daha hafifçe sıkıştır.
-  */
+    tl.to(
+      sagDeste,
+      {
+        x: (index) =>
+          145 + index * 2,
 
-  kartlariHareketEttir(
-    desteKartlari,
-    (index) => {
+        y: (index) =>
+          -10 - index * 0.5,
 
-      const yeniZ =
-        yeniZSirasi.indexOf(index);
+        rotation: 5,
 
-      return {
-        x:
-          yeniZ * 0.8,
+        duration: 0.45,
 
-        y:
-          yeniZ * -0.25,
+        stagger: 0.025
+      },
+      "<"
+    );
 
-        aci: 0,
 
-        z: yeniZ
-      };
-    },
-    220
-  );
+    /*
+      3 — İki deste içe doğru eğilir.
+      Riffle öncesi hazırlık.
+    */
 
-  await bekle(350);
+    tl.to(
+      solDeste,
+      {
+        x: (index) =>
+          -72 + index * 1.5,
+
+        y: (index) =>
+          8 - index * 0.5,
+
+        rotation: -8,
+
+        scaleY: 0.96,
+
+        duration: 0.35
+      }
+    );
+
+
+    tl.to(
+      sagDeste,
+      {
+        x: (index) =>
+          72 + index * 1.5,
+
+        y: (index) =>
+          8 - index * 0.5,
+
+        rotation: 8,
+
+        scaleY: 0.96,
+
+        duration: 0.35
+      },
+      "<"
+    );
+
+
+    /*
+      4 — Kartlar sırayla iç içe geçer.
+    */
+
+    for (let i = 0; i < 6; i++) {
+
+      const solKart =
+        solDeste[i];
+
+      const sagKart =
+        sagDeste[i];
+
+      tl.to(
+        solKart,
+        {
+          x: -6 + i * 2,
+          y: -i * 0.8,
+          rotation: -1.5,
+          duration: 0.18,
+          ease: "power1.out"
+        },
+        "riffle+=" + (i * 0.055)
+      );
+
+
+      tl.to(
+        sagKart,
+        {
+          x: 6 - i * 2,
+          y: -i * 0.8,
+          rotation: 1.5,
+          duration: 0.18,
+          ease: "power1.out"
+        },
+        "riffle+=" + (i * 0.055 + 0.028)
+      );
+
+    }
+
+
+    /*
+      5 — İç içe geçen kartlar
+      tamamen tek deste olur.
+    */
+
+    tl.to(
+      desteKartlari,
+      {
+        x: (index) =>
+          index * 0.9,
+
+        y: (index) =>
+          index * -0.28,
+
+        rotation: 0,
+
+        scaleY: 1,
+
+        duration: 0.4,
+
+        stagger: 0.012,
+
+        ease: "back.out(1.25)"
+      },
+      ">"
+    );
+
+
+    /*
+      6 — Deste masaya hafif oturur.
+    */
+
+    tl.to(
+      desteKartlari,
+      {
+        y: (index) =>
+          index * -0.28 + 4,
+
+        duration: 0.12,
+
+        ease: "power2.in"
+      }
+    );
+
+
+    tl.to(
+      desteKartlari,
+      {
+        y: (index) =>
+          index * -0.28,
+
+        duration: 0.14,
+
+        ease: "power2.out"
+      }
+    );
+
+  });
 }
 
 
@@ -529,7 +519,7 @@ async function gercekDesteKaristir(
 async function sanatciKartlariniKaristir() {
 
   /*
-    Gerçek kartların sırası
+    Sanatçıların gerçek sırası
     her yeni oyunda random.
   */
 
@@ -541,6 +531,7 @@ async function sanatciKartlariniKaristir() {
 
 
   karistirmaDestesi.innerHTML = "";
+
   kapaliKartSirasi.innerHTML = "";
 
   kapaliKartSirasi.classList.remove(
@@ -549,7 +540,7 @@ async function sanatciKartlariniKaristir() {
 
 
   /*
-    12 kapalı karttan deste oluştur.
+    Ortada kapalı deste oluştur.
   */
 
   karisikSanatcilar.forEach(
@@ -567,19 +558,13 @@ async function sanatciKartlariniKaristir() {
       kart.dataset.sanatci =
         sanatci.id;
 
-      kart.style.transform = `
-        translate(
-          ${index * 1.2}px,
-          ${index * -0.35}px
-        )
-      `;
-
       kart.style.zIndex =
         index;
 
       karistirmaDestesi.appendChild(
         kart
       );
+
     }
   );
 
@@ -593,23 +578,25 @@ async function sanatciKartlariniKaristir() {
 
 
   /*
-    Gerçek deste karıştırma animasyonu.
+    GSAP ile gerçek deste karıştırma.
   */
 
-  await gercekDesteKaristir(
+  await gsapDesteKaristir(
     desteKartlari
   );
 
 
   /*
-    Ortadaki deste kaldırılır.
+    Shuffle tamamlanınca
+    ortadaki deste kaldırılır.
   */
 
   karistirmaDestesi.innerHTML = "";
 
 
   /*
-    12 kapalı kart soldan sağa dizilir.
+    12 kapalı kart
+    soldan sağa dizilir.
   */
 
   onIkiKartiDiz(
@@ -641,11 +628,6 @@ function onIkiKartiDiz(
       kart.className =
         "kapaliSanatciKarti";
 
-      /*
-        Oyuncu sanatçıyı görmez,
-        JS hangi kart olduğunu bilir.
-      */
-
       kart.dataset.sanatci =
         sanatci.id;
 
@@ -659,6 +641,7 @@ function onIkiKartiDiz(
       kapaliKartSirasi.appendChild(
         kart
       );
+
     }
   );
 
@@ -694,6 +677,7 @@ devamButonu.addEventListener(
 
 
     anaMenuMuzik.currentTime = 0;
+
     anaMenuMuzik.volume = 0;
 
 
@@ -718,6 +702,7 @@ devamButonu.addEventListener(
         );
 
       });
+
   }
 );
 
@@ -733,7 +718,12 @@ baslaButonu.addEventListener(
     butonSesiCal();
 
 
+    /*
+      Oyun müziğini sessiz başlat.
+    */
+
     oyunMuzik.currentTime = 0;
+
     oyunMuzik.volume = 0;
 
 
@@ -785,7 +775,7 @@ baslaButonu.addEventListener(
 
 
     /*
-      Kart karıştırmayı başlat.
+      GSAP shuffle başlasın.
     */
 
     setTimeout(() => {
@@ -793,6 +783,7 @@ baslaButonu.addEventListener(
       sanatciKartlariniKaristir();
 
     }, 400);
+
   }
 );
 
@@ -810,5 +801,6 @@ nasilOynanirButonu.addEventListener(
     console.log(
       "Nasıl Oynanır butonuna basıldı!"
     );
+
   }
 );
