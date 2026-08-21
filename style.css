@@ -9,56 +9,53 @@ body {
   width: 100%;
   height: 100%;
 
-  overflow: hidden;
-
   background: #000;
+
+  overflow: hidden;
 }
 
 
 /* =========================
-   DIŞ TAM EKRAN ARKA PLAN
-   EKRANI DOLDURUR, SÜNDÜRMEZ
-========================= */
+   16:9 OYUN SAHNESİ
+   COVER MANTIĞI
 
-body {
-  position: relative;
-
-  display: flex;
-
-  justify-content: center;
-  align-items: center;
-
-  background-image:
-    url("images/oyun-arkaplan.png");
-
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-
-/* =========================
-   SABİT 16:9 OYUN SAHNESİ
+   EKRANI TAMAMEN DOLDURUR.
+   SÜNDÜRME YOK.
+   BOŞLUK YOK.
+   GEREKEN KISIM KIRPILIR.
 ========================= */
 
 #oyunEkrani {
-  position: relative;
+  position: fixed;
 
-  width: 100vw;
-  height: 56.25vw;
+  left: 50%;
+  top: 50%;
 
-  max-width: 177.777778vh;
-  max-height: 100vh;
+  /*
+    CONTAIN DEĞİL COVER.
+
+    Ekran 16:9'dan farklıysa
+    sahne ekranın dışına taşar.
+  */
+
+  width: max(
+    100vw,
+    177.777778vh
+  );
+
+  height: max(
+    100vh,
+    56.25vw
+  );
+
+  transform:
+    translate(-50%, -50%);
 
   aspect-ratio: 16 / 9;
 
-  flex-shrink: 0;
-
-  background: transparent;
+  background: #000;
 
   overflow: hidden;
-
-  z-index: 1;
 }
 
 
@@ -116,11 +113,17 @@ body {
   left: 50%;
   top: 33%;
 
-  transform: translateX(-50%);
+  transform:
+    translateX(-50%);
 
   opacity: 0;
 
-  animation: logoBelir 1.5s ease forwards;
+  animation:
+    logoBelir
+    1.5s
+    ease
+    forwards;
+
   animation-delay: 1s;
 
   user-select: none;
@@ -140,11 +143,17 @@ body {
   left: 50%;
   top: 67%;
 
-  transform: translateX(-50%);
+  transform:
+    translateX(-50%);
 
   opacity: 0;
 
-  animation: devamBelir 1s ease forwards;
+  animation:
+    devamBelir
+    1s
+    ease
+    forwards;
+
   animation-delay: 2.5s;
 
   cursor: pointer;
@@ -155,7 +164,8 @@ body {
 
   touch-action: manipulation;
 
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color:
+    transparent;
 
   user-select: none;
   -webkit-user-drag: none;
@@ -167,7 +177,8 @@ body {
     scale(0.93)
     translateY(5px);
 
-  filter: brightness(0.82);
+  filter:
+    brightness(0.82);
 }
 
 
@@ -220,7 +231,8 @@ body {
   left: 50%;
   top: 10%;
 
-  transform: translateX(-50%);
+  transform:
+    translateX(-50%);
 
   z-index: 2;
 
@@ -240,7 +252,8 @@ body {
   left: 50%;
   top: 50%;
 
-  transform: translateX(-50%);
+  transform:
+    translateX(-50%);
 
   cursor: pointer;
 
@@ -252,7 +265,8 @@ body {
 
   touch-action: manipulation;
 
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color:
+    transparent;
 
   user-select: none;
   -webkit-user-drag: none;
@@ -264,7 +278,8 @@ body {
     scale(0.93)
     translateY(5px);
 
-  filter: brightness(0.82);
+  filter:
+    brightness(0.82);
 }
 
 
@@ -279,7 +294,8 @@ body {
   left: 50%;
   top: 70%;
 
-  transform: translateX(-50%);
+  transform:
+    translateX(-50%);
 
   cursor: pointer;
 
@@ -291,7 +307,8 @@ body {
 
   touch-action: manipulation;
 
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color:
+    transparent;
 
   user-select: none;
   -webkit-user-drag: none;
@@ -303,7 +320,8 @@ body {
     scale(0.93)
     translateY(5px);
 
-  filter: brightness(0.82);
+  filter:
+    brightness(0.82);
 }
 
 
@@ -318,7 +336,8 @@ body {
   left: 50%;
   bottom: 2%;
 
-  transform: translateX(-50%);
+  transform:
+    translateX(-50%);
 
   z-index: 2;
 
@@ -338,7 +357,7 @@ body {
   width: 100%;
   height: 100%;
 
-  background: transparent;
+  background: #000;
 
   overflow: hidden;
 }
@@ -346,7 +365,10 @@ body {
 
 /* =========================
    OYUN ARKA PLANI
-   16:9 SAHNE İÇİNDE TAMAMEN GÖRÜNSÜN
+
+   OYUN SAHNESİ ZATEN 16:9.
+   BU YÜZDEN ARKA PLAN
+   SAHNEYİ BİREBİR DOLDURUR.
 ========================= */
 
 #oyunArkaplan {
@@ -356,7 +378,7 @@ body {
   width: 100%;
   height: 100%;
 
-  object-fit: contain;
+  object-fit: cover;
   object-position: center;
 
   z-index: 0;
@@ -411,18 +433,21 @@ body {
 .ustSanatci1 {
   left: 24.8%;
   top: 1.9%;
+
   width: 6.9%;
 }
 
 .ustSanatci2 {
   left: 46.6%;
   top: 1.9%;
+
   width: 6.9%;
 }
 
 .ustSanatci3 {
   left: 68.2%;
   top: 1.9%;
+
   width: 6.9%;
 }
 
@@ -434,18 +459,21 @@ body {
 .altSanatci1 {
   left: 24.8%;
   top: 79.9%;
+
   width: 6.9%;
 }
 
 .altSanatci2 {
   left: 46.5%;
   top: 79.9%;
+
   width: 6.9%;
 }
 
 .altSanatci3 {
   left: 68.2%;
   top: 79.9%;
+
   width: 6.9%;
 }
 
