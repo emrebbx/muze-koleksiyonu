@@ -31,9 +31,12 @@ const karistirmaDestesi =
 const kapaliKartSirasi =
   document.getElementById("kapaliKartSirasi");
 
+const artanSanatciYuvasi =
+  document.getElementById("artanSanatciYuvasi");
+
 
 /* =========================
-   YENİ SANATÇI YUVALARI
+   SANATÇI YUVALARI
 ========================= */
 
 const oyuncu1SanatciYuvalari =
@@ -475,6 +478,15 @@ async function sanatciKartlariniKaristir() {
 
   secimKilidi = false;
 
+  const eskiArtanKartlar =
+    document.querySelectorAll(
+      ".artanSanatciKarti"
+    );
+
+  eskiArtanKartlar.forEach(
+    (kart) => kart.remove()
+  );
+
   const karisikSanatcilar =
     karistir(sanatcilar);
 
@@ -584,7 +596,10 @@ function onIkiKartiDiz(
       );
 
       slot.appendChild(kart);
-      kapaliKartSirasi.appendChild(slot);
+
+      kapaliKartSirasi.appendChild(
+        slot
+      );
     }
   );
 
@@ -768,7 +783,6 @@ function kartiYuvayaGonder(
         "power3.inOut",
 
       onComplete: () => {
-
         const yerlesenKart =
           document.createElement("img");
 
@@ -856,6 +870,220 @@ function kartiYuvayaGonder(
       }
     }
   );
+}
+
+
+/* =========================
+   KALAN 6 SANATÇI KARTINI
+   ARTAN SANATÇI YUVASINA GÖNDER
+========================= */
+
+function kalanSanatcilariArtanYuvayaGonder() {
+  return new Promise((resolve) => {
+    const kalanKartlar =
+      Array.from(
+        document.querySelectorAll(
+          ".kapaliSanatciKarti"
+        )
+      );
+
+    if (
+      kalanKartlar.length === 0 ||
+      !artanSanatciYuvasi
+    ) {
+      resolve();
+      return;
+    }
+
+    const yuvaRect =
+      artanSanatciYuvasi.getBoundingClientRect();
+
+    let tamamlananKartSayisi = 0;
+
+
+    kalanKartlar.forEach(
+      (kart, index) => {
+        const kartRect =
+          kart.getBoundingClientRect();
+
+        const ucanKart =
+          document.createElement("img");
+
+        ucanKart.src =
+          "images/kart-arkasi.png";
+
+        ucanKart.className =
+          "artanSanatciUcanKart";
+
+        Object.assign(
+          ucanKart.style,
+          {
+            position: "fixed",
+
+            left:
+              kartRect.left + "px",
+
+            top:
+              kartRect.top + "px",
+
+            width:
+              kartRect.width + "px",
+
+            height:
+              kartRect.height + "px",
+
+            zIndex:
+              9000 + index,
+
+            pointerEvents:
+              "none",
+
+            userSelect:
+              "none",
+
+            WebkitUserDrag:
+              "none"
+          }
+        );
+
+        document.body.appendChild(
+          ucanKart
+        );
+
+
+        /* ORİJİNAL KART YERİNİ KORUR
+           AMA GÖRÜNMEZ OLUR */
+
+        kart.style.visibility =
+          "hidden";
+
+
+        /*
+          KARTLAR TAM ÜST ÜSTE DEĞİL,
+          DESTE HİSSİ İÇİN ÇOK HAFİF
+          KAYDIRILIYOR.
+        */
+
+        const desteKaymaX =
+          index * 0.8;
+
+        const desteKaymaY =
+          index * -0.6;
+
+
+        gsap.to(
+          ucanKart,
+          {
+            left:
+              yuvaRect.left +
+              desteKaymaX,
+
+            top:
+              yuvaRect.top +
+              desteKaymaY,
+
+            width:
+              yuvaRect.width,
+
+            height:
+              yuvaRect.height,
+
+            rotation:
+              (index - 2.5) * 0.35,
+
+            duration: 0.7,
+
+            delay:
+              index * 0.10,
+
+            ease:
+              "power3.inOut",
+
+            onComplete: () => {
+              const artanKart =
+                document.createElement(
+                  "img"
+                );
+
+              artanKart.src =
+                "images/kart-arkasi.png";
+
+              artanKart.className =
+                "artanSanatciKarti";
+
+              Object.assign(
+                artanKart.style,
+                {
+                  position:
+                    "fixed",
+
+                  left:
+                    (
+                      yuvaRect.left +
+                      desteKaymaX
+                    ) + "px",
+
+                  top:
+                    (
+                      yuvaRect.top +
+                      desteKaymaY
+                    ) + "px",
+
+                  width:
+                    yuvaRect.width +
+                    "px",
+
+                  height:
+                    yuvaRect.height +
+                    "px",
+
+                  zIndex:
+                    3 + index,
+
+                  pointerEvents:
+                    "none",
+
+                  userSelect:
+                    "none",
+
+                  WebkitUserDrag:
+                    "none",
+
+                  objectFit:
+                    "fill",
+
+                  transform:
+                    `rotate(${(index - 2.5) * 0.35}deg)`
+                }
+              );
+
+              document.body.appendChild(
+                artanKart
+              );
+
+              ucanKart.remove();
+
+              tamamlananKartSayisi++;
+
+              if (
+                tamamlananKartSayisi ===
+                kalanKartlar.length
+              ) {
+                kapaliKartSirasi.innerHTML =
+                  "";
+
+                kapaliKartSirasi.classList.remove(
+                  "goster"
+                );
+
+                resolve();
+              }
+            }
+          }
+        );
+      }
+    );
+  });
 }
 
 
@@ -1106,35 +1334,15 @@ function secimDurumunuKontrolEt() {
       "SANATÇILAR SEÇİLDİ"
     );
 
-    const kalanKartlar =
-      document.querySelectorAll(
-        ".kapaliSanatciKarti"
-      );
+    setTimeout(
+      async () => {
+        await kalanSanatcilariArtanYuvayaGonder();
 
-    gsap.to(
-      kalanKartlar,
-      {
-        opacity: 0,
-
-        y: 40,
-
-        scale: 0.85,
-
-        duration: 0.5,
-
-        stagger: 0.05,
-
-        ease: "power2.in",
-
-        onComplete: () => {
-          kapaliKartSirasi.innerHTML =
-            "";
-
-          kapaliKartSirasi.classList.remove(
-            "goster"
-          );
-        }
-      }
+        secimYazisiGoster(
+          "SANATÇI SEÇİMİ TAMAMLANDI"
+        );
+      },
+      500
     );
   }
 }
