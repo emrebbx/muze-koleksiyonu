@@ -323,19 +323,16 @@ body {
 
 
 /* =========================
-   YENİ SANATÇI YUVALARI
+   SANATÇI YUVA KAPSAYICILARI
 ========================= */
 
 #oyuncu2SanatciYuvalari,
 #oyuncu1SanatciYuvalari {
   position: absolute;
+  inset: 0;
 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  width: 76%;
-  left: 12%;
+  width: 100%;
+  height: 100%;
 
   z-index: 2;
 
@@ -343,24 +340,13 @@ body {
 }
 
 
-/* 2. OYUNCU - ÜST */
-
-#oyuncu2SanatciYuvalari {
-  top: 7%;
-}
-
-
-/* 1. OYUNCU - ALT */
-
-#oyuncu1SanatciYuvalari {
-  top: 65%;
-}
-
-
-/* TEK TEK SANATÇI YUVASI */
+/* =========================
+   TÜM SANATÇI YUVALARI
+========================= */
 
 .yeniSanatciYuva {
-  width: 12%;
+  position: absolute;
+
   height: auto;
 
   display: block;
@@ -368,6 +354,52 @@ body {
   user-select: none;
   -webkit-user-drag: none;
   pointer-events: none;
+}
+
+
+/* =========================
+   2. OYUNCU - ÜST
+========================= */
+
+.ustSanatci1 {
+  left: 12%;
+  top: 7%;
+  width: 9%;
+}
+
+.ustSanatci2 {
+  left: 45.5%;
+  top: 7%;
+  width: 9%;
+}
+
+.ustSanatci3 {
+  left: 79%;
+  top: 7%;
+  width: 9%;
+}
+
+
+/* =========================
+   1. OYUNCU - ALT
+========================= */
+
+.altSanatci1 {
+  left: 12%;
+  top: 65%;
+  width: 9%;
+}
+
+.altSanatci2 {
+  left: 45.5%;
+  top: 65%;
+  width: 9%;
+}
+
+.altSanatci3 {
+  left: 79%;
+  top: 65%;
+  width: 9%;
 }
 
 
@@ -482,12 +514,6 @@ body {
   justify-content: center;
   align-items: center;
 }
-
-
-/*
-  SLOT BOŞALSA BİLE
-  GRID İÇİNDEKİ YERİ DURUR.
-*/
 
 .kapaliKartSlotu.bos {
   visibility: visible;
