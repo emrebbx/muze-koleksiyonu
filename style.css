@@ -450,21 +450,18 @@ body {
 .ustSanatci1 {
   left: 26.1%;
   top: 6.2%;
-
   width: 6.6%;
 }
 
 .ustSanatci2 {
   left: 46.7%;
   top: 6.2%;
-
   width: 6.6%;
 }
 
 .ustSanatci3 {
   left: 67.3%;
   top: 6.2%;
-
   width: 6.6%;
 }
 
@@ -476,35 +473,28 @@ body {
 .altSanatci1 {
   left: 26.1%;
   top: 77.5%;
-
   width: 6.6%;
 }
 
 .altSanatci2 {
   left: 46.7%;
   top: 77.5%;
-
   width: 6.6%;
 }
 
 .altSanatci3 {
   left: 67.3%;
   top: 77.5%;
-
   width: 6.6%;
 }
 
 
 /* =========================
-   TEST ESER GRUBU
-   ÜST SANATÇI 1
+   ESER GRUPLARI
 ========================= */
 
-.ustEserGrubu1 {
+.eserGrubu {
   position: absolute;
-
-  left: 20%;
-  top: 25%;
 
   width: 20%;
   height: 20%;
@@ -522,7 +512,7 @@ body {
 .eserYuvasi {
   position: absolute;
 
-  width: 30%;
+  width: 32.8%;
   height: auto;
 
   user-select: none;
@@ -533,22 +523,62 @@ body {
 
 
 /* =========================
-   TEST ÜÇLÜ İÇ YERLEŞİM
+   ESER ÜÇLÜSÜ İÇ DÜZEN
 ========================= */
 
-.ustEserGrubu1 .eser1 {
-  left: 0;
-  top: 0;
+.eserGrubu .eser1 {
+  left: -3.74%;
+  top: -10.52%;
 }
 
-.ustEserGrubu1 .eser2 {
-  left: 35%;
-  top: 0;
+.eserGrubu .eser2 {
+  left: 30.5%;
+  top: -10.52%;
 }
 
-.ustEserGrubu1 .eser3 {
-  left: 70%;
-  top: 0;
+.eserGrubu .eser3 {
+  left: 64.8%;
+  top: -10.52%;
+}
+
+
+/* =========================
+   ÜST ESER GRUPLARI
+========================= */
+
+.ustEserGrubu1 {
+  left: 20%;
+  top: 25%;
+}
+
+.ustEserGrubu2 {
+  left: 40.6%;
+  top: 25%;
+}
+
+.ustEserGrubu3 {
+  left: 61.2%;
+  top: 25%;
+}
+
+
+/* =========================
+   ALT ESER GRUPLARI
+========================= */
+
+.altEserGrubu1 {
+  left: 20%;
+  top: 60%;
+}
+
+.altEserGrubu2 {
+  left: 40.6%;
+  top: 60%;
+}
+
+.altEserGrubu3 {
+  left: 61.2%;
+  top: 60%;
 }
 
 
