@@ -75,6 +75,8 @@ let oyuncu2Secimleri = [];
 
 let secimKilidi = false;
 
+let onizlemeAcik = false;
+
 
 /* =========================
    SES SEVİYELERİ
@@ -255,9 +257,12 @@ function secimYazisiniOlustur() {
     yazi =
       document.createElement("div");
 
-    yazi.id = "secimYazisi";
+    yazi.id =
+      "secimYazisi";
 
-    oynanisEkrani.appendChild(yazi);
+    oynanisEkrani.appendChild(
+      yazi
+    );
   }
 
   return yazi;
@@ -269,7 +274,8 @@ function secimYazisiGoster(metin) {
   const yazi =
     secimYazisiniOlustur();
 
-  yazi.textContent = metin;
+  yazi.textContent =
+    metin;
 
   gsap.killTweensOf(yazi);
 
@@ -318,7 +324,6 @@ function gsapDesteKaristir(
           transformOrigin: "50% 100%",
           zIndex: index
         });
-
       }
     );
 
@@ -330,6 +335,7 @@ function gsapDesteKaristir(
         onComplete: resolve
       });
 
+
     tl.to(
       desteKartlari,
       {
@@ -338,6 +344,7 @@ function gsapDesteKaristir(
         stagger: 0.01
       }
     );
+
 
     tl.to(
       solDeste,
@@ -355,6 +362,7 @@ function gsapDesteKaristir(
         stagger: 0.025
       }
     );
+
 
     tl.to(
       sagDeste,
@@ -374,6 +382,7 @@ function gsapDesteKaristir(
       "<"
     );
 
+
     tl.to(
       solDeste,
       {
@@ -390,6 +399,7 @@ function gsapDesteKaristir(
         duration: 0.35
       }
     );
+
 
     tl.to(
       sagDeste,
@@ -409,6 +419,7 @@ function gsapDesteKaristir(
       "<"
     );
 
+
     for (let i = 0; i < 6; i++) {
 
       const solKart =
@@ -426,8 +437,10 @@ function gsapDesteKaristir(
           duration: 0.18,
           ease: "power1.out"
         },
-        "riffle+=" + (i * 0.055)
+        "riffle+=" +
+        (i * 0.055)
       );
+
 
       tl.to(
         sagKart,
@@ -439,9 +452,10 @@ function gsapDesteKaristir(
           ease: "power1.out"
         },
         "riffle+=" +
-          (i * 0.055 + 0.028)
+        (i * 0.055 + 0.028)
       );
     }
+
 
     tl.to(
       desteKartlari,
@@ -464,7 +478,6 @@ function gsapDesteKaristir(
       },
       ">"
     );
-
   });
 }
 
@@ -490,8 +503,11 @@ async function sanatciKartlariniKaristir() {
     karisikSanatcilar;
 
 
-  karistirmaDestesi.innerHTML = "";
-  kapaliKartSirasi.innerHTML = "";
+  karistirmaDestesi.innerHTML =
+    "";
+
+  kapaliKartSirasi.innerHTML =
+    "";
 
   kapaliKartSirasi.classList.remove(
     "goster"
@@ -536,7 +552,8 @@ async function sanatciKartlariniKaristir() {
   );
 
 
-  karistirmaDestesi.innerHTML = "";
+  karistirmaDestesi.innerHTML =
+    "";
 
 
   onIkiKartiDiz(
@@ -553,7 +570,8 @@ function onIkiKartiDiz(
   karisikSanatcilar
 ) {
 
-  kapaliKartSirasi.innerHTML = "";
+  kapaliKartSirasi.innerHTML =
+    "";
 
 
   karisikSanatcilar.forEach(
@@ -589,7 +607,6 @@ function onIkiKartiDiz(
             kart,
             sanatci
           );
-
         }
       );
 
@@ -656,6 +673,7 @@ function sanatciKartiSec(
         kart.src =
           sanatci.dosya;
 
+
         gsap.to(
           kart,
           {
@@ -720,6 +738,7 @@ function kartiYuvayaGonder(
   if (!hedefYuva) {
 
     secimKilidi = false;
+
     return;
   }
 
@@ -807,15 +826,16 @@ function kartiYuvayaGonder(
       onComplete: () => {
 
         /* =========================
-           YUVANIN ÜSTÜNE
-           GERÇEK KARTI YERLEŞTİR
+           YUVAYA KALICI KART
         ========================= */
 
         const yerlesenKart =
           document.createElement("img");
 
+
         yerlesenKart.src =
           sanatci.dosya;
+
 
         yerlesenKart.className =
           "yerlesenSanatciKarti";
@@ -844,11 +864,32 @@ function kartiYuvayaGonder(
 
             pointerEvents: "auto",
 
+            cursor: "pointer",
+
             objectFit: "fill",
 
             userSelect: "none",
 
-            WebkitUserDrag: "none"
+            WebkitUserDrag:
+              "none"
+          }
+        );
+
+
+        /* =========================
+           KARTA TIKLAYINCA
+           ÖNİZLEME AÇ
+        ========================= */
+
+        yerlesenKart.addEventListener(
+          "click",
+          (event) => {
+
+            event.stopPropagation();
+
+            kartOnizlemeAc(
+              yerlesenKart
+            );
           }
         );
 
@@ -858,16 +899,14 @@ function kartiYuvayaGonder(
         );
 
 
-        /*
-          YUVA AYNI KALIYOR.
-          hedefYuva.src ARTIK DEĞİŞMİYOR.
-        */
-
         ucanKart.remove();
+
         kart.remove();
 
 
-        if (aktifOyuncu === 1) {
+        if (
+          aktifOyuncu === 1
+        ) {
 
           oyuncu1Secimleri.push(
             sanatci
@@ -878,7 +917,6 @@ function kartiYuvayaGonder(
           oyuncu2Secimleri.push(
             sanatci
           );
-
         }
 
 
@@ -887,6 +925,287 @@ function kartiYuvayaGonder(
 
         secimDurumunuKontrolEt();
       }
+    }
+  );
+}
+
+
+/* =========================
+   KART ÖNİZLEME
+========================= */
+
+function kartOnizlemeAc(
+  kaynakKart
+) {
+
+  if (onizlemeAcik) return;
+
+  onizlemeAcik = true;
+
+
+  butonSesiCal();
+
+
+  const kaynakRect =
+    kaynakKart.getBoundingClientRect();
+
+
+  /* =========================
+     KARANLIK ARKA PLAN
+  ========================= */
+
+  const katman =
+    document.createElement("div");
+
+  katman.id =
+    "kartOnizlemeKatmani";
+
+
+  document.body.appendChild(
+    katman
+  );
+
+
+  /* =========================
+     BÜYÜK KART
+  ========================= */
+
+  const onizlemeKart =
+    document.createElement("img");
+
+  onizlemeKart.id =
+    "kartOnizlemeKart";
+
+  onizlemeKart.src =
+    kaynakKart.src;
+
+
+  Object.assign(
+    onizlemeKart.style,
+    {
+      position: "fixed",
+
+      left:
+        kaynakRect.left +
+        "px",
+
+      top:
+        kaynakRect.top +
+        "px",
+
+      width:
+        kaynakRect.width +
+        "px",
+
+      height:
+        kaynakRect.height +
+        "px",
+
+      zIndex: 10001,
+
+      opacity: "1",
+
+      cursor: "pointer",
+
+      userSelect: "none",
+
+      WebkitUserDrag:
+        "none"
+    }
+  );
+
+
+  document.body.appendChild(
+    onizlemeKart
+  );
+
+
+  kaynakKart.style.opacity =
+    "0";
+
+
+  /* =========================
+     HEDEF BOYUT
+  ========================= */
+
+  const kartOrani =
+    kaynakRect.width /
+    kaynakRect.height;
+
+
+  let hedefYukseklik =
+    window.innerHeight * 0.82;
+
+
+  let hedefGenislik =
+    hedefYukseklik *
+    kartOrani;
+
+
+  /*
+    Çok geniş ekranda da
+    aşırı büyümesin.
+  */
+
+  const maksimumGenislik =
+    window.innerWidth * 0.42;
+
+
+  if (
+    hedefGenislik >
+    maksimumGenislik
+  ) {
+
+    hedefGenislik =
+      maksimumGenislik;
+
+    hedefYukseklik =
+      hedefGenislik /
+      kartOrani;
+  }
+
+
+  const hedefLeft =
+    (
+      window.innerWidth -
+      hedefGenislik
+    ) / 2;
+
+
+  const hedefTop =
+    (
+      window.innerHeight -
+      hedefYukseklik
+    ) / 2;
+
+
+  /* =========================
+     ARKA PLAN KARAR
+  ========================= */
+
+  gsap.fromTo(
+    katman,
+    {
+      opacity: 0
+    },
+    {
+      opacity: 1,
+      duration: 0.3
+    }
+  );
+
+
+  /* =========================
+     KART ÖNE GELSİN
+  ========================= */
+
+  gsap.to(
+    onizlemeKart,
+    {
+      left:
+        hedefLeft,
+
+      top:
+        hedefTop,
+
+      width:
+        hedefGenislik,
+
+      height:
+        hedefYukseklik,
+
+      rotation: 0,
+
+      duration: 0.55,
+
+      ease:
+        "back.out(1.25)"
+    }
+  );
+
+
+  /* =========================
+     KAPATMA
+  ========================= */
+
+  function onizlemeyiKapat() {
+
+    if (!onizlemeAcik) {
+      return;
+    }
+
+
+    onizlemeAcik = false;
+
+
+    butonSesiCal();
+
+
+    const guncelKaynakRect =
+      kaynakKart.getBoundingClientRect();
+
+
+    gsap.to(
+      katman,
+      {
+        opacity: 0,
+        duration: 0.25
+      }
+    );
+
+
+    gsap.to(
+      onizlemeKart,
+      {
+        left:
+          guncelKaynakRect.left,
+
+        top:
+          guncelKaynakRect.top,
+
+        width:
+          guncelKaynakRect.width,
+
+        height:
+          guncelKaynakRect.height,
+
+        duration: 0.45,
+
+        ease:
+          "power3.inOut",
+
+        onComplete: () => {
+
+          kaynakKart.style.opacity =
+            "1";
+
+          onizlemeKart.remove();
+
+          katman.remove();
+        }
+      }
+    );
+  }
+
+
+  /* Büyük karta basınca kapan */
+  onizlemeKart.addEventListener(
+    "click",
+    (event) => {
+
+      event.stopPropagation();
+
+      onizlemeyiKapat();
+    }
+  );
+
+
+  /* Karanlık alana basınca kapan */
+  katman.addEventListener(
+    "click",
+    () => {
+
+      onizlemeyiKapat();
     }
   );
 }
@@ -905,9 +1224,11 @@ function secimDurumunuKontrolEt() {
 
     aktifOyuncu = 2;
 
+
     secimYazisiGoster(
       "2. OYUNCU — 3 SANATÇI SEÇ"
     );
+
 
     return;
   }
@@ -936,7 +1257,9 @@ function secimDurumunuKontrolEt() {
       kalanKartlar,
       {
         opacity: 0,
+
         y: 40,
+
         scale: 0.85,
 
         duration: 0.5,
@@ -950,10 +1273,10 @@ function secimDurumunuKontrolEt() {
           kapaliKartSirasi.innerHTML =
             "";
 
+
           kapaliKartSirasi.classList.remove(
             "goster"
           );
-
         }
       }
     );
@@ -976,13 +1299,18 @@ devamButonu.addEventListener(
       "aktif"
     );
 
+
     anaMenu.classList.add(
       "aktif"
     );
 
 
-    anaMenuMuzik.currentTime = 0;
-    anaMenuMuzik.volume = 0;
+    anaMenuMuzik.currentTime =
+      0;
+
+
+    anaMenuMuzik.volume =
+      0;
 
 
     anaMenuMuzik
@@ -1021,8 +1349,12 @@ baslaButonu.addEventListener(
     butonSesiCal();
 
 
-    oyunMuzik.currentTime = 0;
-    oyunMuzik.volume = 0;
+    oyunMuzik.currentTime =
+      0;
+
+
+    oyunMuzik.volume =
+      0;
 
 
     oyunMuzik
@@ -1047,6 +1379,7 @@ baslaButonu.addEventListener(
     anaMenu.classList.remove(
       "aktif"
     );
+
 
     oynanisEkrani.classList.add(
       "aktif"
@@ -1078,6 +1411,7 @@ nasilOynanirButonu.addEventListener(
   () => {
 
     butonSesiCal();
+
 
     console.log(
       "Nasıl Oynanır butonuna basıldı!"
