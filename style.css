@@ -120,6 +120,7 @@ body {
     transform 0.12s ease,
     filter 0.12s ease;
 
+  touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
   user-select: none;
   -webkit-user-drag: none;
@@ -213,6 +214,7 @@ body {
     transform 0.12s ease,
     filter 0.12s ease;
 
+  touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
   user-select: none;
   -webkit-user-drag: none;
@@ -249,6 +251,7 @@ body {
     transform 0.12s ease,
     filter 0.12s ease;
 
+  touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
   user-select: none;
   -webkit-user-drag: none;
@@ -320,56 +323,52 @@ body {
 
 
 /* =========================
-   SANATÇI YUVALARI
+   YENİ SANATÇI YUVALARI
 ========================= */
 
-.sanatciYuva {
+#oyuncu2SanatciYuvalari,
+#oyuncu1SanatciYuvalari {
   position: absolute;
 
-  width: 9%;
-  height: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 76%;
+
+  left: 12%;
 
   z-index: 2;
 
-  user-select: none;
-  -webkit-user-drag: none;
   pointer-events: none;
 }
 
 
-/* 2. OYUNCU */
+/* 2. OYUNCU - ÜST */
 
-.bordo1 {
-  left: 12%;
-  top: 8%;
-}
-
-.bordo2 {
-  left: 45.5%;
-  top: 8%;
-}
-
-.bordo3 {
-  left: 79%;
-  top: 8%;
+#oyuncu2SanatciYuvalari {
+  top: 7%;
 }
 
 
-/* 1. OYUNCU */
+/* 1. OYUNCU - ALT */
 
-.lacivert1 {
-  left: 12%;
-  top: 66%;
+#oyuncu1SanatciYuvalari {
+  top: 65%;
 }
 
-.lacivert2 {
-  left: 45.5%;
-  top: 66%;
-}
 
-.lacivert3 {
-  left: 79%;
-  top: 66%;
+/* TEK TEK YUVALAR */
+
+.yeniSanatciYuva {
+  width: 12%;
+  height: auto;
+
+  display: block;
+
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
 }
 
 
@@ -473,6 +472,8 @@ body {
     transform 0.18s ease,
     filter 0.18s ease;
 
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
   user-select: none;
   -webkit-user-drag: none;
 }
@@ -483,6 +484,10 @@ body {
   filter:
     brightness(1.08)
     drop-shadow(0 12px 9px rgba(0, 0, 0, 0.55));
+}
+
+.kapaliSanatciKarti:active {
+  transform: translateY(-5px) scale(0.96);
 }
 
 
@@ -560,6 +565,8 @@ body {
     filter 0.18s ease,
     transform 0.18s ease;
 
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
   user-select: none;
   -webkit-user-drag: none;
 }
@@ -617,6 +624,8 @@ body {
 
   cursor: pointer;
 
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
   user-select: none;
   -webkit-user-drag: none;
 }
