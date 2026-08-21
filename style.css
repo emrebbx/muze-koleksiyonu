@@ -16,15 +16,21 @@ body {
 
 
 /* =========================
-   TAM EKRAN OYUN ALANI
+   SABİT 16:9 OYUN SAHNESİ
 ========================= */
 
 #oyunEkrani {
   position: fixed;
-  inset: 0;
 
-  width: 100vw;
-  height: 100vh;
+  left: 50%;
+  top: 50%;
+
+  width: min(100vw, 177.777778vh);
+  height: min(100vh, 56.25vw);
+
+  transform: translate(-50%, -50%);
+
+  aspect-ratio: 16 / 9;
 
   background: #000;
 
@@ -423,7 +429,6 @@ body {
 
 /* =========================
    ARTAN ÖZEL KART YUVASI
-   GEÇİCİ KONUM
 ========================= */
 
 #artanOzelYuvasi {
