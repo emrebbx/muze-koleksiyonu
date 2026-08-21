@@ -797,3 +797,22 @@ body {
     opacity: 1;
   }
 }
+/* =========================
+   ARTAN SANATÇI KARTLARI YUVASI
+========================= */
+
+#artanSanatciYuvasi {
+  position: absolute;
+
+  left: 88%;
+  top: 40%;
+
+  width: 7%;
+  height: auto;
+
+  z-index: 2;
+
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
