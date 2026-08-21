@@ -17,12 +17,13 @@ body {
 
 /* =========================
    16:9 OYUN SAHNESİ
-   COVER MANTIĞI
 
-   EKRANI TAMAMEN DOLDURUR.
-   SÜNDÜRME YOK.
-   BOŞLUK YOK.
-   GEREKEN KISIM KIRPILIR.
+   COVER MANTIĞI:
+   - SÜNDÜRME YOK
+   - BOŞLUK YOK
+   - EKRAN TAM DOLAR
+   - FAZLALIK KIRPILIR
+   - TÜM OYUN BİRLİKTE ÖLÇEKLENİR
 ========================= */
 
 #oyunEkrani {
@@ -30,13 +31,6 @@ body {
 
   left: 50%;
   top: 50%;
-
-  /*
-    CONTAIN DEĞİL COVER.
-
-    Ekran 16:9'dan farklıysa
-    sahne ekranın dışına taşar.
-  */
 
   width: max(
     100vw,
@@ -365,10 +359,6 @@ body {
 
 /* =========================
    OYUN ARKA PLANI
-
-   OYUN SAHNESİ ZATEN 16:9.
-   BU YÜZDEN ARKA PLAN
-   SAHNEYİ BİREBİR DOLDURUR.
 ========================= */
 
 #oyunArkaplan {
