@@ -122,6 +122,7 @@ body {
 
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
+
   user-select: none;
   -webkit-user-drag: none;
 }
@@ -169,6 +170,7 @@ body {
 
   user-select: none;
   -webkit-user-drag: none;
+
   pointer-events: none;
 }
 
@@ -216,6 +218,7 @@ body {
 
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
+
   user-select: none;
   -webkit-user-drag: none;
 }
@@ -253,6 +256,7 @@ body {
 
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
+
   user-select: none;
   -webkit-user-drag: none;
 }
@@ -318,6 +322,7 @@ body {
 
   user-select: none;
   -webkit-user-drag: none;
+
   pointer-events: none;
 }
 
@@ -353,13 +358,14 @@ body {
 
   user-select: none;
   -webkit-user-drag: none;
+
   pointer-events: none;
 }
 
 
 /* =========================
    2. OYUNCU - ÜST
-   YENİ KESİN KONUMLAR
+   KESİN KONUMLAR
 ========================= */
 
 .ustSanatci1 {
@@ -383,7 +389,7 @@ body {
 
 /* =========================
    1. OYUNCU - ALT
-   YENİ KESİN KONUMLAR
+   KESİN KONUMLAR
 ========================= */
 
 .altSanatci1 {
@@ -402,6 +408,29 @@ body {
   left: 68.2%;
   top: 79.9%;
   width: 6.9%;
+}
+
+
+/* =========================
+   ARTAN SANATÇI YUVASI
+   GÜNCEL KESİN KONUM
+========================= */
+
+#artanSanatciYuvasi {
+  position: absolute;
+
+  left: 88.6%;
+  top: 40.8%;
+
+  width: 7%;
+  height: auto;
+
+  z-index: 2;
+
+  user-select: none;
+  -webkit-user-drag: none;
+
+  pointer-events: none;
 }
 
 
@@ -469,6 +498,7 @@ body {
   position: absolute;
 
   width: 92%;
+
   left: 4%;
   top: 42%;
 
@@ -517,6 +547,12 @@ body {
   align-items: center;
 }
 
+
+/*
+  SEÇİLEN KARTIN YERİ BOŞ KALIR.
+  DİĞER KARTLAR KAYMAZ.
+*/
+
 .kapaliKartSlotu.bos {
   visibility: visible;
 }
@@ -550,7 +586,6 @@ body {
     transparent;
 
   user-select: none;
-
   -webkit-user-drag: none;
 }
 
@@ -634,11 +669,9 @@ body {
     0 5px 15px
     rgba(0, 0, 0, 0.45);
 
-  z-index:
-    30;
+  z-index: 30;
 
-  pointer-events:
-    none;
+  pointer-events: none;
 }
 
 
@@ -655,11 +688,8 @@ body {
       rgba(0, 0, 0, 0.5)
     );
 
-  user-select:
-    none;
-
-  -webkit-user-drag:
-    none;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 
@@ -674,17 +704,13 @@ body {
     filter 0.18s ease,
     transform 0.18s ease;
 
-  touch-action:
-    manipulation;
+  touch-action: manipulation;
 
   -webkit-tap-highlight-color:
     transparent;
 
-  user-select:
-    none;
-
-  -webkit-user-drag:
-    none;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 
@@ -698,6 +724,27 @@ body {
         rgba(0, 0, 0, 0.55)
       );
   }
+}
+
+
+/* =========================
+   ARTAN SANATÇI KARTLARI
+========================= */
+
+.artanSanatciKarti,
+.artanSanatciUcanKart {
+  object-fit: fill;
+
+  user-select: none;
+  -webkit-user-drag: none;
+
+  pointer-events: none;
+
+  filter:
+    drop-shadow(
+      0 6px 6px
+      rgba(0, 0, 0, 0.45)
+    );
 }
 
 
@@ -721,11 +768,9 @@ body {
   -webkit-backdrop-filter:
     blur(3px);
 
-  z-index:
-    10000;
+  z-index: 10000;
 
-  cursor:
-    pointer;
+  cursor: pointer;
 }
 
 
@@ -734,11 +779,9 @@ body {
 ========================= */
 
 #kartOnizlemeKart {
-  object-fit:
-    fill;
+  object-fit: fill;
 
-  z-index:
-    10001;
+  z-index: 10001;
 
   filter:
     drop-shadow(
@@ -746,20 +789,15 @@ body {
       rgba(0, 0, 0, 0.75)
     );
 
-  cursor:
-    pointer;
+  cursor: pointer;
 
-  touch-action:
-    manipulation;
+  touch-action: manipulation;
 
   -webkit-tap-highlight-color:
     transparent;
 
-  user-select:
-    none;
-
-  -webkit-user-drag:
-    none;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 
@@ -796,23 +834,4 @@ body {
   to {
     opacity: 1;
   }
-}
-/* =========================
-   ARTAN SANATÇI KARTLARI YUVASI
-========================= */
-
-#artanSanatciYuvasi {
-  position: absolute;
-
-  left: 88%;
-  top: 40%;
-
-  width: 7%;
-  height: auto;
-
-  z-index: 2;
-
-  user-select: none;
-  -webkit-user-drag: none;
-  pointer-events: none;
 }
