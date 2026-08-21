@@ -1,514 +1,241 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+/* =========================
+   EKRANLAR VE BUTONLAR
+========================= */
 
-html,
-body {
-  width: 100%;
-  height: 100%;
-  background: #000;
-  overflow: hidden;
-}
+const acilisEkrani =
+  document.getElementById("acilisEkrani");
+
+const anaMenu =
+  document.getElementById("anaMenu");
+
+const oynanisEkrani =
+  document.getElementById("oynanisEkrani");
+
+const devamButonu =
+  document.getElementById("devamButonu");
+
+const baslaButonu =
+  document.getElementById("baslaButonu");
+
+const nasilOynanirButonu =
+  document.getElementById("nasilOynanirButonu");
 
 
 /* =========================
-   TAM EKRAN OYUN ALANI
+   SANATÇI SEÇİM ELEMANLARI
 ========================= */
 
-#oyunEkrani {
-  position: fixed;
-  inset: 0;
-
-  width: 100vw;
-  height: 100vh;
-
-  background: #000;
-  overflow: hidden;
-}
-
-
-/* =========================
-   TÜM EKRANLAR
-========================= */
-
-.ekran {
-  position: absolute;
-  inset: 0;
-
-  width: 100%;
-  height: 100%;
-
-  opacity: 0;
-  visibility: hidden;
-
-  transition:
-    opacity 0.7s ease,
-    visibility 0.7s ease;
-}
-
-.ekran.aktif {
-  opacity: 1;
-  visibility: visible;
-}
-
-
-/* =========================
-   AÇILIŞ EKRANI
-========================= */
-
-#acilisEkrani {
-  position: absolute;
-  inset: 0;
-
-  width: 100%;
-  height: 100%;
-
-  background: #000;
-
-  z-index: 5;
-}
-
-
-/* EU GAMES LOGOSU */
-
-#euLogo {
-  position: absolute;
-
-  width: 30%;
-  max-width: 500px;
-  height: auto;
-
-  left: 50%;
-  top: 33%;
-
-  transform: translateX(-50%);
-
-  opacity: 0;
-
-  animation: logoBelir 1.5s ease forwards;
-  animation-delay: 1s;
-
-  user-select: none;
-  -webkit-user-drag: none;
-}
-
-
-/* DEVAM ETMEK İÇİN DOKUN */
-
-#devamButonu {
-  position: absolute;
-
-  width: 24%;
-  max-width: 430px;
-  height: auto;
-
-  left: 50%;
-  top: 67%;
-
-  transform: translateX(-50%);
-
-  opacity: 0;
-
-  animation: devamBelir 1s ease forwards;
-  animation-delay: 2.5s;
-
-  cursor: pointer;
-
-  transition:
-    transform 0.12s ease,
-    filter 0.12s ease;
-
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
-  user-select: none;
-  -webkit-user-drag: none;
-}
-
-#devamButonu:active {
-  transform:
-    translateX(-50%)
-    scale(0.93)
-    translateY(5px);
-
-  filter: brightness(0.82);
-}
-
-
-/* =========================
-   ANA MENÜ
-========================= */
-
-#anaMenu {
-  position: absolute;
-  inset: 0;
-
-  width: 100%;
-  height: 100%;
-
-  background: #000;
-}
-
-
-/* ANA MENÜ ARKA PLANI */
-
-#anaMenuArkaplan {
-  position: absolute;
-  inset: 0;
-
-  width: 100%;
-  height: 100%;
-
-  object-fit: cover;
-  object-position: center;
-
-  opacity: 0.7;
-
-  z-index: 0;
-
-  user-select: none;
-  -webkit-user-drag: none;
-  pointer-events: none;
-}
-
-
-/* MÜZE KOLEKSİYONU LOGOSU */
-
-#muzeLogo {
-  position: absolute;
-
-  width: 30%;
-  height: auto;
-
-  left: 50%;
-  top: 10%;
-
-  transform: translateX(-50%);
-
-  z-index: 2;
-
-  user-select: none;
-  -webkit-user-drag: none;
-}
-
-
-/* BAŞLA */
-
-#baslaButonu {
-  position: absolute;
-
-  width: 20%;
-  height: auto;
-
-  left: 50%;
-  top: 50%;
-
-  transform: translateX(-50%);
-
-  cursor: pointer;
-
-  z-index: 2;
-
-  transition:
-    transform 0.12s ease,
-    filter 0.12s ease;
-
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
-  user-select: none;
-  -webkit-user-drag: none;
-}
-
-#baslaButonu:active {
-  transform:
-    translateX(-50%)
-    scale(0.93)
-    translateY(5px);
-
-  filter: brightness(0.82);
-}
-
-
-/* NASIL OYNANIR */
-
-#nasilOynanirButonu {
-  position: absolute;
-
-  width: 15%;
-  height: auto;
-
-  left: 50%;
-  top: 70%;
-
-  transform: translateX(-50%);
-
-  cursor: pointer;
-
-  z-index: 2;
-
-  transition:
-    transform 0.12s ease,
-    filter 0.12s ease;
-
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
-  user-select: none;
-  -webkit-user-drag: none;
-}
-
-#nasilOynanirButonu:active {
-  transform:
-    translateX(-50%)
-    scale(0.93)
-    translateY(5px);
-
-  filter: brightness(0.82);
-}
-
-
-/* ALT EU GAMES */
-
-#altEuLogo {
-  position: absolute;
-
-  width: 8%;
-  height: auto;
-
-  left: 50%;
-  bottom: 2%;
-
-  transform: translateX(-50%);
-
-  z-index: 2;
-
-  user-select: none;
-  -webkit-user-drag: none;
-}
-
-
-/* =========================
-   OYNANIŞ EKRANI
-========================= */
-
-#oynanisEkrani {
-  position: absolute;
-  inset: 0;
-
-  width: 100%;
-  height: 100%;
-
-  background: #000;
-}
-
-
-/* OYUN ARKA PLANI */
-
-#oyunArkaplan {
-  position: absolute;
-  inset: 0;
-
-  width: 100%;
-  height: 100%;
-
-  object-fit: cover;
-  object-position: center;
-
-  z-index: 0;
-
-  user-select: none;
-  -webkit-user-drag: none;
-  pointer-events: none;
-}
+const karistirmaDestesi =
+  document.getElementById("karistirmaDestesi");
+
+const kapaliKartSirasi =
+  document.getElementById("kapaliKartSirasi");
 
 
 /* =========================
    YENİ SANATÇI YUVALARI
 ========================= */
 
-#oyuncu2SanatciYuvalari,
-#oyuncu1SanatciYuvalari {
-  position: absolute;
+const oyuncu1SanatciYuvalari =
+  Array.from(
+    document.querySelectorAll(
+      "#oyuncu1SanatciYuvalari .yeniSanatciYuva"
+    )
+  );
 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  width: 76%;
-
-  left: 12%;
-
-  z-index: 2;
-
-  pointer-events: none;
-}
+const oyuncu2SanatciYuvalari =
+  Array.from(
+    document.querySelectorAll(
+      "#oyuncu2SanatciYuvalari .yeniSanatciYuva"
+    )
+  );
 
 
-/* 2. OYUNCU - ÜST */
+/* =========================
+   12 SANATÇI
+========================= */
 
-#oyuncu2SanatciYuvalari {
-  top: 7%;
-}
+const sanatcilar = [
+  { id: "vermeer", dosya: "images/vermeer.png" },
+  { id: "van-gogh", dosya: "images/van-gogh.png" },
+  { id: "velazquez", dosya: "images/velazquez.png" },
+  { id: "monet", dosya: "images/monet.png" },
+  { id: "leonardo", dosya: "images/leonardo.png" },
+  { id: "munch", dosya: "images/munch.png" },
+  { id: "rembrandt", dosya: "images/rembrandt.png" },
+  { id: "osman-hamdi", dosya: "images/osman-hamdi.png" },
+  { id: "cezanne", dosya: "images/cezanne.png" },
+  { id: "mondrian", dosya: "images/mondrian.png" },
+  { id: "durer", dosya: "images/durer.png" },
+  { id: "millet", dosya: "images/millet.png" }
+];
 
 
-/* 1. OYUNCU - ALT */
+/* =========================
+   OYUN DURUMU
+========================= */
 
-#oyuncu1SanatciYuvalari {
-  top: 65%;
-}
+let aktifOyuncu = 1;
+
+let oyuncu1Secimleri = [];
+let oyuncu2Secimleri = [];
+
+let secimKilidi = false;
+
+let onizlemeAcik = false;
 
 
-/* TEK TEK YUVALAR */
+/* =========================
+   SES SEVİYELERİ
+========================= */
 
-.yeniSanatciYuva {
-  width: 12%;
-  height: auto;
+const MUZIK_SESI = 0.22;
+const BUTON_SESI = 0.65;
 
-  display: block;
 
-  user-select: none;
-  -webkit-user-drag: none;
-  pointer-events: none;
+/* =========================
+   MÜZİKLER
+========================= */
+
+const anaMenuMuzik =
+  new Audio("sounds/ana-menu-muzik.mp3");
+
+const oyunMuzik =
+  new Audio("sounds/oyun-muzik.mp3");
+
+anaMenuMuzik.loop = true;
+oyunMuzik.loop = true;
+
+anaMenuMuzik.volume = 0;
+oyunMuzik.volume = 0;
+
+
+/* =========================
+   BUTON SESİ
+========================= */
+
+const butonTik =
+  new Audio("sounds/buton-tik.mp3");
+
+butonTik.volume = BUTON_SESI;
+
+function butonSesiCal() {
+  butonTik.currentTime = 0;
+
+  butonTik.play().catch((hata) => {
+    console.log(
+      "Buton sesi çalınamadı:",
+      hata
+    );
+  });
 }
 
 
 /* =========================
-   SANATÇI SEÇİM ALANI
+   RANDOM KARIŞTIRMA
 ========================= */
 
-#sanatciSecimAlani {
-  position: absolute;
-  inset: 0;
+function karistir(dizi) {
+  const yeniDizi = [...dizi];
 
-  width: 100%;
-  height: 100%;
+  for (
+    let i = yeniDizi.length - 1;
+    i > 0;
+    i--
+  ) {
+    const j =
+      Math.floor(
+        Math.random() * (i + 1)
+      );
 
-  z-index: 10;
+    [
+      yeniDizi[i],
+      yeniDizi[j]
+    ] = [
+      yeniDizi[j],
+      yeniDizi[i]
+    ];
+  }
 
-  pointer-events: none;
+  return yeniDizi;
 }
 
 
 /* =========================
-   KARIŞTIRMA DESTESİ
+   MÜZİĞİ AÇ
 ========================= */
 
-#karistirmaDestesi {
-  position: absolute;
+function muzikAc(
+  muzik,
+  hedefSes = MUZIK_SESI,
+  sure = 1500
+) {
+  const baslangicZamani =
+    performance.now();
 
-  left: 50%;
-  top: 50%;
+  const baslangicSes =
+    muzik.volume;
 
-  width: 8%;
+  function animasyon(zaman) {
+    const ilerleme =
+      Math.min(
+        (zaman - baslangicZamani) / sure,
+        1
+      );
 
-  transform: translate(-50%, -50%);
+    muzik.volume =
+      baslangicSes +
+      (hedefSes - baslangicSes) *
+      ilerleme;
 
-  perspective: 1000px;
-}
+    if (ilerleme < 1) {
+      requestAnimationFrame(animasyon);
+    }
+  }
 
-.karistirmaKarti {
-  position: absolute;
-
-  width: 100%;
-  height: auto;
-
-  left: 0;
-  top: 0;
-
-  transform-origin: center;
-
-  filter:
-    drop-shadow(0 8px 8px rgba(0, 0, 0, 0.4));
-
-  user-select: none;
-  -webkit-user-drag: none;
+  requestAnimationFrame(animasyon);
 }
 
 
 /* =========================
-   12 KAPALI KART SIRASI
+   MÜZİĞİ KAPAT
 ========================= */
 
-#kapaliKartSirasi {
-  position: absolute;
+function muzikKapat(
+  muzik,
+  sure = 1000
+) {
+  const baslangicZamani =
+    performance.now();
 
-  width: 92%;
+  const baslangicSes =
+    muzik.volume;
 
-  left: 4%;
-  top: 42%;
+  return new Promise((resolve) => {
+    function animasyon(zaman) {
+      const ilerleme =
+        Math.min(
+          (zaman - baslangicZamani) / sure,
+          1
+        );
 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+      muzik.volume =
+        baslangicSes *
+        (1 - ilerleme);
 
-  opacity: 0;
+      if (ilerleme < 1) {
+        requestAnimationFrame(animasyon);
+      } else {
+        muzik.pause();
+        muzik.currentTime = 0;
+        muzik.volume = 0;
 
-  pointer-events: none;
+        resolve();
+      }
+    }
 
-  transition:
-    opacity 0.5s ease,
-    transform 0.5s ease;
-
-  transform: translateY(40px);
-}
-
-#kapaliKartSirasi.goster {
-  opacity: 1;
-  transform: translateY(0);
-
-  pointer-events: auto;
-}
-
-
-/* =========================
-   SABİT 12 KART SLOTU
-========================= */
-
-.kapaliKartSlotu {
-  width: 6.6%;
-  flex: 0 0 6.6%;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.kapaliKartSlotu.bos {
-  visibility: hidden;
-}
-
-
-/* KAPALI SANATÇI KARTI */
-
-.kapaliSanatciKarti {
-  width: 100%;
-  height: auto;
-
-  cursor: pointer;
-
-  filter:
-    drop-shadow(0 7px 6px rgba(0, 0, 0, 0.45));
-
-  transition:
-    transform 0.18s ease,
-    filter 0.18s ease;
-
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
-  user-select: none;
-  -webkit-user-drag: none;
-}
-
-.kapaliSanatciKarti:hover {
-  transform: translateY(-12px) scale(1.04);
-
-  filter:
-    brightness(1.08)
-    drop-shadow(0 12px 9px rgba(0, 0, 0, 0.55));
-}
-
-.kapaliSanatciKarti:active {
-  transform: translateY(-5px) scale(0.96);
+    requestAnimationFrame(animasyon);
+  });
 }
 
 
@@ -516,170 +243,1009 @@ body {
    SEÇİM YAZISI
 ========================= */
 
-#secimYazisi {
-  position: absolute;
+function secimYazisiniOlustur() {
+  let yazi =
+    document.getElementById("secimYazisi");
 
-  left: 50%;
-  top: 32%;
+  if (!yazi) {
+    yazi =
+      document.createElement("div");
 
-  transform: translateX(-50%);
+    yazi.id =
+      "secimYazisi";
 
-  padding: 12px 28px;
-
-  background:
-    rgba(30, 18, 10, 0.88);
-
-  border:
-    2px solid #c7a15a;
-
-  border-radius: 12px;
-
-  color: #f5e7c4;
-
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
-
-  font-size:
-    clamp(14px, 1.4vw, 26px);
-
-  font-weight: bold;
-
-  letter-spacing: 1px;
-
-  text-align: center;
-
-  box-shadow:
-    0 5px 15px
-    rgba(0, 0, 0, 0.45);
-
-  z-index: 30;
-
-  pointer-events: none;
-}
-
-
-/* =========================
-   UÇAN SANATÇI KARTI
-========================= */
-
-.ucanSanatciKarti {
-  object-fit: fill;
-
-  filter:
-    drop-shadow(0 10px 10px rgba(0, 0, 0, 0.5));
-
-  user-select: none;
-  -webkit-user-drag: none;
-}
-
-
-/* =========================
-   YERLEŞEN SANATÇI KARTI
-========================= */
-
-.yerlesenSanatciKarti {
-  cursor: pointer;
-
-  transition:
-    filter 0.18s ease,
-    transform 0.18s ease;
-
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
-  user-select: none;
-  -webkit-user-drag: none;
-}
-
-.yerlesenSanatciKarti:hover {
-  filter:
-    brightness(1.08)
-    drop-shadow(
-      0 7px 8px
-      rgba(0, 0, 0, 0.55)
+    oynanisEkrani.appendChild(
+      yazi
     );
+  }
+
+  return yazi;
+}
+
+
+function secimYazisiGoster(metin) {
+  const yazi =
+    secimYazisiniOlustur();
+
+  yazi.textContent =
+    metin;
+
+  gsap.killTweensOf(yazi);
+
+  gsap.fromTo(
+    yazi,
+    {
+      opacity: 0,
+      scale: 0.85,
+      y: -10
+    },
+    {
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      duration: 0.4,
+      ease: "back.out(1.7)"
+    }
+  );
 }
 
 
 /* =========================
-   KART ÖNİZLEME KARANLIK KATMAN
+   GSAP DESTE SHUFFLE
 ========================= */
 
-#kartOnizlemeKatmani {
-  position: fixed;
-  inset: 0;
+function gsapDesteKaristir(
+  desteKartlari
+) {
+  return new Promise((resolve) => {
+    const solDeste =
+      desteKartlari.slice(0, 6);
 
-  width: 100vw;
-  height: 100vh;
+    const sagDeste =
+      desteKartlari.slice(6, 12);
 
-  background:
-    rgba(0, 0, 0, 0.78);
-
-  backdrop-filter:
-    blur(3px);
-
-  -webkit-backdrop-filter:
-    blur(3px);
-
-  z-index: 10000;
-
-  cursor: pointer;
-}
-
-
-/* =========================
-   BÜYÜK KART ÖNİZLEME
-========================= */
-
-#kartOnizlemeKart {
-  object-fit: fill;
-
-  z-index: 10001;
-
-  filter:
-    drop-shadow(
-      0 25px 30px
-      rgba(0, 0, 0, 0.75)
+    desteKartlari.forEach(
+      (kart, index) => {
+        gsap.set(kart, {
+          x: index * 1.2,
+          y: index * -0.35,
+          rotation: 0,
+          scale: 1,
+          transformOrigin: "50% 100%",
+          zIndex: index
+        });
+      }
     );
 
-  cursor: pointer;
+    const tl =
+      gsap.timeline({
+        defaults: {
+          ease: "power2.inOut"
+        },
+        onComplete: resolve
+      });
 
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
-  user-select: none;
-  -webkit-user-drag: none;
+    tl.to(
+      desteKartlari,
+      {
+        y: "-=20",
+        duration: 0.25,
+        stagger: 0.01
+      }
+    );
+
+    tl.to(
+      solDeste,
+      {
+        x: (index) =>
+          -145 + index * 2,
+
+        y: (index) =>
+          -10 - index * 0.5,
+
+        rotation: -5,
+
+        duration: 0.45,
+
+        stagger: 0.025
+      }
+    );
+
+    tl.to(
+      sagDeste,
+      {
+        x: (index) =>
+          145 + index * 2,
+
+        y: (index) =>
+          -10 - index * 0.5,
+
+        rotation: 5,
+
+        duration: 0.45,
+
+        stagger: 0.025
+      },
+      "<"
+    );
+
+    tl.to(
+      solDeste,
+      {
+        x: (index) =>
+          -72 + index * 1.5,
+
+        y: (index) =>
+          8 - index * 0.5,
+
+        rotation: -8,
+
+        scaleY: 0.96,
+
+        duration: 0.35
+      }
+    );
+
+    tl.to(
+      sagDeste,
+      {
+        x: (index) =>
+          72 + index * 1.5,
+
+        y: (index) =>
+          8 - index * 0.5,
+
+        rotation: 8,
+
+        scaleY: 0.96,
+
+        duration: 0.35
+      },
+      "<"
+    );
+
+    for (let i = 0; i < 6; i++) {
+      const solKart =
+        solDeste[i];
+
+      const sagKart =
+        sagDeste[i];
+
+      tl.to(
+        solKart,
+        {
+          x: -6 + i * 2,
+          y: -i * 0.8,
+          rotation: -1.5,
+          duration: 0.18,
+          ease: "power1.out"
+        },
+        "riffle+=" +
+        (i * 0.055)
+      );
+
+      tl.to(
+        sagKart,
+        {
+          x: 6 - i * 2,
+          y: -i * 0.8,
+          rotation: 1.5,
+          duration: 0.18,
+          ease: "power1.out"
+        },
+        "riffle+=" +
+        (i * 0.055 + 0.028)
+      );
+    }
+
+    tl.to(
+      desteKartlari,
+      {
+        x: (index) =>
+          index * 0.9,
+
+        y: (index) =>
+          index * -0.28,
+
+        rotation: 0,
+
+        scaleY: 1,
+
+        duration: 0.4,
+
+        stagger: 0.012,
+
+        ease: "back.out(1.25)"
+      },
+      ">"
+    );
+  });
 }
 
 
 /* =========================
-   AÇILIŞ ANİMASYONLARI
+   KARTLARI KARIŞTIR
 ========================= */
 
-@keyframes logoBelir {
-  from {
-    opacity: 0;
+async function sanatciKartlariniKaristir() {
+  aktifOyuncu = 1;
 
-    transform:
-      translateX(-50%)
-      scale(0.9);
+  oyuncu1Secimleri = [];
+  oyuncu2Secimleri = [];
+
+  secimKilidi = false;
+
+  const karisikSanatcilar =
+    karistir(sanatcilar);
+
+  window.karisikSanatcilar =
+    karisikSanatcilar;
+
+  karistirmaDestesi.innerHTML =
+    "";
+
+  kapaliKartSirasi.innerHTML =
+    "";
+
+  kapaliKartSirasi.classList.remove(
+    "goster"
+  );
+
+  karisikSanatcilar.forEach(
+    (sanatci, index) => {
+      const kart =
+        document.createElement("img");
+
+      kart.src =
+        "images/kart-arkasi.png";
+
+      kart.className =
+        "karistirmaKarti";
+
+      kart.dataset.sanatci =
+        sanatci.id;
+
+      kart.style.zIndex =
+        index;
+
+      karistirmaDestesi.appendChild(
+        kart
+      );
+    }
+  );
+
+  const desteKartlari =
+    Array.from(
+      karistirmaDestesi.querySelectorAll(
+        ".karistirmaKarti"
+      )
+    );
+
+  await gsapDesteKaristir(
+    desteKartlari
+  );
+
+  karistirmaDestesi.innerHTML =
+    "";
+
+  onIkiKartiDiz(
+    karisikSanatcilar
+  );
+}
+
+
+/* =========================
+   12 KARTI DİZ
+========================= */
+
+function onIkiKartiDiz(
+  karisikSanatcilar
+) {
+  kapaliKartSirasi.innerHTML =
+    "";
+
+  karisikSanatcilar.forEach(
+    (sanatci, index) => {
+      const slot =
+        document.createElement("div");
+
+      slot.className =
+        "kapaliKartSlotu";
+
+      const kart =
+        document.createElement("img");
+
+      kart.src =
+        "images/kart-arkasi.png";
+
+      kart.className =
+        "kapaliSanatciKarti";
+
+      kart.dataset.sanatci =
+        sanatci.id;
+
+      kart.dataset.dosya =
+        sanatci.dosya;
+
+      kart.dataset.sira =
+        index;
+
+      kart.dataset.secildi =
+        "hayir";
+
+      kart.addEventListener(
+        "click",
+        () => {
+          sanatciKartiSec(
+            kart,
+            sanatci
+          );
+        }
+      );
+
+      slot.appendChild(kart);
+      kapaliKartSirasi.appendChild(slot);
+    }
+  );
+
+  requestAnimationFrame(() => {
+    kapaliKartSirasi.classList.add(
+      "goster"
+    );
+  });
+
+  setTimeout(() => {
+    secimYazisiGoster(
+      "1. OYUNCU — 3 SANATÇI SEÇ"
+    );
+  }, 500);
+}
+
+
+/* =========================
+   SANATÇI KARTINI SEÇ
+========================= */
+
+function sanatciKartiSec(
+  kart,
+  sanatci
+) {
+  if (secimKilidi) return;
+
+  if (
+    kart.dataset.secildi === "evet"
+  ) {
+    return;
   }
 
-  to {
-    opacity: 1;
+  secimKilidi = true;
 
-    transform:
-      translateX(-50%)
-      scale(1);
+  kart.dataset.secildi =
+    "evet";
+
+  gsap.to(
+    kart,
+    {
+      scaleX: 0,
+      duration: 0.2,
+      ease: "power2.in",
+
+      onComplete: () => {
+        kart.src =
+          sanatci.dosya;
+
+        gsap.to(
+          kart,
+          {
+            scaleX: 1,
+            duration: 0.22,
+            ease: "back.out(1.5)",
+
+            onComplete: () => {
+              setTimeout(() => {
+                kartiYuvayaGonder(
+                  kart,
+                  sanatci
+                );
+              }, 300);
+            }
+          }
+        );
+      }
+    }
+  );
+}
+
+
+/* =========================
+   KARTI YUVAYA GÖNDER
+========================= */
+
+function kartiYuvayaGonder(
+  kart,
+  sanatci
+) {
+  let hedefYuva;
+  let hedefIndex;
+
+  if (aktifOyuncu === 1) {
+    hedefIndex =
+      oyuncu1Secimleri.length;
+
+    hedefYuva =
+      oyuncu1SanatciYuvalari[
+        hedefIndex
+      ];
+  } else {
+    hedefIndex =
+      oyuncu2Secimleri.length;
+
+    hedefYuva =
+      oyuncu2SanatciYuvalari[
+        hedefIndex
+      ];
+  }
+
+  if (!hedefYuva) {
+    secimKilidi = false;
+    return;
+  }
+
+  const kartRect =
+    kart.getBoundingClientRect();
+
+  const yuvaRect =
+    hedefYuva.getBoundingClientRect();
+
+
+  /* =========================
+     UÇAN KART
+  ========================= */
+
+  const ucanKart =
+    document.createElement("img");
+
+  ucanKart.src =
+    sanatci.dosya;
+
+  ucanKart.className =
+    "ucanSanatciKarti";
+
+  Object.assign(
+    ucanKart.style,
+    {
+      position: "fixed",
+
+      left:
+        kartRect.left + "px",
+
+      top:
+        kartRect.top + "px",
+
+      width:
+        kartRect.width + "px",
+
+      height:
+        kartRect.height + "px",
+
+      zIndex: 9999,
+
+      pointerEvents: "none",
+
+      opacity: "1"
+    }
+  );
+
+  document.body.appendChild(
+    ucanKart
+  );
+
+  kart.style.visibility =
+    "hidden";
+
+  gsap.to(
+    ucanKart,
+    {
+      left:
+        yuvaRect.left,
+
+      top:
+        yuvaRect.top,
+
+      width:
+        yuvaRect.width,
+
+      height:
+        yuvaRect.height,
+
+      rotation: 0,
+
+      opacity: 1,
+
+      duration: 0.65,
+
+      ease:
+        "power3.inOut",
+
+      onComplete: () => {
+
+        const yerlesenKart =
+          document.createElement("img");
+
+        yerlesenKart.src =
+          sanatci.dosya;
+
+        yerlesenKart.className =
+          "yerlesenSanatciKarti";
+
+        Object.assign(
+          yerlesenKart.style,
+          {
+            position: "fixed",
+
+            left:
+              yuvaRect.left + "px",
+
+            top:
+              yuvaRect.top + "px",
+
+            width:
+              yuvaRect.width + "px",
+
+            height:
+              yuvaRect.height + "px",
+
+            zIndex: 5,
+
+            opacity: "1",
+
+            pointerEvents: "auto",
+
+            cursor: "pointer",
+
+            objectFit: "fill",
+
+            userSelect: "none",
+
+            WebkitUserDrag:
+              "none"
+          }
+        );
+
+        yerlesenKart.addEventListener(
+          "click",
+          (event) => {
+            event.stopPropagation();
+
+            kartOnizlemeAc(
+              yerlesenKart
+            );
+          }
+        );
+
+        document.body.appendChild(
+          yerlesenKart
+        );
+
+        ucanKart.remove();
+
+        const slot =
+          kart.parentElement;
+
+        kart.remove();
+
+        if (slot) {
+          slot.classList.add("bos");
+        }
+
+        if (
+          aktifOyuncu === 1
+        ) {
+          oyuncu1Secimleri.push(
+            sanatci
+          );
+        } else {
+          oyuncu2Secimleri.push(
+            sanatci
+          );
+        }
+
+        secimKilidi = false;
+
+        secimDurumunuKontrolEt();
+      }
+    }
+  );
+}
+
+
+/* =========================
+   KART ÖNİZLEME
+========================= */
+
+function kartOnizlemeAc(
+  kaynakKart
+) {
+  if (onizlemeAcik) return;
+
+  onizlemeAcik = true;
+
+  butonSesiCal();
+
+  const kaynakRect =
+    kaynakKart.getBoundingClientRect();
+
+  const katman =
+    document.createElement("div");
+
+  katman.id =
+    "kartOnizlemeKatmani";
+
+  document.body.appendChild(
+    katman
+  );
+
+  const onizlemeKart =
+    document.createElement("img");
+
+  onizlemeKart.id =
+    "kartOnizlemeKart";
+
+  onizlemeKart.src =
+    kaynakKart.src;
+
+  Object.assign(
+    onizlemeKart.style,
+    {
+      position: "fixed",
+
+      left:
+        kaynakRect.left +
+        "px",
+
+      top:
+        kaynakRect.top +
+        "px",
+
+      width:
+        kaynakRect.width +
+        "px",
+
+      height:
+        kaynakRect.height +
+        "px",
+
+      zIndex: 10001,
+
+      opacity: "1",
+
+      cursor: "pointer",
+
+      userSelect: "none",
+
+      WebkitUserDrag:
+        "none"
+    }
+  );
+
+  document.body.appendChild(
+    onizlemeKart
+  );
+
+  kaynakKart.style.opacity =
+    "0";
+
+  const kartOrani =
+    kaynakRect.width /
+    kaynakRect.height;
+
+  let hedefYukseklik =
+    window.innerHeight * 0.82;
+
+  let hedefGenislik =
+    hedefYukseklik *
+    kartOrani;
+
+  const maksimumGenislik =
+    window.innerWidth * 0.42;
+
+  if (
+    hedefGenislik >
+    maksimumGenislik
+  ) {
+    hedefGenislik =
+      maksimumGenislik;
+
+    hedefYukseklik =
+      hedefGenislik /
+      kartOrani;
+  }
+
+  const hedefLeft =
+    (
+      window.innerWidth -
+      hedefGenislik
+    ) / 2;
+
+  const hedefTop =
+    (
+      window.innerHeight -
+      hedefYukseklik
+    ) / 2;
+
+  gsap.fromTo(
+    katman,
+    {
+      opacity: 0
+    },
+    {
+      opacity: 1,
+      duration: 0.3
+    }
+  );
+
+  gsap.to(
+    onizlemeKart,
+    {
+      left:
+        hedefLeft,
+
+      top:
+        hedefTop,
+
+      width:
+        hedefGenislik,
+
+      height:
+        hedefYukseklik,
+
+      rotation: 0,
+
+      duration: 0.55,
+
+      ease:
+        "back.out(1.25)"
+    }
+  );
+
+  function onizlemeyiKapat() {
+    if (!onizlemeAcik) {
+      return;
+    }
+
+    onizlemeAcik = false;
+
+    butonSesiCal();
+
+    const guncelKaynakRect =
+      kaynakKart.getBoundingClientRect();
+
+    gsap.to(
+      katman,
+      {
+        opacity: 0,
+        duration: 0.25
+      }
+    );
+
+    gsap.to(
+      onizlemeKart,
+      {
+        left:
+          guncelKaynakRect.left,
+
+        top:
+          guncelKaynakRect.top,
+
+        width:
+          guncelKaynakRect.width,
+
+        height:
+          guncelKaynakRect.height,
+
+        duration: 0.45,
+
+        ease:
+          "power3.inOut",
+
+        onComplete: () => {
+          kaynakKart.style.opacity =
+            "1";
+
+          onizlemeKart.remove();
+
+          katman.remove();
+        }
+      }
+    );
+  }
+
+  onizlemeKart.addEventListener(
+    "click",
+    (event) => {
+      event.stopPropagation();
+
+      onizlemeyiKapat();
+    }
+  );
+
+  katman.addEventListener(
+    "click",
+    () => {
+      onizlemeyiKapat();
+    }
+  );
+}
+
+
+/* =========================
+   SEÇİM DURUMU
+========================= */
+
+function secimDurumunuKontrolEt() {
+  if (
+    aktifOyuncu === 1 &&
+    oyuncu1Secimleri.length === 3
+  ) {
+    aktifOyuncu = 2;
+
+    secimYazisiGoster(
+      "2. OYUNCU — 3 SANATÇI SEÇ"
+    );
+
+    return;
+  }
+
+  if (
+    aktifOyuncu === 2 &&
+    oyuncu2Secimleri.length === 3
+  ) {
+    secimKilidi = true;
+
+    secimYazisiGoster(
+      "SANATÇILAR SEÇİLDİ"
+    );
+
+    const kalanKartlar =
+      document.querySelectorAll(
+        ".kapaliSanatciKarti"
+      );
+
+    gsap.to(
+      kalanKartlar,
+      {
+        opacity: 0,
+
+        y: 40,
+
+        scale: 0.85,
+
+        duration: 0.5,
+
+        stagger: 0.05,
+
+        ease: "power2.in",
+
+        onComplete: () => {
+          kapaliKartSirasi.innerHTML =
+            "";
+
+          kapaliKartSirasi.classList.remove(
+            "goster"
+          );
+        }
+      }
+    );
   }
 }
 
-@keyframes devamBelir {
-  from {
-    opacity: 0;
-  }
 
-  to {
-    opacity: 1;
+/* =========================
+   DEVAM ETMEK İÇİN DOKUN
+========================= */
+
+devamButonu.addEventListener(
+  "click",
+  () => {
+    butonSesiCal();
+
+    acilisEkrani.classList.remove(
+      "aktif"
+    );
+
+    anaMenu.classList.add(
+      "aktif"
+    );
+
+    anaMenuMuzik.currentTime =
+      0;
+
+    anaMenuMuzik.volume =
+      0;
+
+    anaMenuMuzik
+      .play()
+
+      .then(() => {
+        muzikAc(
+          anaMenuMuzik,
+          MUZIK_SESI,
+          1500
+        );
+      })
+
+      .catch((hata) => {
+        console.log(
+          "Ana menü müziği başlatılamadı:",
+          hata
+        );
+      });
   }
-}
+);
+
+
+/* =========================
+   BAŞLA
+========================= */
+
+baslaButonu.addEventListener(
+  "click",
+  async () => {
+    butonSesiCal();
+
+    oyunMuzik.currentTime =
+      0;
+
+    oyunMuzik.volume =
+      0;
+
+    oyunMuzik
+      .play()
+
+      .catch((hata) => {
+        console.log(
+          "Oyun müziği başlatılamadı:",
+          hata
+        );
+      });
+
+    await muzikKapat(
+      anaMenuMuzik,
+      1000
+    );
+
+    anaMenu.classList.remove(
+      "aktif"
+    );
+
+    oynanisEkrani.classList.add(
+      "aktif"
+    );
+
+    muzikAc(
+      oyunMuzik,
+      MUZIK_SESI,
+      1500
+    );
+
+    setTimeout(() => {
+      sanatciKartlariniKaristir();
+    }, 400);
+  }
+);
+
+
+/* =========================
+   NASIL OYNANIR
+========================= */
+
+nasilOynanirButonu.addEventListener(
+  "click",
+  () => {
+    butonSesiCal();
+
+    console.log(
+      "Nasıl Oynanır butonuna basıldı!"
+    );
+  }
+);
