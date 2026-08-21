@@ -103,21 +103,38 @@ body {
 
 
 /* =========================
-   EU GAMES LOGOSU
+   AÇILIŞ LOGO + DEVAM GRUBU
 ========================= */
 
-#euLogo {
+#acilisIcerik {
   position: absolute;
 
-  width: 30%;
-  max-width: 500px;
-  height: auto;
-
   left: 50%;
-  top: 33%;
+  top: 30%;
+
+  width: 30%;
 
   transform:
     translateX(-50%);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  z-index: 2;
+}
+
+
+/* =========================
+   AÇILIŞ EU GAMES LOGOSU
+========================= */
+
+#euLogo {
+  position: relative;
+
+  width: 100%;
+  max-width: 500px;
+  height: auto;
 
   opacity: 0;
 
@@ -139,17 +156,13 @@ body {
 ========================= */
 
 #devamButonu {
-  position: absolute;
+  position: relative;
 
-  width: 24%;
+  width: 80%;
   max-width: 430px;
   height: auto;
 
-  left: 50%;
-  top: 67%;
-
-  transform:
-    translateX(-50%);
+  margin-top: 24%;
 
   opacity: 0;
 
@@ -178,7 +191,6 @@ body {
 
 #devamButonu:active {
   transform:
-    translateX(-50%)
     scale(0.93)
     translateY(5px);
 
@@ -349,7 +361,7 @@ body {
   height: auto;
 
   left: 50%;
-  bottom: 2%;
+  bottom: 7%;
 
   transform:
     translateX(-50%);
@@ -1206,7 +1218,6 @@ body {
     opacity: 0;
 
     transform:
-      translateX(-50%)
       scale(0.9);
   }
 
@@ -1214,7 +1225,6 @@ body {
     opacity: 1;
 
     transform:
-      translateX(-50%)
       scale(1);
   }
 }
