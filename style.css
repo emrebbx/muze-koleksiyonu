@@ -9,36 +9,71 @@ body {
   width: 100%;
   height: 100%;
 
-  background: #000;
-
   overflow: hidden;
+
+  background: #000;
 }
 
 
 /* =========================
    DIŞ EKRAN
-   İLERİDE BURAYA DEKOR GÖRSELİ
-   KOYABİLİRİZ
 ========================= */
 
 body {
+  position: relative;
+
   display: flex;
 
   justify-content: center;
   align-items: center;
+}
 
-  background: #000;
 
-  /*
-  İLERİDE İSTERSEK:
+/* =========================
+   DIŞ BULANIK ARKA PLAN
+========================= */
+
+body::before {
+  content: "";
+
+  position: fixed;
+
+  inset: -40px;
 
   background-image:
-    url("images/dis-arkaplan.png");
+    url("images/oyun-arkaplan.png");
 
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  */
+
+  filter:
+    blur(24px)
+    brightness(0.48);
+
+  transform: scale(1.08);
+
+  z-index: 0;
+
+  pointer-events: none;
+}
+
+
+/* HAFİF KARARTMA */
+
+body::after {
+  content: "";
+
+  position: fixed;
+
+  inset: 0;
+
+  background:
+    rgba(0, 0, 0, 0.18);
+
+  z-index: 0;
+
+  pointer-events: none;
 }
 
 
@@ -62,6 +97,8 @@ body {
   background: #000;
 
   overflow: hidden;
+
+  z-index: 1;
 }
 
 
@@ -341,7 +378,7 @@ body {
   width: 100%;
   height: 100%;
 
-  background: transparent;
+  background: #000;
 
   overflow: hidden;
 }
@@ -349,7 +386,6 @@ body {
 
 /* =========================
    OYUN ARKA PLANI
-   TAMAMI GÖRÜNSÜN
 ========================= */
 
 #oyunArkaplan {
@@ -414,21 +450,18 @@ body {
 .ustSanatci1 {
   left: 24.8%;
   top: 1.9%;
-
   width: 6.9%;
 }
 
 .ustSanatci2 {
   left: 46.6%;
   top: 1.9%;
-
   width: 6.9%;
 }
 
 .ustSanatci3 {
   left: 68.2%;
   top: 1.9%;
-
   width: 6.9%;
 }
 
@@ -440,21 +473,18 @@ body {
 .altSanatci1 {
   left: 24.8%;
   top: 79.9%;
-
   width: 6.9%;
 }
 
 .altSanatci2 {
   left: 46.5%;
   top: 79.9%;
-
   width: 6.9%;
 }
 
 .altSanatci3 {
   left: 68.2%;
   top: 79.9%;
-
   width: 6.9%;
 }
 
