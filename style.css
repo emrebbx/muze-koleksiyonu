@@ -359,47 +359,49 @@ body {
 
 /* =========================
    2. OYUNCU - ÜST
+   YENİ KESİN KONUMLAR
 ========================= */
 
 .ustSanatci1 {
-  left: 11.4%;
+  left: 24.8%;
   top: 1.9%;
-  width: 10.7%;
+  width: 6.9%;
 }
 
 .ustSanatci2 {
-  left: 44.7%;
+  left: 46.6%;
   top: 1.9%;
-  width: 10.7%;
+  width: 6.9%;
 }
 
 .ustSanatci3 {
-  left: 77.9%;
+  left: 68.2%;
   top: 1.9%;
-  width: 10.7%;
+  width: 6.9%;
 }
 
 
 /* =========================
    1. OYUNCU - ALT
+   YENİ KESİN KONUMLAR
 ========================= */
 
 .altSanatci1 {
-  left: 11.3%;
-  top: 79.7%;
-  width: 10.7%;
+  left: 24.8%;
+  top: 79.9%;
+  width: 6.9%;
 }
 
 .altSanatci2 {
-  left: 44.6%;
-  top: 79.7%;
-  width: 10.7%;
+  left: 46.5%;
+  top: 79.9%;
+  width: 6.9%;
 }
 
 .altSanatci3 {
-  left: 77.8%;
-  top: 79.7%;
-  width: 10.7%;
+  left: 68.2%;
+  top: 79.9%;
+  width: 6.9%;
 }
 
 
