@@ -550,6 +550,79 @@ body {
 
 
 /* =========================
+   YERLEŞEN SANATÇI KARTI
+========================= */
+
+.yerlesenSanatciKarti {
+  cursor: pointer;
+
+  transition:
+    filter 0.18s ease,
+    transform 0.18s ease;
+
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.yerlesenSanatciKarti:hover {
+  filter:
+    brightness(1.08)
+    drop-shadow(
+      0 7px 8px
+      rgba(0, 0, 0, 0.55)
+    );
+}
+
+
+/* =========================
+   KART ÖNİZLEME KARANLIK KATMAN
+========================= */
+
+#kartOnizlemeKatmani {
+  position: fixed;
+  inset: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  background:
+    rgba(0, 0, 0, 0.78);
+
+  backdrop-filter:
+    blur(3px);
+
+  -webkit-backdrop-filter:
+    blur(3px);
+
+  z-index: 10000;
+
+  cursor: pointer;
+}
+
+
+/* =========================
+   BÜYÜK KART ÖNİZLEME
+========================= */
+
+#kartOnizlemeKart {
+  object-fit: fill;
+
+  z-index: 10001;
+
+  filter:
+    drop-shadow(
+      0 25px 30px
+      rgba(0, 0, 0, 0.75)
+    );
+
+  cursor: pointer;
+
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+
+/* =========================
    AÇILIŞ ANİMASYONLARI
 ========================= */
 
