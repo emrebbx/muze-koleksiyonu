@@ -1,3 +1,7 @@
+/* =========================
+   TEMEL AYARLAR
+========================= */
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -16,14 +20,14 @@ body {
 
 
 /* =========================
-   16:9 OYUN SAHNESİ
+   SABİT 16:9 OYUN SAHNESİ
 
-   COVER MANTIĞI:
-   - SÜNDÜRME YOK
-   - BOŞLUK YOK
-   - EKRAN TAM DOLAR
-   - FAZLALIK KIRPILIR
-   - TÜM OYUN BİRLİKTE ÖLÇEKLENİR
+   REFERANS:
+   2704 × 1521
+
+   SAHNE ASLA SÜNDÜRÜLMEZ.
+   TÜM ELEMANLAR BİRLİKTE
+   BÜYÜR / KÜÇÜLÜR.
 ========================= */
 
 #oyunEkrani {
@@ -32,12 +36,12 @@ body {
   left: 50%;
   top: 50%;
 
-  width: max(
+  width: min(
     100vw,
     177.777778vh
   );
 
-  height: max(
+  height: min(
     100vh,
     56.25vw
   );
@@ -95,7 +99,9 @@ body {
 }
 
 
-/* EU GAMES LOGOSU */
+/* =========================
+   EU GAMES LOGOSU
+========================= */
 
 #euLogo {
   position: absolute;
@@ -125,7 +131,9 @@ body {
 }
 
 
-/* DEVAM ETMEK İÇİN DOKUN */
+/* =========================
+   DEVAM BUTONU
+========================= */
 
 #devamButonu {
   position: absolute;
@@ -191,7 +199,9 @@ body {
 }
 
 
-/* ANA MENÜ ARKA PLANI */
+/* =========================
+   ANA MENÜ ARKA PLANI
+========================= */
 
 #anaMenuArkaplan {
   position: absolute;
@@ -214,7 +224,9 @@ body {
 }
 
 
-/* MÜZE KOLEKSİYONU LOGOSU */
+/* =========================
+   MÜZE KOLEKSİYONU LOGOSU
+========================= */
 
 #muzeLogo {
   position: absolute;
@@ -235,7 +247,9 @@ body {
 }
 
 
-/* BAŞLA */
+/* =========================
+   BAŞLA
+========================= */
 
 #baslaButonu {
   position: absolute;
@@ -277,7 +291,9 @@ body {
 }
 
 
-/* NASIL OYNANIR */
+/* =========================
+   NASIL OYNANIR
+========================= */
 
 #nasilOynanirButonu {
   position: absolute;
@@ -319,7 +335,9 @@ body {
 }
 
 
-/* ALT EU GAMES */
+/* =========================
+   ALT EU GAMES
+========================= */
 
 #altEuLogo {
   position: absolute;
@@ -368,7 +386,7 @@ body {
   width: 100%;
   height: 100%;
 
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
 
   z-index: 0;
@@ -418,53 +436,55 @@ body {
 
 /* =========================
    2. OYUNCU - ÜST
+   YENİ KESİN KONUMLAR
 ========================= */
 
 .ustSanatci1 {
-  left: 24.8%;
-  top: 1.9%;
+  left: 26.1%;
+  top: 6.2%;
 
-  width: 6.9%;
+  width: 6.6%;
 }
 
 .ustSanatci2 {
-  left: 46.6%;
-  top: 1.9%;
+  left: 46.7%;
+  top: 6.2%;
 
-  width: 6.9%;
+  width: 6.6%;
 }
 
 .ustSanatci3 {
-  left: 68.2%;
-  top: 1.9%;
+  left: 67.3%;
+  top: 6.2%;
 
-  width: 6.9%;
+  width: 6.6%;
 }
 
 
 /* =========================
    1. OYUNCU - ALT
+   YENİ KESİN KONUMLAR
 ========================= */
 
 .altSanatci1 {
-  left: 24.8%;
-  top: 79.9%;
+  left: 26.1%;
+  top: 77.5%;
 
-  width: 6.9%;
+  width: 6.6%;
 }
 
 .altSanatci2 {
-  left: 46.5%;
-  top: 79.9%;
+  left: 46.7%;
+  top: 77.5%;
 
-  width: 6.9%;
+  width: 6.6%;
 }
 
 .altSanatci3 {
-  left: 68.2%;
-  top: 79.9%;
+  left: 67.3%;
+  top: 77.5%;
 
-  width: 6.9%;
+  width: 6.6%;
 }
 
 
