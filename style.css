@@ -25,12 +25,6 @@ body {
 
    REFERANS TASARIM:
    2704 × 1521
-
-   - SÜNDÜRME YOK
-   - BOŞLUK YOK
-   - EKRAN TAM DOLAR
-   - FAZLALIK KIRPILIR
-   - TÜM OYUN BİRLİKTE ÖLÇEKLENİR
 ========================= */
 
 #oyunEkrani {
@@ -451,7 +445,6 @@ body {
 
 /* =========================
    2. OYUNCU - ÜST
-   KESİN KONUMLAR
 ========================= */
 
 .ustSanatci1 {
@@ -478,7 +471,6 @@ body {
 
 /* =========================
    1. OYUNCU - ALT
-   KESİN KONUMLAR
 ========================= */
 
 .altSanatci1 {
@@ -504,16 +496,73 @@ body {
 
 
 /* =========================
+   TEST ESER GRUBU
+   ÜST SANATÇI 1
+========================= */
+
+.ustEserGrubu1 {
+  position: absolute;
+
+  left: 20%;
+  top: 25%;
+
+  width: 20%;
+  height: 20%;
+
+  z-index: 2;
+
+  pointer-events: none;
+}
+
+
+/* =========================
+   TÜM ESER YUVALARI
+========================= */
+
+.eserYuvasi {
+  position: absolute;
+
+  width: 30%;
+  height: auto;
+
+  user-select: none;
+  -webkit-user-drag: none;
+
+  pointer-events: none;
+}
+
+
+/* =========================
+   TEST ÜÇLÜ İÇ YERLEŞİM
+========================= */
+
+.ustEserGrubu1 .eser1 {
+  left: 0;
+  top: 0;
+}
+
+.ustEserGrubu1 .eser2 {
+  left: 35%;
+  top: 0;
+}
+
+.ustEserGrubu1 .eser3 {
+  left: 70%;
+  top: 0;
+}
+
+
+/* =========================
    ARTAN ÖZEL KART YUVASI
 ========================= */
 
 #artanOzelYuvasi {
   position: absolute;
 
-  left: 4.4%;
-  top: 40.8%;
+  left: 8.1%;
+  top: 41.8%;
 
-  width: 7%;
+  width: 6.6%;
   height: auto;
 
   z-index: 2;
@@ -532,10 +581,10 @@ body {
 #artanSanatciYuvasi {
   position: absolute;
 
-  left: 88.6%;
-  top: 40.8%;
+  left: 85.3%;
+  top: 41.8%;
 
-  width: 7%;
+  width: 6.6%;
   height: auto;
 
   z-index: 2;
