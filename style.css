@@ -16,7 +16,8 @@ body {
 
 
 /* =========================
-   DIŞ EKRAN
+   DIŞ TAM EKRAN ARKA PLAN
+   EKRANI DOLDURUR, SÜNDÜRMEZ
 ========================= */
 
 body {
@@ -26,19 +27,6 @@ body {
 
   justify-content: center;
   align-items: center;
-}
-
-
-/* =========================
-   DIŞ BULANIK ARKA PLAN
-========================= */
-
-body::before {
-  content: "";
-
-  position: fixed;
-
-  inset: -40px;
 
   background-image:
     url("images/oyun-arkaplan.png");
@@ -46,34 +34,6 @@ body::before {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-
-  filter:
-    blur(24px)
-    brightness(0.48);
-
-  transform: scale(1.08);
-
-  z-index: 0;
-
-  pointer-events: none;
-}
-
-
-/* HAFİF KARARTMA */
-
-body::after {
-  content: "";
-
-  position: fixed;
-
-  inset: 0;
-
-  background:
-    rgba(0, 0, 0, 0.18);
-
-  z-index: 0;
-
-  pointer-events: none;
 }
 
 
@@ -94,7 +54,7 @@ body::after {
 
   flex-shrink: 0;
 
-  background: #000;
+  background: transparent;
 
   overflow: hidden;
 
@@ -378,7 +338,7 @@ body::after {
   width: 100%;
   height: 100%;
 
-  background: #000;
+  background: transparent;
 
   overflow: hidden;
 }
@@ -386,6 +346,7 @@ body::after {
 
 /* =========================
    OYUN ARKA PLANI
+   16:9 SAHNE İÇİNDE TAMAMEN GÖRÜNSÜN
 ========================= */
 
 #oyunArkaplan {
