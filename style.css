@@ -16,21 +16,48 @@ body {
 
 
 /* =========================
+   DIŞ EKRAN
+   İLERİDE BURAYA DEKOR GÖRSELİ
+   KOYABİLİRİZ
+========================= */
+
+body {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  background: #000;
+
+  /*
+  İLERİDE İSTERSEK:
+
+  background-image:
+    url("images/dis-arkaplan.png");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  */
+}
+
+
+/* =========================
    SABİT 16:9 OYUN SAHNESİ
 ========================= */
 
 #oyunEkrani {
-  position: fixed;
+  position: relative;
 
-  left: 50%;
-  top: 50%;
+  width: 100vw;
+  height: 56.25vw;
 
-  width: min(100vw, 177.777778vh);
-  height: min(100vh, 56.25vw);
-
-  transform: translate(-50%, -50%);
+  max-width: 177.777778vh;
+  max-height: 100vh;
 
   aspect-ratio: 16 / 9;
+
+  flex-shrink: 0;
 
   background: #000;
 
@@ -314,11 +341,16 @@ body {
   width: 100%;
   height: 100%;
 
-  background: #000;
+  background: transparent;
+
+  overflow: hidden;
 }
 
 
-/* OYUN ARKA PLANI */
+/* =========================
+   OYUN ARKA PLANI
+   TAMAMI GÖRÜNSÜN
+========================= */
 
 #oyunArkaplan {
   position: absolute;
@@ -327,7 +359,7 @@ body {
   width: 100%;
   height: 100%;
 
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
 
   z-index: 0;
