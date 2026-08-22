@@ -542,19 +542,13 @@ butonTik.preload = "auto";
 
 const yuklenecekGorseller = [
 
-  /* ANA EKRAN */
-
   "images/eu-games-logo.png",
   "images/devam-etmek-icin-dokun.png",
-
-  /* ANA MENÜ */
 
   "images/ana-menu-arkaplan.png",
   "images/muze-koleksiyonu-logo.png",
   "images/basla.png",
   "images/nasil-oynanir.png",
-
-  /* OYUN ALANI */
 
   "images/oyun-arkaplan.png",
 
@@ -576,21 +570,15 @@ const yuklenecekGorseller = [
 
   "images/kart-arkasi.png",
 
-  /* SANATÇILAR */
-
   ...sanatcilar.map(
     (sanatci) =>
       sanatci.dosya
   ),
 
-  /* ESERLER */
-
   ...eserKartlari.map(
     (kart) =>
       kart.dosya
   ),
-
-  /* ÖZEL KARTLAR */
 
   ...ozelKartlar.map(
     (kart) =>
@@ -2871,8 +2859,6 @@ function ortakDesteyiHazirla() {
     );
 
 
-  /* 36 ESER */
-
   const eserler =
     eserKartlari.map(
       (kart) => (
@@ -2882,8 +2868,6 @@ function ortakDesteyiHazirla() {
       )
     );
 
-
-  /* SADECE SEÇİLEN 12 ÖZEL */
 
   const secilenOzeller =
     secilenOzelKartlar.map(
@@ -2895,8 +2879,6 @@ function ortakDesteyiHazirla() {
       )
     );
 
-
-  /* 36 + 12 = 48 */
 
   ortakDeste =
     karistir(
@@ -2962,15 +2944,6 @@ function ortakDesteAnimasyonunuBaslat() {
     "ORTAK DESTE HAZIRLANIYOR"
   );
 
-
-  /*
-    48 görseli üst üste koymaya gerek yok.
-
-    Gerçek deste JS tarafında 48 kart.
-
-    Görselde 10 adet kart arkası
-    deste kalınlığı hissi verecek.
-  */
 
   const gorselKartSayisi =
     10;
@@ -3115,10 +3088,6 @@ function ortakDesteAnimasyonunuBaslat() {
 
   setTimeout(
     () => {
-
-      /*
-        Ortada küçük shuffle hissi.
-      */
 
       kartlar.forEach(
         (kart, index) => {
@@ -3293,9 +3262,13 @@ function zarStilleriniEkle() {
   stil.textContent = `
 
     #baslangicZarKatmani {
-      position: absolute;
+      position: fixed;
       inset: 0;
-      z-index: 12000;
+
+      width: 100vw;
+      height: 100vh;
+
+      z-index: 50000;
 
       display: flex;
       align-items: center;
@@ -3305,6 +3278,8 @@ function zarStilleriniEkle() {
 
       backdrop-filter: blur(3px);
       -webkit-backdrop-filter: blur(3px);
+
+      isolation: isolate;
     }
 
 
@@ -3338,6 +3313,8 @@ function zarStilleriniEkle() {
       text-align: center;
 
       color: #5b3d11;
+
+      z-index: 1;
     }
 
 
@@ -3725,7 +3702,16 @@ function baslangicZarSisteminiBaslat() {
   `;
 
 
-  oynanisEkrani.appendChild(
+  /*
+    ÖNEMLİ:
+    Zar artık oyun ekranının içine değil
+    doğrudan BODY üzerine ekleniyor.
+
+    Böylece ortak deste ve diğer bütün
+    oyun elemanlarının üstünde kalır.
+  */
+
+  document.body.appendChild(
     katman
   );
 
@@ -4315,23 +4301,6 @@ function kartCekmeAsamasiniBaslat() {
   secimYazisiGoster(
     `${aktifOyuncu}. OYUNCU — ORTAK DESTEDEN KART ÇEK`
   );
-
-
-  /*
-    ŞİMDİLİK burada duruyoruz.
-
-    Bir sonraki aşamada
-    ortak destenin üst kartına
-    tıklayınca:
-
-    ortakDeste.pop()
-
-    çalışacak.
-
-    Sonra kart büyük açılacak
-    ve kartın türüne göre
-    işlem yapacağız.
-  */
 
 
   document
