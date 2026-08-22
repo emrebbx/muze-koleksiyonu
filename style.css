@@ -1585,6 +1585,8 @@ body {
 
 
   #ozelKartSayac {
+    top: 30%;
+
     font-size:
       clamp(
         10px,
@@ -1597,7 +1599,6 @@ body {
 
 /* =========================
    ORTA GENİŞ EKRAN
-   4:3 ÜSTÜ - 16:10 ALTI
 ========================= */
 
 @media (min-aspect-ratio: 1.334) and (max-aspect-ratio: 1.599) {
@@ -1637,7 +1638,6 @@ body {
 
 /* =========================
    16:10 / 16:9 / GENİŞ EKRAN
-   MACBOOK / PROART / MONİTÖR
 ========================= */
 
 @media (min-aspect-ratio: 16 / 10) {
