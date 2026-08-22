@@ -21,12 +21,6 @@ body {
 
 /* =========================
    2704 × 1900 OYUN SAHNESİ
-
-   YENİ ARKAPLAN ORANI:
-   2704 / 1900 = 1.423157895
-
-   ESKİ 2704 × 1521 OYUN ALANI
-   SAHNENİN ORTASINDA KORUNUR.
 ========================= */
 
 #oyunEkrani {
@@ -260,8 +254,15 @@ body {
   height: 100%;
 
   background: #000;
+
+  overflow: hidden;
 }
 
+
+/* =========================
+   ANA MENÜ ARKAPLAN
+   2704 × 1900
+========================= */
 
 #anaMenuArkaplan {
   position: absolute;
@@ -420,7 +421,7 @@ body {
 
 
 /* =========================
-   YENİ 2704 × 1900 ARKAPLAN
+   2704 × 1900 ARKAPLAN
 ========================= */
 
 #oyunArkaplan {
@@ -444,12 +445,6 @@ body {
 
 /* =====================================================
    ESKİ 2704 × 1521 OYUN BÖLGESİ
-
-   1900 yüksekliğin ortasında tutuluyor.
-   Böylece eski kart konumları bozulmuyor.
-
-   ÜST BOŞLUK: %9.973684
-   OYUN YÜKSEKLİĞİ: %80.052632
 ===================================================== */
 
 #oyuncu2SanatciYuvalari,
@@ -1158,9 +1153,6 @@ body {
 
 /* =========================
    ÖZEL KART SEÇİMİ
-
-   BU ALAN DA ESKİ 1521 YÜKSEKLİKLİ
-   OYUN BÖLGESİNE BAĞLANDI.
 ========================= */
 
 #ozelKartSecimAlani {
@@ -1554,6 +1546,49 @@ body {
 
   user-select: none;
   -webkit-user-drag: none;
+}
+
+
+/* =========================
+   TABLET / IPAD DÜZELTMELERİ
+========================= */
+
+@media (max-aspect-ratio: 4 / 3) {
+
+  #ozelKartBaslik {
+    font-size:
+      clamp(
+        15px,
+        1.45vw,
+        27px
+      );
+
+    letter-spacing: 1px;
+  }
+
+
+  #ozelKartAciklama {
+    width: 48%;
+
+    font-size:
+      clamp(
+        9px,
+        1vw,
+        15px
+      );
+
+    line-height: 1.2;
+  }
+
+
+  #ozelKartSayac {
+    font-size:
+      clamp(
+        9px,
+        0.95vw,
+        15px
+      );
+  }
 }
 
 
