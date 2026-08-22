@@ -262,6 +262,10 @@ body {
 }
 
 
+/* =========================
+   MÜZE LOGOSU
+========================= */
+
 #muzeLogo {
   position: absolute;
 
@@ -269,7 +273,7 @@ body {
   height: auto;
 
   left: 50%;
-  top: 10%;
+  top: 17%;
 
   transform:
     translateX(-50%);
@@ -280,6 +284,10 @@ body {
   -webkit-user-drag: none;
 }
 
+
+/* =========================
+   BAŞLA BUTONU
+========================= */
 
 #baslaButonu {
   position: absolute;
@@ -322,6 +330,10 @@ body {
 }
 
 
+/* =========================
+   NASIL OYNANIR BUTONU
+========================= */
+
 #nasilOynanirButonu {
   position: absolute;
 
@@ -329,7 +341,7 @@ body {
   height: auto;
 
   left: 50%;
-  top: 70%;
+  top: 66%;
 
   transform:
     translateX(-50%);
@@ -363,6 +375,10 @@ body {
 }
 
 
+/* =========================
+   ALT EU GAMES LOGOSU
+========================= */
+
 #altEuLogo {
   position: absolute;
 
@@ -370,7 +386,7 @@ body {
   height: auto;
 
   left: 50%;
-  bottom: 7%;
+  bottom: 15%;
 
   transform:
     translateX(-50%);
@@ -1064,10 +1080,6 @@ body {
 
 /* =====================================================
    ÖZEL KART BİLGİ KUTUSU
-
-   EN ÖNEMLİ DÜZELTME:
-   ÇERÇEVE + TÜM YAZILAR
-   AYNI KAPSAYICIYA BAĞLI.
 ===================================================== */
 
 #ozelKartBilgiKutusu {
@@ -1083,11 +1095,6 @@ body {
 
   z-index: 2;
 
-  /*
-    Yazıların artık viewport yerine
-    BU KUTUNUN genişliğine göre
-    ölçeklenmesini sağlar.
-  */
   container-type: inline-size;
 
   pointer-events: none;
