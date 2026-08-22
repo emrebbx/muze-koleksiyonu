@@ -6462,42 +6462,13 @@ function turuBitir() {
     450
   );
 }
-
-  kartCekmeKilidi =
-    true;
-
-
-  setTimeout(
-    () => {
-
-      aktifOyuncu =
-        aktifOyuncu === 1
-          ? 2
-          : 1;
-
-
-      kartCekmeKilidi =
-        false;
-
-
-      console.log(
-        "Yeni aktif oyuncu:",
-        aktifOyuncu
-      );
-
-
-      kartCekmeAsamasiniBaslat();
-
-    },
-    450
-  );
-}
 /* =====================================================
    KART ÖNİZLEME
 ===================================================== */
 
 function kartOnizlemeAc(
-  kaynakKart
+  kaynakKart,
+  gercekDosya = null
 ) {
 
   if (
@@ -6544,8 +6515,10 @@ function kartOnizlemeAc(
     "kartOnizlemeKart";
 
 
-  onizlemeKart.src =
-    kaynakKart.src;
+onizlemeKart.src =
+  gercekDosya ||
+  kaynakKart.dataset.gercekDosya ||
+  kaynakKart.src;
 
 
   Object.assign(
