@@ -515,6 +515,7 @@ let oyuncu1DepoKartlari = [];
 let oyuncu2DepoKartlari = [];
 
 let bekleyenOzelKart = null;
+let copDeste = [];
 
 
 /* =========================
@@ -5332,18 +5333,235 @@ function eseriCopeGonder(
     );
 
 
-  if (
-    !copYuvasi
-  ) {
+  if (!copYuvasi) {
 
     kartElementi.remove();
-
     katman.remove();
 
     turuBitir();
 
     return;
   }
+
+
+  const hedefRect =
+    copYuvasi
+      .getBoundingClientRect();
+
+
+  const sahneRect =
+    oynanisEkrani
+      .getBoundingClientRect();
+
+
+  /*
+    GERÇEK ÇÖPLÜK SIRASI
+
+    push kullandığımız için:
+    ilk atılan kart index 0,
+    son atılan kart en sonda kalır.
+  */
+
+  copDeste.push(
+    kartBilgisi
+  );
+
+
+  window.copDeste =
+    copDeste;
+
+
+  const copIndex =
+    copDeste.length - 1;
+
+
+  /*
+    Kartlar tamamen aynı noktada
+    görünmesin diye çok küçük
+    deste kayması veriyoruz.
+  */
+
+  const kaymaX =
+    copIndex * 0.45;
+
+
+  const kaymaY =
+    copIndex * -0.35;
+
+
+  gsap.to(
+    katman,
+    {
+      opacity: 0,
+      duration: 0.25
+    }
+  );
+
+
+  gsap.to(
+    kartElementi,
+    {
+      left:
+        hedefRect.left +
+        kaymaX,
+
+      top:
+        hedefRect.top +
+        kaymaY,
+
+      width:
+        hedefRect.width,
+
+      height:
+        hedefRect.height,
+
+      rotation:
+        (
+          copIndex % 5 -
+          2
+        ) *
+        0.35,
+
+      opacity:
+        1,
+
+      duration:
+        0.65,
+
+      ease:
+        "power3.inOut",
+
+      onComplete:
+        () => {
+
+          const copKarti =
+            document.createElement(
+              "img"
+            );
+
+
+          /*
+            ÇÖPTE KART ÖN YÜZÜ AÇIK.
+          */
+
+          copKarti.src =
+            kartBilgisi.dosya;
+
+
+          copKarti.className =
+            "coptekiKart";
+
+
+          copKarti.dataset.id =
+            kartBilgisi.id;
+
+
+          copKarti.dataset.tip =
+            kartBilgisi.tip;
+
+
+          Object.assign(
+            copKarti.style,
+            {
+              position:
+                "absolute",
+
+              left:
+                (
+                  hedefRect.left -
+                  sahneRect.left +
+                  kaymaX
+                ) +
+                "px",
+
+              top:
+                (
+                  hedefRect.top -
+                  sahneRect.top +
+                  kaymaY
+                ) +
+                "px",
+
+              width:
+                hedefRect.width +
+                "px",
+
+              height:
+                hedefRect.height +
+                "px",
+
+              zIndex:
+                40 +
+                copIndex,
+
+              objectFit:
+                "fill",
+
+              pointerEvents:
+                "auto",
+
+              cursor:
+                "pointer",
+
+              userSelect:
+                "none",
+
+              WebkitUserDrag:
+                "none",
+
+              transform:
+                `rotate(${(
+                  copIndex % 5 -
+                  2
+                ) * 0.35}deg)`,
+
+              filter:
+                "drop-shadow(0 5px 5px rgba(0,0,0,0.42))"
+            }
+          );
+
+
+          /*
+            ÇÖPTEKİ KARTA TIKLAYINCA
+            BÜYÜK ÖNİZLEME AÇILABİLİR.
+          */
+
+          copKarti.addEventListener(
+            "click",
+            (event) => {
+
+              event.stopPropagation();
+
+              kartOnizlemeAc(
+                copKarti
+              );
+
+            }
+          );
+
+
+          oynanisEkrani
+            .appendChild(
+              copKarti
+            );
+
+
+          kartElementi.remove();
+          katman.remove();
+
+
+          console.log(
+            "ÇÖPLÜK:",
+            copDeste
+          );
+
+
+          turuBitir();
+
+        }
+    }
+  );
+}
 
 
   const hedefRect =
