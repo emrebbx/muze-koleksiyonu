@@ -1082,7 +1082,7 @@ body {
   position: absolute;
 
   left: 50%;
-  top: 25%;
+  top: 14%;
 
   transform:
     translateX(-50%);
@@ -1123,7 +1123,7 @@ body {
   position: absolute;
 
   left: 50%;
-  top: 30%;
+  top: 20%;
 
   transform:
     translateX(-50%);
@@ -1166,7 +1166,7 @@ body {
   position: absolute;
 
   left: 50%;
-  top: 37%;
+  top: 28%;
 
   transform:
     translateX(-50%);
@@ -1197,6 +1197,10 @@ body {
 }
 
 
+/* =========================
+   DEDEKTİF SEÇİM ALANI
+========================= */
+
 #dedektifSecimAlani {
   position: absolute;
 
@@ -1204,6 +1208,8 @@ body {
 
   left: 46.5%;
   top: 41.3%;
+
+  z-index: 3;
 }
 
 
@@ -1251,6 +1257,10 @@ body {
   }
 }
 
+
+/* =========================
+   ÖZEL KART SIRASI
+========================= */
 
 #ozelKartSecimSirasi {
   position: absolute;
