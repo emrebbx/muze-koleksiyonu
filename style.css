@@ -111,10 +111,6 @@ body {
 }
 
 
-/* =========================
-   EU GAMES LOGOSU
-========================= */
-
 #euLogo {
   position: relative;
 
@@ -137,16 +133,12 @@ body {
 }
 
 
-/* =========================
-   YÜKLEME YÜZDESİ
-========================= */
-
 #yuklemeYuzdesi {
   position: relative;
 
   margin-top: 15%;
 
-  color: #ffffff;
+  color: #fff;
 
   font-family:
     Georgia,
@@ -170,17 +162,9 @@ body {
     0 2px 10px
     rgba(255, 255, 255, 0.25);
 
-  opacity: 1;
-
-  user-select: none;
-
   pointer-events: none;
 }
 
-
-/* =========================
-   DEVAM BUTONU
-========================= */
 
 #devamButonu {
   position: relative;
@@ -220,7 +204,6 @@ body {
 
 #devamButonu.hazir {
   opacity: 1;
-
   visibility: visible;
 
   pointer-events: auto;
@@ -257,10 +240,6 @@ body {
   overflow: hidden;
 }
 
-
-/* =========================
-   ANA MENÜ ARKAPLAN
-========================= */
 
 #anaMenuArkaplan {
   position: absolute;
@@ -331,6 +310,7 @@ body {
   -webkit-user-drag: none;
 }
 
+
 #baslaButonu:active {
   transform:
     translateX(-50%)
@@ -370,6 +350,7 @@ body {
   user-select: none;
   -webkit-user-drag: none;
 }
+
 
 #nasilOynanirButonu:active {
   transform:
@@ -417,10 +398,6 @@ body {
   overflow: hidden;
 }
 
-
-/* =========================
-   2704 × 1900 ARKAPLAN
-========================= */
 
 #oyunArkaplan {
   position: absolute;
@@ -475,9 +452,7 @@ body {
 }
 
 
-/* =========================
-   ÜST SANATÇILAR
-========================= */
+/* ÜST SANATÇILAR */
 
 .ustSanatci1 {
   left: 26.1%;
@@ -498,9 +473,7 @@ body {
 }
 
 
-/* =========================
-   ALT SANATÇILAR
-========================= */
+/* ALT SANATÇILAR */
 
 .altSanatci1 {
   left: 26.1%;
@@ -522,33 +495,15 @@ body {
 
 
 /* =========================
-   ÜST 9 ESER ANA GRUBU
+   ESER ALANLARI
 ========================= */
 
-#ustEserAlani {
-  position: absolute;
-
-  left: 0%;
-  top: 0%;
-
-  width: 100%;
-  height: 100%;
-
-  z-index: 2;
-
-  pointer-events: none;
-}
-
-
-/* =========================
-   ALT 9 ESER ANA GRUBU
-========================= */
-
+#ustEserAlani,
 #altEserAlani {
   position: absolute;
 
-  left: 0%;
-  top: 0%;
+  left: 0;
+  top: 0;
 
   width: 100%;
   height: 100%;
@@ -558,10 +513,6 @@ body {
   pointer-events: none;
 }
 
-
-/* =========================
-   ÜÇLÜ ESER GRUPLARI
-========================= */
 
 .eserGrubu {
   position: absolute;
@@ -575,10 +526,6 @@ body {
 }
 
 
-/* =========================
-   TÜM ESER YUVALARI
-========================= */
-
 .eserYuvasi {
   position: absolute;
 
@@ -591,10 +538,6 @@ body {
   pointer-events: none;
 }
 
-
-/* =========================
-   ÜST ÜÇLÜLER
-========================= */
 
 .ustEserGrubu1 {
   left: 20%;
@@ -612,10 +555,6 @@ body {
 }
 
 
-/* =========================
-   ALT ÜÇLÜLER
-========================= */
-
 .altEserGrubu1 {
   left: 20%;
   top: 63%;
@@ -632,39 +571,9 @@ body {
 }
 
 
-/* =========================
-   ÜST 9 ESER
-========================= */
-
 .ustS1E1,
 .ustS2E1,
-.ustS3E1 {
-  left: -3.74%;
-  top: -10.52%;
-  width: 32.8%;
-}
-
-.ustS1E2,
-.ustS2E2,
-.ustS3E2 {
-  left: 30.5%;
-  top: -10.52%;
-  width: 32.8%;
-}
-
-.ustS1E3,
-.ustS2E3,
-.ustS3E3 {
-  left: 64.8%;
-  top: -10.52%;
-  width: 32.8%;
-}
-
-
-/* =========================
-   ALT 9 ESER
-========================= */
-
+.ustS3E1,
 .altS1E1,
 .altS2E1,
 .altS3E1 {
@@ -673,6 +582,10 @@ body {
   width: 32.8%;
 }
 
+
+.ustS1E2,
+.ustS2E2,
+.ustS3E2,
 .altS1E2,
 .altS2E2,
 .altS3E2 {
@@ -681,6 +594,10 @@ body {
   width: 32.8%;
 }
 
+
+.ustS1E3,
+.ustS2E3,
+.ustS3E3,
 .altS1E3,
 .altS2E3,
 .altS3E3 {
@@ -691,7 +608,7 @@ body {
 
 
 /* =========================
-   ARTAN ÖZEL KART YUVASI
+   ORTA ALAN
 ========================= */
 
 #artanOzelYuvasi {
@@ -712,10 +629,6 @@ body {
 }
 
 
-/* =========================
-   ARTAN SANATÇI YUVASI
-========================= */
-
 #artanSanatciYuvasi {
   position: absolute;
 
@@ -733,10 +646,6 @@ body {
   pointer-events: none;
 }
 
-
-/* =========================
-   ÇÖP YUVASI
-========================= */
 
 #copYuvasi {
   position: absolute;
@@ -756,10 +665,6 @@ body {
 }
 
 
-/* =========================
-   ORTAK DESTE YUVASI
-========================= */
-
 #ortakDesteYuvasi {
   position: absolute;
 
@@ -778,9 +683,9 @@ body {
 }
 
 
-/* =====================================================
-   DEPO VE ÖZEL KART YUVALARI
-===================================================== */
+/* =========================
+   DEPO / ÖZEL YUVALAR
+========================= */
 
 .depoYuvasi,
 .oyuncuOzelKartYuvasi {
@@ -798,10 +703,6 @@ body {
 }
 
 
-/* =========================
-   2. OYUNCU - ÜST DEPO
-========================= */
-
 #ustDepoBir {
   left: 4.7%;
   top: 14.856895%;
@@ -812,10 +713,6 @@ body {
   top: 14.856895%;
 }
 
-
-/* =========================
-   2. OYUNCU - ÜST ÖZEL KART
-========================= */
 
 #ustOzelKartBir {
   left: 81.8%;
@@ -828,10 +725,6 @@ body {
 }
 
 
-/* =========================
-   1. OYUNCU - ALT DEPO
-========================= */
-
 #altDepoBir {
   left: 4.7%;
   top: 71.934421%;
@@ -842,10 +735,6 @@ body {
   top: 71.934421%;
 }
 
-
-/* =========================
-   1. OYUNCU - ALT ÖZEL KART
-========================= */
 
 #altOzelKartBir {
   left: 81.8%;
@@ -859,7 +748,7 @@ body {
 
 
 /* =========================
-   SANATÇI SEÇİM ALANI
+   SANATÇI SEÇİM
 ========================= */
 
 #sanatciSecimAlani {
@@ -877,10 +766,6 @@ body {
 }
 
 
-/* =========================
-   KARIŞTIRMA DESTESİ
-========================= */
-
 #karistirmaDestesi {
   position: absolute;
 
@@ -894,6 +779,7 @@ body {
 
   perspective: 1000px;
 }
+
 
 .karistirmaKarti {
   position: absolute;
@@ -916,10 +802,6 @@ body {
   -webkit-user-drag: none;
 }
 
-
-/* =========================
-   12 KAPALI SANATÇI KARTI
-========================= */
 
 #kapaliKartSirasi {
   position: absolute;
@@ -950,6 +832,7 @@ body {
     translateY(40px);
 }
 
+
 #kapaliKartSirasi.goster {
   opacity: 1;
 
@@ -970,10 +853,6 @@ body {
 
   justify-content: center;
   align-items: center;
-}
-
-.kapaliKartSlotu.bos {
-  visibility: visible;
 }
 
 
@@ -1149,9 +1028,9 @@ body {
 }
 
 
-/* =========================
+/* =====================================================
    ÖZEL KART SEÇİMİ
-========================= */
+===================================================== */
 
 #ozelKartSecimAlani {
   position: absolute;
@@ -1174,6 +1053,7 @@ body {
     visibility 0.45s ease;
 }
 
+
 #ozelKartSecimAlani.aktif {
   opacity: 1;
   visibility: visible;
@@ -1182,21 +1062,49 @@ body {
 }
 
 
-/* =========================
-   ÖZEL KART SEÇİM ÇERÇEVESİ
-========================= */
+/* =====================================================
+   ÖZEL KART BİLGİ KUTUSU
 
-#ozelKartSecimCercevesi {
+   EN ÖNEMLİ DÜZELTME:
+   ÇERÇEVE + TÜM YAZILAR
+   AYNI KAPSAYICIYA BAĞLI.
+===================================================== */
+
+#ozelKartBilgiKutusu {
   position: absolute;
-
-  width: 38%;
-  height: auto;
 
   left: 50%;
   top: 3.5%;
 
+  width: 38%;
+
   transform:
     translateX(-50%);
+
+  z-index: 2;
+
+  /*
+    Yazıların artık viewport yerine
+    BU KUTUNUN genişliğine göre
+    ölçeklenmesini sağlar.
+  */
+  container-type: inline-size;
+
+  pointer-events: none;
+}
+
+
+/* =========================
+   ÇERÇEVE
+========================= */
+
+#ozelKartSecimCercevesi {
+  position: relative;
+
+  display: block;
+
+  width: 100%;
+  height: auto;
 
   z-index: 1;
 
@@ -1214,14 +1122,16 @@ body {
 
 
 /* =========================
-   ÖZEL KART BAŞLIK
+   BAŞLIK
 ========================= */
 
 #ozelKartBaslik {
   position: absolute;
 
   left: 50%;
-  top: 14%;
+  top: 21%;
+
+  width: 84%;
 
   transform:
     translateX(-50%);
@@ -1233,41 +1143,39 @@ body {
     "Times New Roman",
     serif;
 
+  font-size: 34px;
+  font-size: 3.4cqw;
+
   font-weight: bold;
 
-  font-size:
-    clamp(
-      18px,
-      1.8vw,
-      34px
-    );
+  letter-spacing: 0.08em;
 
-  letter-spacing: 2px;
+  text-align: center;
+
+  white-space: nowrap;
 
   text-shadow:
     0 1px 2px
     rgba(255, 255, 255, 0.3);
-
-  white-space: nowrap;
 
   z-index: 2;
 }
 
 
 /* =========================
-   ÖZEL KART AÇIKLAMA
+   AÇIKLAMA
 ========================= */
 
 #ozelKartAciklama {
   position: absolute;
 
   left: 50%;
-  top: 20%;
+  top: 43%;
+
+  width: 86%;
 
   transform:
     translateX(-50%);
-
-  width: 65%;
 
   color: #7A5A16;
 
@@ -1276,12 +1184,8 @@ body {
     "Times New Roman",
     serif;
 
-  font-size:
-    clamp(
-      12px,
-      1.05vw,
-      20px
-    );
+  font-size: 20px;
+  font-size: 2cqw;
 
   line-height: 1.35;
 
@@ -1300,14 +1204,16 @@ body {
 
 
 /* =========================
-   ÖZEL KART SAYACI
+   SEÇİLEN ÖZEL KART SAYACI
 ========================= */
 
 #ozelKartSayac {
   position: absolute;
 
   left: 50%;
-  top: 30.5%;
+  top: 70%;
+
+  width: 82%;
 
   transform:
     translateX(-50%);
@@ -1319,16 +1225,16 @@ body {
     "Times New Roman",
     serif;
 
-  font-size:
-    clamp(
-      12px,
-      1vw,
-      19px
-    );
+  font-size: 19px;
+  font-size: 1.9cqw;
 
   font-weight: bold;
 
-  letter-spacing: 1px;
+  letter-spacing: 0.06em;
+
+  text-align: center;
+
+  white-space: nowrap;
 
   text-shadow:
     0 1px 2px
@@ -1339,7 +1245,7 @@ body {
 
 
 /* =========================
-   DEDEKTİF SEÇİM ALANI
+   DEDEKTİF SEÇİM
 ========================= */
 
 #dedektifSecimAlani {
@@ -1549,148 +1455,8 @@ body {
 }
 
 
-/* =====================================================
-   RESPONSIVE ÖZEL KART YAZILARI
-===================================================== */
-
-
 /* =========================
-   TABLET / DAHA KARE EKRAN
-========================= */
-
-@media (max-aspect-ratio: 4 / 3) {
-
-  #ozelKartBaslik {
-    font-size:
-      clamp(
-        15px,
-        1.45vw,
-        27px
-      );
-
-    letter-spacing: 1px;
-  }
-
-
-  #ozelKartAciklama {
-    font-size:
-      clamp(
-        12px,
-        1.05vw,
-        20px
-      );
-
-    line-height: 1.35;
-  }
-
-
-  #ozelKartSayac {
-    font-size:
-      clamp(
-        10px,
-        1vw,
-        17px
-      );
-  }
-}
-
-
-/* =========================
-   ORTA GENİŞ EKRAN
-========================= */
-
-@media (min-aspect-ratio: 1.334) and (max-aspect-ratio: 1.599) {
-
-  #ozelKartBaslik {
-    font-size:
-      clamp(
-        19px,
-        1.9vw,
-        34px
-      );
-  }
-
-
-  #ozelKartAciklama {
-    font-size:
-      clamp(
-        13px,
-        1.15vw,
-        22px
-      );
-
-    line-height: 1.35;
-  }
-
-
-  #ozelKartSayac {
-    font-size:
-      clamp(
-        13px,
-        1.08vw,
-        20px
-      );
-  }
-}
-
-
-/* =========================
-   16:10 / 16:9 / GENİŞ EKRAN
-========================= */
-
-@media (min-aspect-ratio: 16 / 10) {
-
-  #ozelKartBaslik {
-    font-size:
-      clamp(
-        22px,
-        2vw,
-        38px
-      );
-  }
-
-
-  #ozelKartAciklama {
-    font-size:
-      clamp(
-        15px,
-        1.25vw,
-        24px
-      );
-
-    line-height: 1.35;
-  }
-
-
-  #ozelKartSayac {
-    top: 28%;
-
-    font-size:
-      clamp(
-        14px,
-        1.15vw,
-        22px
-      );
-  }
-}
-
-
-/* =====================================================
-   IPAD / TABLET
-   SAYACI KESİN OLARAK AŞAĞI AL
-===================================================== */
-
-@media (max-aspect-ratio: 3 / 2) {
-
-  #ozelKartSayac {
-    top: 34% !important;
-  }
-
-}
-
-
-/* =========================
-   AÇILIŞ ANİMASYONLARI
+   AÇILIŞ ANİMASYONU
 ========================= */
 
 @keyframes logoBelir {
