@@ -1398,9 +1398,23 @@ function kalanSanatcilariArtanYuvayaGonder() {
       }
 
 
+      const sahneRect =
+        oynanisEkrani
+          .getBoundingClientRect();
+
+
       const yuvaRect =
         artanSanatciYuvasi
           .getBoundingClientRect();
+
+
+      const yuvaLeft =
+        yuvaRect.left -
+        sahneRect.left;
+
+      const yuvaTop =
+        yuvaRect.top -
+        sahneRect.top;
 
 
       let tamamlananKartSayisi =
@@ -1413,6 +1427,15 @@ function kalanSanatcilariArtanYuvayaGonder() {
           const kartRect =
             kart
               .getBoundingClientRect();
+
+
+          const kartLeft =
+            kartRect.left -
+            sahneRect.left;
+
+          const kartTop =
+            kartRect.top -
+            sahneRect.top;
 
 
           const ucanKart =
@@ -1433,14 +1456,14 @@ function kalanSanatcilariArtanYuvayaGonder() {
             ucanKart.style,
             {
               position:
-                "fixed",
+                "absolute",
 
               left:
-                kartRect.left +
+                kartLeft +
                 "px",
 
               top:
-                kartRect.top +
+                kartTop +
                 "px",
 
               width:
@@ -1462,12 +1485,15 @@ function kalanSanatcilariArtanYuvayaGonder() {
                 "none",
 
               WebkitUserDrag:
-                "none"
+                "none",
+
+              objectFit:
+                "fill"
             }
           );
 
 
-          document.body
+          oynanisEkrani
             .appendChild(
               ucanKart
             );
@@ -1491,11 +1517,11 @@ function kalanSanatcilariArtanYuvayaGonder() {
             ucanKart,
             {
               left:
-                yuvaRect.left +
+                yuvaLeft +
                 desteKaymaX,
 
               top:
-                yuvaRect.top +
+                yuvaTop +
                 desteKaymaY,
 
               width:
@@ -1543,18 +1569,18 @@ function kalanSanatcilariArtanYuvayaGonder() {
                     artanKart.style,
                     {
                       position:
-                        "fixed",
+                        "absolute",
 
                       left:
                         (
-                          yuvaRect.left +
+                          yuvaLeft +
                           desteKaymaX
                         ) +
                         "px",
 
                       top:
                         (
-                          yuvaRect.top +
+                          yuvaTop +
                           desteKaymaY
                         ) +
                         "px",
@@ -1568,7 +1594,7 @@ function kalanSanatcilariArtanYuvayaGonder() {
                         "px",
 
                       zIndex:
-                        3 +
+                        20 +
                         index,
 
                       pointerEvents:
@@ -1592,7 +1618,7 @@ function kalanSanatcilariArtanYuvayaGonder() {
                   );
 
 
-                  document.body
+                  oynanisEkrani
                     .appendChild(
                       artanKart
                     );
@@ -2326,19 +2352,6 @@ function ozelKartSeciminiBitir() {
 
   ozelKartSayac.textContent =
     "SEÇİLEN ÖZEL KART: 12 / 12";
-
-
-  /*
-    İLERİDE BURADA:
-
-    12 seçilmiş özel kart
-    +
-    36 eser kartı
-    =
-    48 kartlık ortak deste
-
-    oluşturacağız.
-  */
 
 
   console.log(
