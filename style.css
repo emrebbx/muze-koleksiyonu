@@ -20,7 +20,13 @@ body {
 
 
 /* =========================
-   SABİT 16:9 OYUN SAHNESİ
+   2704 × 1900 OYUN SAHNESİ
+
+   YENİ ARKAPLAN ORANI:
+   2704 / 1900 = 1.423157895
+
+   ESKİ 2704 × 1521 OYUN ALANI
+   SAHNENİN ORTASINDA KORUNUR.
 ========================= */
 
 #oyunEkrani {
@@ -31,18 +37,18 @@ body {
 
   width: max(
     100vw,
-    177.777778vh
+    142.315789vh
   );
 
   height: max(
     100vh,
-    56.25vw
+    70.266272vw
   );
 
   transform:
     translate(-50%, -50%);
 
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 2704 / 1900;
 
   background: #000;
 
@@ -413,6 +419,10 @@ body {
 }
 
 
+/* =========================
+   YENİ 2704 × 1900 ARKAPLAN
+========================= */
+
 #oyunArkaplan {
   position: absolute;
   inset: 0;
@@ -432,17 +442,25 @@ body {
 }
 
 
-/* =========================
-   SANATÇI ALANLARI
-========================= */
+/* =====================================================
+   ESKİ 2704 × 1521 OYUN BÖLGESİ
+
+   1900 yüksekliğin ortasında tutuluyor.
+   Böylece eski kart konumları bozulmuyor.
+
+   ÜST BOŞLUK: %9.973684
+   OYUN YÜKSEKLİĞİ: %80.052632
+===================================================== */
 
 #oyuncu2SanatciYuvalari,
 #oyuncu1SanatciYuvalari {
   position: absolute;
-  inset: 0;
+
+  left: 0;
+  top: 9.973684%;
 
   width: 100%;
-  height: 100%;
+  height: 80.052632%;
 
   z-index: 2;
 
@@ -687,7 +705,7 @@ body {
   position: absolute;
 
   left: 8.1%;
-  top: 41.8%;
+  top: 43.435684%;
 
   width: 6.6%;
   height: auto;
@@ -709,7 +727,7 @@ body {
   position: absolute;
 
   left: 85.3%;
-  top: 41.8%;
+  top: 43.435684%;
 
   width: 6.6%;
   height: auto;
@@ -731,7 +749,7 @@ body {
   position: absolute;
 
   left: 36.4%;
-  top: 41.8%;
+  top: 43.435684%;
 
   width: 6.6%;
   height: auto;
@@ -753,7 +771,7 @@ body {
   position: absolute;
 
   left: 57%;
-  top: 41.8%;
+  top: 43.435684%;
 
   width: 6.6%;
   height: auto;
@@ -793,12 +811,12 @@ body {
 
 #ustDepoBir {
   left: 4.7%;
-  top: 6.1%;
+  top: 14.856895%;
 }
 
 #ustDepoIki {
   left: 11.6%;
-  top: 6.1%;
+  top: 14.856895%;
 }
 
 
@@ -808,12 +826,12 @@ body {
 
 #ustOzelKartBir {
   left: 81.8%;
-  top: 6.1%;
+  top: 14.856895%;
 }
 
 #ustOzelKartIki {
   left: 88.7%;
-  top: 6.1%;
+  top: 14.856895%;
 }
 
 
@@ -823,12 +841,12 @@ body {
 
 #altDepoBir {
   left: 4.7%;
-  top: 77.4%;
+  top: 71.934421%;
 }
 
 #altDepoIki {
   left: 11.6%;
-  top: 77.4%;
+  top: 71.934421%;
 }
 
 
@@ -838,12 +856,12 @@ body {
 
 #altOzelKartBir {
   left: 81.8%;
-  top: 77.4%;
+  top: 71.934421%;
 }
 
 #altOzelKartIki {
   left: 88.7%;
-  top: 77.4%;
+  top: 71.934421%;
 }
 
 
@@ -853,10 +871,12 @@ body {
 
 #sanatciSecimAlani {
   position: absolute;
-  inset: 0;
+
+  left: 0;
+  top: 9.973684%;
 
   width: 100%;
-  height: 100%;
+  height: 80.052632%;
 
   z-index: 10;
 
@@ -1024,7 +1044,7 @@ body {
   position: absolute;
 
   left: 50%;
-  top: 32%;
+  top: 35.590526%;
 
   transform:
     translateX(-50%);
@@ -1138,14 +1158,19 @@ body {
 
 /* =========================
    ÖZEL KART SEÇİMİ
+
+   BU ALAN DA ESKİ 1521 YÜKSEKLİKLİ
+   OYUN BÖLGESİNE BAĞLANDI.
 ========================= */
 
 #ozelKartSecimAlani {
   position: absolute;
-  inset: 0;
+
+  left: 0;
+  top: 9.973684%;
 
   width: 100%;
-  height: 100%;
+  height: 80.052632%;
 
   z-index: 1000;
 
