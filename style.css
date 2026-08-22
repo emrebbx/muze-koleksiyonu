@@ -404,7 +404,9 @@ body {
 }
 
 
-/* ÜST SANATÇILAR */
+/* =========================
+   ÜST SANATÇILAR
+========================= */
 
 .ustSanatci1 {
   left: 26.1%;
@@ -425,7 +427,9 @@ body {
 }
 
 
-/* ALT SANATÇILAR */
+/* =========================
+   ALT SANATÇILAR
+========================= */
 
 .altSanatci1 {
   left: 26.1%;
@@ -561,56 +565,24 @@ body {
    ÜST 9 ESER
 ========================= */
 
-.ustS1E1 {
-  left: -3.74%;
-  top: -10.52%;
-  width: 32.8%;
-}
-
-.ustS1E2 {
-  left: 30.5%;
-  top: -10.52%;
-  width: 32.8%;
-}
-
-.ustS1E3 {
-  left: 64.8%;
-  top: -10.52%;
-  width: 32.8%;
-}
-
-
-.ustS2E1 {
-  left: -3.74%;
-  top: -10.52%;
-  width: 32.8%;
-}
-
-.ustS2E2 {
-  left: 30.5%;
-  top: -10.52%;
-  width: 32.8%;
-}
-
-.ustS2E3 {
-  left: 64.8%;
-  top: -10.52%;
-  width: 32.8%;
-}
-
-
+.ustS1E1,
+.ustS2E1,
 .ustS3E1 {
   left: -3.74%;
   top: -10.52%;
   width: 32.8%;
 }
 
+.ustS1E2,
+.ustS2E2,
 .ustS3E2 {
   left: 30.5%;
   top: -10.52%;
   width: 32.8%;
 }
 
+.ustS1E3,
+.ustS2E3,
 .ustS3E3 {
   left: 64.8%;
   top: -10.52%;
@@ -622,56 +594,24 @@ body {
    ALT 9 ESER
 ========================= */
 
-.altS1E1 {
-  left: -3.74%;
-  top: -10.52%;
-  width: 32.8%;
-}
-
-.altS1E2 {
-  left: 30.5%;
-  top: -10.52%;
-  width: 32.8%;
-}
-
-.altS1E3 {
-  left: 64.8%;
-  top: -10.52%;
-  width: 32.8%;
-}
-
-
-.altS2E1 {
-  left: -3.74%;
-  top: -10.52%;
-  width: 32.8%;
-}
-
-.altS2E2 {
-  left: 30.5%;
-  top: -10.52%;
-  width: 32.8%;
-}
-
-.altS2E3 {
-  left: 64.8%;
-  top: -10.52%;
-  width: 32.8%;
-}
-
-
+.altS1E1,
+.altS2E1,
 .altS3E1 {
   left: -3.74%;
   top: -10.52%;
   width: 32.8%;
 }
 
+.altS1E2,
+.altS2E2,
 .altS3E2 {
   left: 30.5%;
   top: -10.52%;
   width: 32.8%;
 }
 
+.altS1E3,
+.altS2E3,
 .altS3E3 {
   left: 64.8%;
   top: -10.52%;
@@ -709,6 +649,50 @@ body {
   position: absolute;
 
   left: 85.3%;
+  top: 41.8%;
+
+  width: 6.6%;
+  height: auto;
+
+  z-index: 2;
+
+  user-select: none;
+  -webkit-user-drag: none;
+
+  pointer-events: none;
+}
+
+
+/* =========================
+   ÇÖP YUVASI
+========================= */
+
+#copYuvasi {
+  position: absolute;
+
+  left: 41.8%;
+  top: 41.8%;
+
+  width: 6.6%;
+  height: auto;
+
+  z-index: 2;
+
+  user-select: none;
+  -webkit-user-drag: none;
+
+  pointer-events: none;
+}
+
+
+/* =========================
+   ORTAK DESTE YUVASI
+========================= */
+
+#ortakDesteYuvasi {
+  position: absolute;
+
+  left: 51.6%;
   top: 41.8%;
 
   width: 6.6%;
@@ -1054,7 +1038,7 @@ body {
   height: auto;
 
   left: 50%;
-  top: 21.5%;
+  top: 3.5%;
 
   transform:
     translateX(-50%);
