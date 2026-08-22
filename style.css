@@ -21,10 +21,11 @@ body {
 
 /* =========================
    SABİT 16:9 OYUN SAHNESİ
-   COVER MANTIĞI
 
-   REFERANS TASARIM:
+   REFERANS:
    2704 × 1521
+
+   COVER MANTIĞI
 ========================= */
 
 #oyunEkrani {
@@ -80,7 +81,7 @@ body {
 
 
 /* =========================
-   AÇILIŞ EKRANI
+   AÇILIŞ
 ========================= */
 
 #acilisEkrani {
@@ -95,10 +96,6 @@ body {
   z-index: 5;
 }
 
-
-/* =========================
-   AÇILIŞ LOGO + DEVAM GRUBU
-========================= */
 
 #acilisIcerik {
   position: absolute;
@@ -118,10 +115,6 @@ body {
   z-index: 2;
 }
 
-
-/* =========================
-   AÇILIŞ EU GAMES LOGOSU
-========================= */
 
 #euLogo {
   position: relative;
@@ -144,10 +137,6 @@ body {
   -webkit-user-drag: none;
 }
 
-
-/* =========================
-   DEVAM BUTONU
-========================= */
 
 #devamButonu {
   position: relative;
@@ -208,10 +197,6 @@ body {
 }
 
 
-/* =========================
-   ANA MENÜ ARKA PLANI
-========================= */
-
 #anaMenuArkaplan {
   position: absolute;
   inset: 0;
@@ -233,10 +218,6 @@ body {
 }
 
 
-/* =========================
-   MÜZE KOLEKSİYONU LOGOSU
-========================= */
-
 #muzeLogo {
   position: absolute;
 
@@ -255,10 +236,6 @@ body {
   -webkit-user-drag: none;
 }
 
-
-/* =========================
-   BAŞLA
-========================= */
 
 #baslaButonu {
   position: absolute;
@@ -300,10 +277,6 @@ body {
 }
 
 
-/* =========================
-   NASIL OYNANIR
-========================= */
-
 #nasilOynanirButonu {
   position: absolute;
 
@@ -344,10 +317,6 @@ body {
 }
 
 
-/* =========================
-   ALT EU GAMES
-========================= */
-
 #altEuLogo {
   position: absolute;
 
@@ -368,7 +337,7 @@ body {
 
 
 /* =========================
-   OYNANIŞ EKRANI
+   OYNANIŞ
 ========================= */
 
 #oynanisEkrani {
@@ -383,10 +352,6 @@ body {
   overflow: hidden;
 }
 
-
-/* =========================
-   OYUN ARKA PLANI
-========================= */
 
 #oyunArkaplan {
   position: absolute;
@@ -408,7 +373,7 @@ body {
 
 
 /* =========================
-   SANATÇI YUVA KAPSAYICILARI
+   SANATÇI ALANLARI
 ========================= */
 
 #oyuncu2SanatciYuvalari,
@@ -425,10 +390,6 @@ body {
 }
 
 
-/* =========================
-   TÜM SANATÇI YUVALARI
-========================= */
-
 .yeniSanatciYuva {
   position: absolute;
 
@@ -443,9 +404,7 @@ body {
 }
 
 
-/* =========================
-   2. OYUNCU - ÜST
-========================= */
+/* ÜST SANATÇILAR */
 
 .ustSanatci1 {
   left: 26.1%;
@@ -466,9 +425,7 @@ body {
 }
 
 
-/* =========================
-   1. OYUNCU - ALT
-========================= */
+/* ALT SANATÇILAR */
 
 .altSanatci1 {
   left: 26.1%;
@@ -489,8 +446,52 @@ body {
 }
 
 
+/* =====================================================
+   ÜST 9 ESER ANA GRUBU
+
+   BUNUN left/top DEĞERİNİ DEĞİŞTİRİRSEN
+   SADECE ÜSTTEKİ 9 ESER BİRLİKTE HAREKET EDER.
+===================================================== */
+
+#ustEserAlani {
+  position: absolute;
+
+  left: 0%;
+  top: 0%;
+
+  width: 100%;
+  height: 100%;
+
+  z-index: 2;
+
+  pointer-events: none;
+}
+
+
+/* =====================================================
+   ALT 9 ESER ANA GRUBU
+
+   BUNUN left/top DEĞERİNİ DEĞİŞTİRİRSEN
+   SADECE ALTTAKİ 9 ESER BİRLİKTE HAREKET EDER.
+===================================================== */
+
+#altEserAlani {
+  position: absolute;
+
+  left: 0%;
+  top: 0%;
+
+  width: 100%;
+  height: 100%;
+
+  z-index: 2;
+
+  pointer-events: none;
+}
+
+
 /* =========================
-   ESER GRUPLARI
+   ÜÇLÜ ESER GRUPLARI
 ========================= */
 
 .eserGrubu {
@@ -523,27 +524,7 @@ body {
 
 
 /* =========================
-   ESER ÜÇLÜSÜ İÇ DÜZEN
-========================= */
-
-.eserGrubu .eser1 {
-  left: -3.74%;
-  top: -10.52%;
-}
-
-.eserGrubu .eser2 {
-  left: 30.5%;
-  top: -10.52%;
-}
-
-.eserGrubu .eser3 {
-  left: 64.8%;
-  top: -10.52%;
-}
-
-
-/* =========================
-   ÜST ESER GRUPLARI
+   ÜST ÜÇLÜLERİN KONUMU
 ========================= */
 
 .ustEserGrubu1 {
@@ -563,7 +544,7 @@ body {
 
 
 /* =========================
-   ALT ESER GRUPLARI
+   ALT ÜÇLÜLERİN KONUMU
 ========================= */
 
 .altEserGrubu1 {
@@ -579,6 +560,144 @@ body {
 .altEserGrubu3 {
   left: 61.2%;
   top: 60%;
+}
+
+
+/* =====================================================
+   ÜST 9 ESER
+   HER BİRİ TAMAMEN BAĞIMSIZ
+===================================================== */
+
+
+/* ÜST SANATÇI 1 */
+
+.ustS1E1 {
+  left: -3.74%;
+  top: -10.52%;
+  width: 32.8%;
+}
+
+.ustS1E2 {
+  left: 30.5%;
+  top: -10.52%;
+  width: 32.8%;
+}
+
+.ustS1E3 {
+  left: 64.8%;
+  top: -10.52%;
+  width: 32.8%;
+}
+
+
+/* ÜST SANATÇI 2 */
+
+.ustS2E1 {
+  left: -3.74%;
+  top: -10.52%;
+  width: 32.8%;
+}
+
+.ustS2E2 {
+  left: 30.5%;
+  top: -10.52%;
+  width: 32.8%;
+}
+
+.ustS2E3 {
+  left: 64.8%;
+  top: -10.52%;
+  width: 32.8%;
+}
+
+
+/* ÜST SANATÇI 3 */
+
+.ustS3E1 {
+  left: -3.74%;
+  top: -10.52%;
+  width: 32.8%;
+}
+
+.ustS3E2 {
+  left: 30.5%;
+  top: -10.52%;
+  width: 32.8%;
+}
+
+.ustS3E3 {
+  left: 64.8%;
+  top: -10.52%;
+  width: 32.8%;
+}
+
+
+/* =====================================================
+   ALT 9 ESER
+   HER BİRİ TAMAMEN BAĞIMSIZ
+===================================================== */
+
+
+/* ALT SANATÇI 1 */
+
+.altS1E1 {
+  left: -3.74%;
+  top: -10.52%;
+  width: 32.8%;
+}
+
+.altS1E2 {
+  left: 30.5%;
+  top: -10.52%;
+  width: 32.8%;
+}
+
+.altS1E3 {
+  left: 64.8%;
+  top: -10.52%;
+  width: 32.8%;
+}
+
+
+/* ALT SANATÇI 2 */
+
+.altS2E1 {
+  left: -3.74%;
+  top: -10.52%;
+  width: 32.8%;
+}
+
+.altS2E2 {
+  left: 30.5%;
+  top: -10.52%;
+  width: 32.8%;
+}
+
+.altS2E3 {
+  left: 64.8%;
+  top: -10.52%;
+  width: 32.8%;
+}
+
+
+/* ALT SANATÇI 3 */
+
+.altS3E1 {
+  left: -3.74%;
+  top: -10.52%;
+  width: 32.8%;
+}
+
+.altS3E2 {
+  left: 30.5%;
+  top: -10.52%;
+  width: 32.8%;
+}
+
+.altS3E3 {
+  left: 64.8%;
+  top: -10.52%;
+  width: 32.8%;
 }
 
 
@@ -726,10 +845,6 @@ body {
 }
 
 
-/* =========================
-   12 SABİT KART SLOTU
-========================= */
-
 .kapaliKartSlotu {
   position: relative;
 
@@ -746,10 +861,6 @@ body {
   visibility: visible;
 }
 
-
-/* =========================
-   KAPALI SANATÇI KARTI
-========================= */
 
 .kapaliSanatciKarti {
   display: block;
@@ -859,7 +970,7 @@ body {
 
 
 /* =========================
-   UÇAN SANATÇI KARTI
+   UÇAN / YERLEŞEN SANATÇI
 ========================= */
 
 .ucanSanatciKarti {
@@ -875,10 +986,6 @@ body {
   -webkit-user-drag: none;
 }
 
-
-/* =========================
-   YERLEŞEN SANATÇI KARTI
-========================= */
 
 .yerlesenSanatciKarti {
   cursor: pointer;
@@ -910,10 +1017,6 @@ body {
 }
 
 
-/* =========================
-   ARTAN SANATÇI KARTLARI
-========================= */
-
 .artanSanatciKarti,
 .artanSanatciUcanKart {
   object-fit: fill;
@@ -932,7 +1035,7 @@ body {
 
 
 /* =========================
-   ÖZEL KART SEÇİM ALANI
+   ÖZEL KART SEÇİMİ
 ========================= */
 
 #ozelKartSecimAlani {
@@ -961,10 +1064,6 @@ body {
   pointer-events: auto;
 }
 
-
-/* =========================
-   ÖZEL KART BAŞLIK
-========================= */
 
 #ozelKartBaslik {
   position: absolute;
@@ -1000,10 +1099,6 @@ body {
   white-space: nowrap;
 }
 
-
-/* =========================
-   ÖZEL KART AÇIKLAMA
-========================= */
 
 #ozelKartAciklama {
   position: absolute;
@@ -1042,10 +1137,6 @@ body {
 }
 
 
-/* =========================
-   ÖZEL KART SAYACI
-========================= */
-
 #ozelKartSayac {
   position: absolute;
 
@@ -1075,10 +1166,6 @@ body {
 }
 
 
-/* =========================
-   ZORUNLU DEDEKTİF KARTI
-========================= */
-
 #dedektifSecimAlani {
   position: absolute;
 
@@ -1087,6 +1174,7 @@ body {
   left: 46.5%;
   top: 42%;
 }
+
 
 #dedektifZorunluKart {
   display: block;
@@ -1133,10 +1221,6 @@ body {
 }
 
 
-/* =========================
-   19 KAPALI ÖZEL KART
-========================= */
-
 #ozelKartSecimSirasi {
   position: absolute;
 
@@ -1156,6 +1240,7 @@ body {
   align-items: center;
 }
 
+
 .ozelKartSlotu {
   position: relative;
 
@@ -1168,6 +1253,7 @@ body {
 
   min-width: 0;
 }
+
 
 .kapaliOzelKart {
   width: 100%;
@@ -1213,10 +1299,6 @@ body {
 }
 
 
-/* =========================
-   ARTAN ÖZEL KARTLAR
-========================= */
-
 .artanOzelKarti,
 .artanOzelUcanKart {
   object-fit: fill;
@@ -1235,7 +1317,7 @@ body {
 
 
 /* =========================
-   KART ÖNİZLEME KARANLIK KATMAN
+   KART ÖNİZLEME
 ========================= */
 
 #kartOnizlemeKatmani {
@@ -1259,10 +1341,6 @@ body {
   cursor: pointer;
 }
 
-
-/* =========================
-   BÜYÜK KART ÖNİZLEME
-========================= */
 
 #kartOnizlemeKart {
   object-fit: fill;
