@@ -59,6 +59,14 @@ const ozelKartSecimSirasi =
 
 
 /* =========================
+   ORTAK DESTE
+========================= */
+
+const ortakDesteYuvasi =
+  document.getElementById("ortakDesteYuvasi");
+
+
+/* =========================
    SANATÇI YUVALARI
 ========================= */
 
@@ -97,37 +105,368 @@ const sanatcilar = [
 ];
 
 
+/* =====================================================
+   36 ESER KARTI
+===================================================== */
+
+const eserKartlari = [
+
+  /* CEZANNE */
+
+  {
+    id: "cezanne-eser1",
+    tip: "eser",
+    sanatci: "cezanne",
+    eserSirasi: 1,
+    dosya: "images/cezanne-eser1-kagit-oynayanlar.png"
+  },
+
+  {
+    id: "cezanne-eser2",
+    tip: "eser",
+    sanatci: "cezanne",
+    eserSirasi: 2,
+    dosya: "images/cezanne-eser2-sainte-victorie-dagi.png"
+  },
+
+  {
+    id: "cezanne-eser3",
+    tip: "eser",
+    sanatci: "cezanne",
+    eserSirasi: 3,
+    dosya: "images/cezanne-eser3-elmali-naturmort.png"
+  },
+
+
+  /* DURER */
+
+  {
+    id: "durer-eser1",
+    tip: "eser",
+    sanatci: "durer",
+    eserSirasi: 1,
+    dosya: "images/durer-eser1-genc-tavsan.png"
+  },
+
+  {
+    id: "durer-eser2",
+    tip: "eser",
+    sanatci: "durer",
+    eserSirasi: 2,
+    dosya: "images/durer-eser2-gergedan.png"
+  },
+
+  {
+    id: "durer-eser3",
+    tip: "eser",
+    sanatci: "durer",
+    eserSirasi: 3,
+    dosya: "images/durer-eser3-buyuk-cimen-parcasi.png"
+  },
+
+
+  /* LEONARDO */
+
+  {
+    id: "leonardo-eser1",
+    tip: "eser",
+    sanatci: "leonardo",
+    eserSirasi: 1,
+    dosya: "images/leonardo-eser1-mona-lisa.png"
+  },
+
+  {
+    id: "leonardo-eser2",
+    tip: "eser",
+    sanatci: "leonardo",
+    eserSirasi: 2,
+    dosya: "images/leonardo-eser2-son-aksam-yemegi.png"
+  },
+
+  {
+    id: "leonardo-eser3",
+    tip: "eser",
+    sanatci: "leonardo",
+    eserSirasi: 3,
+    dosya: "images/leonardo-eser3-erminli-kadin.png"
+  },
+
+
+  /* MILLET */
+
+  {
+    id: "millet-eser1",
+    tip: "eser",
+    sanatci: "millet",
+    eserSirasi: 1,
+    dosya: "images/millet-eser1-basak-toplayanlar.png"
+  },
+
+  {
+    id: "millet-eser2",
+    tip: "eser",
+    sanatci: "millet",
+    eserSirasi: 2,
+    dosya: "images/millet-eser2-angelus.png"
+  },
+
+  {
+    id: "millet-eser3",
+    tip: "eser",
+    sanatci: "millet",
+    eserSirasi: 3,
+    dosya: "images/millet-eser3-ekici.png"
+  },
+
+
+  /* MONDRIAN */
+
+  {
+    id: "mondrian-eser1",
+    tip: "eser",
+    sanatci: "mondrian",
+    eserSirasi: 1,
+    dosya: "images/mondrian-eser1-kirmizi-sari-mavi.png"
+  },
+
+  {
+    id: "mondrian-eser2",
+    tip: "eser",
+    sanatci: "mondrian",
+    eserSirasi: 2,
+    dosya: "images/mondrian-eser2-new-york-city.png"
+  },
+
+  {
+    id: "mondrian-eser3",
+    tip: "eser",
+    sanatci: "mondrian",
+    eserSirasi: 3,
+    dosya: "images/mondrian-eser3-broadway.png"
+  },
+
+
+  /* MONET */
+
+  {
+    id: "monet-eser1",
+    tip: "eser",
+    sanatci: "monet",
+    eserSirasi: 1,
+    dosya: "images/monet-eser1-izlenim.png"
+  },
+
+  {
+    id: "monet-eser2",
+    tip: "eser",
+    sanatci: "monet",
+    eserSirasi: 2,
+    dosya: "images/monet-eser2-niluferler.png"
+  },
+
+  {
+    id: "monet-eser3",
+    tip: "eser",
+    sanatci: "monet",
+    eserSirasi: 3,
+    dosya: "images/monet-eser3-parlamento-binasi.png"
+  },
+
+
+  /* MUNCH */
+
+  {
+    id: "munch-eser1",
+    tip: "eser",
+    sanatci: "munch",
+    eserSirasi: 1,
+    dosya: "images/munch-eser1-ciglik.png"
+  },
+
+  {
+    id: "munch-eser2",
+    tip: "eser",
+    sanatci: "munch",
+    eserSirasi: 2,
+    dosya: "images/munch-eser2-hasta-cocuk.png"
+  },
+
+  {
+    id: "munch-eser3",
+    tip: "eser",
+    sanatci: "munch",
+    eserSirasi: 3,
+    dosya: "images/munch-eser3-kaygi.png"
+  },
+
+
+  /* OSMAN HAMDİ */
+
+  {
+    id: "osman-hamdi-eser1",
+    tip: "eser",
+    sanatci: "osman-hamdi",
+    eserSirasi: 1,
+    dosya: "images/osman-hamdi-eser1-kaplumbaga-terbiyecisi.png"
+  },
+
+  {
+    id: "osman-hamdi-eser2",
+    tip: "eser",
+    sanatci: "osman-hamdi",
+    eserSirasi: 2,
+    dosya: "images/osman-hamdi-eser2-silah-taciri.png"
+  },
+
+  {
+    id: "osman-hamdi-eser3",
+    tip: "eser",
+    sanatci: "osman-hamdi",
+    eserSirasi: 3,
+    dosya: "images/osman-hamdi-eser3-iki-muzisyen-kiz.png"
+  },
+
+
+  /* REMBRANDT */
+
+  {
+    id: "rembrandt-eser1",
+    tip: "eser",
+    sanatci: "rembrandt",
+    eserSirasi: 1,
+    dosya: "images/rembrandt-eser1-gece-devriyesi.png"
+  },
+
+  {
+    id: "rembrandt-eser2",
+    tip: "eser",
+    sanatci: "rembrandt",
+    eserSirasi: 2,
+    dosya: "images/rembrandt-eser2-belsazzarin-ziyafeti.png"
+  },
+
+  {
+    id: "rembrandt-eser3",
+    tip: "eser",
+    sanatci: "rembrandt",
+    eserSirasi: 3,
+    dosya: "images/rembrandt-eser3-celile-denizindeki-firtina.png"
+  },
+
+
+  /* VAN GOGH */
+
+  {
+    id: "van-gogh-eser1",
+    tip: "eser",
+    sanatci: "van-gogh",
+    eserSirasi: 1,
+    dosya: "images/van-gogh-eser1-yildizli-gece.png"
+  },
+
+  {
+    id: "van-gogh-eser2",
+    tip: "eser",
+    sanatci: "van-gogh",
+    eserSirasi: 2,
+    dosya: "images/van-gogh-eser2-aycicekleri.png"
+  },
+
+  {
+    id: "van-gogh-eser3",
+    tip: "eser",
+    sanatci: "van-gogh",
+    eserSirasi: 3,
+    dosya: "images/van-gogh-eser3-yatak-odasi.png"
+  },
+
+
+  /* VELAZQUEZ */
+
+  {
+    id: "velazquez-eser1",
+    tip: "eser",
+    sanatci: "velazquez",
+    eserSirasi: 1,
+    dosya: "images/velazquez-eser1-nedimeler.png"
+  },
+
+  {
+    id: "velazquez-eser2",
+    tip: "eser",
+    sanatci: "velazquez",
+    eserSirasi: 2,
+    dosya: "images/velazquez-eser2-bredanin-teslimi.png"
+  },
+
+  {
+    id: "velazquez-eser3",
+    tip: "eser",
+    sanatci: "velazquez",
+    eserSirasi: 3,
+    dosya: "images/velazquez-eser3-infanta-margarita.png"
+  },
+
+
+  /* VERMEER */
+
+  {
+    id: "vermeer-eser1",
+    tip: "eser",
+    sanatci: "vermeer",
+    eserSirasi: 1,
+    dosya: "images/vermeer-eser1-inci-kupeli-kiz.png"
+  },
+
+  {
+    id: "vermeer-eser2",
+    tip: "eser",
+    sanatci: "vermeer",
+    eserSirasi: 2,
+    dosya: "images/vermeer-eser2-sut-doken-kadin.png"
+  },
+
+  {
+    id: "vermeer-eser3",
+    tip: "eser",
+    sanatci: "vermeer",
+    eserSirasi: 3,
+    dosya: "images/vermeer-eser3-resim-sanati.png"
+  }
+];
+
+
 /* =========================
    20 ÖZEL KART
 ========================= */
 
 const ozelKartlar = [
-  { id: "acik-artirma", dosya: "images/acik-artirma.png" },
-  { id: "arkeolojik-kazi", dosya: "images/arkeolojik-kazi.png" },
-  { id: "arti-iki-kart", dosya: "images/arti-iki-kart.png" },
-  { id: "dedektif-sorusturmasi", dosya: "images/dedektif-sorusturmasi.png" },
-  { id: "depo-kilidi", dosya: "images/depo-kilidi.png" },
-  { id: "dunya-takimi", dosya: "images/dunya-takimi.png" },
-  { id: "eser-calindi", dosya: "images/eser-calindi.png" },
-  { id: "eser-sahteydi", dosya: "images/eser-sahteydi.png" },
-  { id: "fransa-takimi", dosya: "images/fransa-takimi.png" },
-  { id: "gece-nobeti", dosya: "images/gece-nobeti.png" },
-  { id: "gizli-sandik", dosya: "images/gizli-sandik.png" },
-  { id: "hollanda-takimi", dosya: "images/hollanda-takimi.png" },
-  { id: "klasikler-takimi", dosya: "images/klasikler-takimi.png" },
-  { id: "muze-guvenligi", dosya: "images/muze-guvenligi.png" },
-  { id: "muze-muduru", dosya: "images/muze-muduru.png" },
-  { id: "muzede-deprem", dosya: "images/muzede-deprem.png" },
-  { id: "muzede-kaza", dosya: "images/muzede-kaza.png" },
-  { id: "ozel-kart-takasi", dosya: "images/ozel-kart-takasi.png" },
-  { id: "restorasyon", dosya: "images/restorasyon.png" },
-  { id: "yeni-sergi", dosya: "images/yeni-sergi.png" }
+  { id: "acik-artirma", tip: "ozel", dosya: "images/acik-artirma.png" },
+  { id: "arkeolojik-kazi", tip: "ozel", dosya: "images/arkeolojik-kazi.png" },
+  { id: "arti-iki-kart", tip: "ozel", dosya: "images/arti-iki-kart.png" },
+  { id: "dedektif-sorusturmasi", tip: "ozel", dosya: "images/dedektif-sorusturmasi.png" },
+  { id: "depo-kilidi", tip: "ozel", dosya: "images/depo-kilidi.png" },
+  { id: "dunya-takimi", tip: "ozel", dosya: "images/dunya-takimi.png" },
+  { id: "eser-calindi", tip: "ozel", dosya: "images/eser-calindi.png" },
+  { id: "eser-sahteydi", tip: "ozel", dosya: "images/eser-sahteydi.png" },
+  { id: "fransa-takimi", tip: "ozel", dosya: "images/fransa-takimi.png" },
+  { id: "gece-nobeti", tip: "ozel", dosya: "images/gece-nobeti.png" },
+  { id: "gizli-sandik", tip: "ozel", dosya: "images/gizli-sandik.png" },
+  { id: "hollanda-takimi", tip: "ozel", dosya: "images/hollanda-takimi.png" },
+  { id: "klasikler-takimi", tip: "ozel", dosya: "images/klasikler-takimi.png" },
+  { id: "muze-guvenligi", tip: "ozel", dosya: "images/muze-guvenligi.png" },
+  { id: "muze-muduru", tip: "ozel", dosya: "images/muze-muduru.png" },
+  { id: "muzede-deprem", tip: "ozel", dosya: "images/muzede-deprem.png" },
+  { id: "muzede-kaza", tip: "ozel", dosya: "images/muzede-kaza.png" },
+  { id: "ozel-kart-takasi", tip: "ozel", dosya: "images/ozel-kart-takasi.png" },
+  { id: "restorasyon", tip: "ozel", dosya: "images/restorasyon.png" },
+  { id: "yeni-sergi", tip: "ozel", dosya: "images/yeni-sergi.png" }
 ];
 
 
-/* =========================
+/* =====================================================
    OYUN DURUMU
-========================= */
+===================================================== */
 
 let aktifOyuncu = 1;
 
@@ -144,6 +483,28 @@ let artanOzelKartlar = [];
 let ozelKartSecimKilidi = false;
 
 let oyunHazir = false;
+
+
+/* ORTAK DESTE */
+
+let ortakDeste = [];
+
+let ortakDesteHazir = false;
+
+
+/* OYUN AŞAMASI */
+
+let oyunAsamasi =
+  "hazirlik";
+
+
+/* BAŞLANGIÇ ZARI */
+
+let oyuncu1ZarSonucu = null;
+let oyuncu2ZarSonucu = null;
+
+let zarSirasi = 1;
+let zarAtisKilidi = false;
 
 
 /* =========================
@@ -175,23 +536,26 @@ oyunMuzik.preload = "auto";
 butonTik.preload = "auto";
 
 
-/* =========================
+/* =====================================================
    AÇILIŞ PRELOAD DOSYALARI
-========================= */
+===================================================== */
 
 const yuklenecekGorseller = [
 
   /* ANA EKRAN */
+
   "images/eu-games-logo.png",
   "images/devam-etmek-icin-dokun.png",
 
   /* ANA MENÜ */
-  "images/ana-menu-arkaplan.webp",
+
+  "images/ana-menu-arkaplan.png",
   "images/muze-koleksiyonu-logo.png",
   "images/basla.png",
   "images/nasil-oynanir.png",
 
   /* OYUN ALANI */
+
   "images/oyun-arkaplan.png",
 
   "images/sanatci-1.png",
@@ -213,20 +577,27 @@ const yuklenecekGorseller = [
   "images/kart-arkasi.png",
 
   /* SANATÇILAR */
+
   ...sanatcilar.map(
     (sanatci) =>
       sanatci.dosya
   ),
 
+  /* ESERLER */
+
+  ...eserKartlari.map(
+    (kart) =>
+      kart.dosya
+  ),
+
   /* ÖZEL KARTLAR */
+
   ...ozelKartlar.map(
     (kart) =>
       kart.dosya
   )
 ];
 
-
-/* TEKRAR EDEN DOSYALARI TEMİZLE */
 
 const benzersizGorseller =
   [...new Set(yuklenecekGorseller)];
@@ -403,14 +774,6 @@ function sesYukle(
       ses.load();
 
 
-      /*
-        Bazı mobil tarayıcılar canplaythrough
-        olayını geç verebilir.
-
-        Bu yüzden oyun sonsuza kadar
-        %99'da kalmasın.
-      */
-
       setTimeout(
         () => {
 
@@ -463,43 +826,33 @@ function tarayiciTamYuklendiMi() {
 
 async function oyunuOncedenYukle() {
 
-  oyunHazir =
-    false;
-
+  oyunHazir = false;
 
   devamButonu
     .classList
-    .remove(
-      "hazir"
-    );
-
+    .remove("hazir");
 
   yuklemeYuzdesi.textContent =
     "0%";
 
 
   const sesler = [
-    {
-      ses:
-        anaMenuMuzik,
 
-      isim:
-        "ana-menu-muzik.mp3"
+    {
+      ses: anaMenuMuzik,
+      isim: "ana-menu-muzik.mp3"
     },
-    {
-      ses:
-        oyunMuzik,
 
-      isim:
-        "oyun-muzik.mp3"
+    {
+      ses: oyunMuzik,
+      isim: "oyun-muzik.mp3"
     },
-    {
-      ses:
-        butonTik,
 
-      isim:
-        "buton-tik.mp3"
+    {
+      ses: butonTik,
+      isim: "buton-tik.mp3"
     }
+
   ];
 
 
@@ -508,21 +861,13 @@ async function oyunuOncedenYukle() {
     sesler.length;
 
 
-  let yuklenenDosya =
-    0;
+  let yuklenenDosya = 0;
 
 
   function ilerlemeGuncelle() {
 
     yuklenenDosya++;
 
-
-    /*
-      Burada bilerek en fazla %99 gösteriyoruz.
-
-      Tarayıcının kendi window.load olayı da
-      tamamlanınca %100 yapacağız.
-    */
 
     const yuzde =
       Math.min(
@@ -579,11 +924,6 @@ async function oyunuOncedenYukle() {
   );
 
 
-  /*
-    Assetler hazır olsa bile tarayıcı
-    sayfayı tamamen yüklememiş olabilir.
-  */
-
   await tarayiciTamYuklendiMi();
 
 
@@ -591,14 +931,8 @@ async function oyunuOncedenYukle() {
     "100%";
 
 
-  oyunHazir =
-    true;
+  oyunHazir = true;
 
-
-  /*
-    %100 kısa bir an görünsün,
-    sonra devam butonu gelsin.
-  */
 
   setTimeout(
     () => {
@@ -776,11 +1110,9 @@ function muzikKapat(
 
           muzik.pause();
 
-          muzik.currentTime =
-            0;
+          muzik.currentTime = 0;
 
-          muzik.volume =
-            0;
+          muzik.volume = 0;
 
           resolve();
 
@@ -798,9 +1130,9 @@ function muzikKapat(
 }
 
 
-/* =========================
+/* =====================================================
    SEÇİM YAZISI
-========================= */
+===================================================== */
 
 function secimYazisiniOlustur() {
 
@@ -894,9 +1226,9 @@ function secimYazisiniGizle() {
 }
 
 
-/* =========================
+/* =====================================================
    GSAP DESTE SHUFFLE
-========================= */
+===================================================== */
 
 function gsapDesteKaristir(
   desteKartlari
@@ -925,25 +1257,12 @@ function gsapDesteKaristir(
           gsap.set(
             kart,
             {
-              x:
-                index *
-                1.2,
-
-              y:
-                index *
-                -0.35,
-
-              rotation:
-                0,
-
-              scale:
-                1,
-
-              transformOrigin:
-                "50% 100%",
-
-              zIndex:
-                index
+              x: index * 1.2,
+              y: index * -0.35,
+              rotation: 0,
+              scale: 1,
+              transformOrigin: "50% 100%",
+              zIndex: index
             }
           );
 
@@ -969,14 +1288,9 @@ function gsapDesteKaristir(
       tl.to(
         desteKartlari,
         {
-          y:
-            "-=20",
-
-          duration:
-            0.25,
-
-          stagger:
-            0.01
+          y: "-=20",
+          duration: 0.25,
+          stagger: 0.01
         }
       );
 
@@ -994,14 +1308,9 @@ function gsapDesteKaristir(
               -10 -
               index * 0.5,
 
-          rotation:
-            -5,
-
-          duration:
-            0.45,
-
-          stagger:
-            0.025
+          rotation: -5,
+          duration: 0.45,
+          stagger: 0.025
         }
       );
 
@@ -1019,65 +1328,9 @@ function gsapDesteKaristir(
               -10 -
               index * 0.5,
 
-          rotation:
-            5,
-
-          duration:
-            0.45,
-
-          stagger:
-            0.025
-        },
-        "<"
-      );
-
-
-      tl.to(
-        solDeste,
-        {
-          x:
-            (index) =>
-              -72 +
-              index * 1.5,
-
-          y:
-            (index) =>
-              8 -
-              index * 0.5,
-
-          rotation:
-            -8,
-
-          scaleY:
-            0.96,
-
-          duration:
-            0.35
-        }
-      );
-
-
-      tl.to(
-        sagDeste,
-        {
-          x:
-            (index) =>
-              72 +
-              index * 1.5,
-
-          y:
-            (index) =>
-              8 -
-              index * 0.5,
-
-          rotation:
-            8,
-
-          scaleY:
-            0.96,
-
-          duration:
-            0.35
+          rotation: 5,
+          duration: 0.45,
+          stagger: 0.025
         },
         "<"
       );
@@ -1099,22 +1352,11 @@ function gsapDesteKaristir(
         tl.to(
           solKart,
           {
-            x:
-              -6 +
-              i * 2,
-
-            y:
-              -i *
-              0.8,
-
-            rotation:
-              -1.5,
-
-            duration:
-              0.18,
-
-            ease:
-              "power1.out"
+            x: -6 + i * 2,
+            y: -i * 0.8,
+            rotation: -1.5,
+            duration: 0.18,
+            ease: "power1.out"
           },
           "riffle+=" +
           (
@@ -1127,22 +1369,11 @@ function gsapDesteKaristir(
         tl.to(
           sagKart,
           {
-            x:
-              6 -
-              i * 2,
-
-            y:
-              -i *
-              0.8,
-
-            rotation:
-              1.5,
-
-            duration:
-              0.18,
-
-            ease:
-              "power1.out"
+            x: 6 - i * 2,
+            y: -i * 0.8,
+            rotation: 1.5,
+            duration: 0.18,
+            ease: "power1.out"
           },
           "riffle+=" +
           (
@@ -1168,20 +1399,11 @@ function gsapDesteKaristir(
               index *
               -0.28,
 
-          rotation:
-            0,
-
-          scaleY:
-            1,
-
-          duration:
-            0.4,
-
-          stagger:
-            0.012,
-
-          ease:
-            "back.out(1.25)"
+          rotation: 0,
+          scaleY: 1,
+          duration: 0.4,
+          stagger: 0.012,
+          ease: "back.out(1.25)"
         },
         ">"
       );
@@ -1191,23 +1413,21 @@ function gsapDesteKaristir(
 }
 
 
-/* =========================
+/* =====================================================
    SANATÇI KARTLARINI KARIŞTIR
-========================= */
+===================================================== */
 
 async function sanatciKartlariniKaristir() {
 
-  aktifOyuncu =
-    1;
+  oyunAsamasi =
+    "sanatci-secimi";
 
-  oyuncu1Secimleri =
-    [];
+  aktifOyuncu = 1;
 
-  oyuncu2Secimleri =
-    [];
+  oyuncu1Secimleri = [];
+  oyuncu2Secimleri = [];
 
-  secimKilidi =
-    false;
+  secimKilidi = false;
 
 
   document
@@ -1411,9 +1631,7 @@ function sanatciKartiSec(
   sanatci
 ) {
 
-  if (
-    secimKilidi
-  ) {
+  if (secimKilidi) {
     return;
   }
 
@@ -1426,9 +1644,7 @@ function sanatciKartiSec(
   }
 
 
-  secimKilidi =
-    true;
-
+  secimKilidi = true;
 
   kart.dataset.secildi =
     "evet";
@@ -1437,14 +1653,9 @@ function sanatciKartiSec(
   gsap.to(
     kart,
     {
-      scaleX:
-        0,
-
-      duration:
-        0.2,
-
-      ease:
-        "power2.in",
+      scaleX: 0,
+      duration: 0.2,
+      ease: "power2.in",
 
       onComplete:
         () => {
@@ -1456,14 +1667,9 @@ function sanatciKartiSec(
           gsap.to(
             kart,
             {
-              scaleX:
-                1,
-
-              duration:
-                0.22,
-
-              ease:
-                "back.out(1.5)",
+              scaleX: 1,
+              duration: 0.22,
+              ease: "back.out(1.5)",
 
               onComplete:
                 () => {
@@ -1532,8 +1738,7 @@ function kartiYuvayaGonder(
 
   if (!hedefYuva) {
 
-    secimKilidi =
-      false;
+    secimKilidi = false;
 
     return;
 
@@ -1565,33 +1770,14 @@ function kartiYuvayaGonder(
   Object.assign(
     ucanKart.style,
     {
-      position:
-        "fixed",
-
-      left:
-        kartRect.left +
-        "px",
-
-      top:
-        kartRect.top +
-        "px",
-
-      width:
-        kartRect.width +
-        "px",
-
-      height:
-        kartRect.height +
-        "px",
-
-      zIndex:
-        9999,
-
-      pointerEvents:
-        "none",
-
-      opacity:
-        "1"
+      position: "fixed",
+      left: kartRect.left + "px",
+      top: kartRect.top + "px",
+      width: kartRect.width + "px",
+      height: kartRect.height + "px",
+      zIndex: 9999,
+      pointerEvents: "none",
+      opacity: "1"
     }
   );
 
@@ -1608,29 +1794,14 @@ function kartiYuvayaGonder(
   gsap.to(
     ucanKart,
     {
-      left:
-        yuvaRect.left,
-
-      top:
-        yuvaRect.top,
-
-      width:
-        yuvaRect.width,
-
-      height:
-        yuvaRect.height,
-
-      rotation:
-        0,
-
-      opacity:
-        1,
-
-      duration:
-        0.65,
-
-      ease:
-        "power3.inOut",
+      left: yuvaRect.left,
+      top: yuvaRect.top,
+      width: yuvaRect.width,
+      height: yuvaRect.height,
+      rotation: 0,
+      opacity: 1,
+      duration: 0.65,
+      ease: "power3.inOut",
 
       onComplete:
         () => {
@@ -1657,8 +1828,7 @@ function kartiYuvayaGonder(
           Object.assign(
             yerlesenKart.style,
             {
-              position:
-                "absolute",
+              position: "absolute",
 
               left:
                 (
@@ -1682,26 +1852,13 @@ function kartiYuvayaGonder(
                 yuvaRect.height +
                 "px",
 
-              zIndex:
-                5,
-
-              opacity:
-                "1",
-
-              pointerEvents:
-                "auto",
-
-              cursor:
-                "pointer",
-
-              objectFit:
-                "fill",
-
-              userSelect:
-                "none",
-
-              WebkitUserDrag:
-                "none"
+              zIndex: 5,
+              opacity: "1",
+              pointerEvents: "auto",
+              cursor: "pointer",
+              objectFit: "fill",
+              userSelect: "none",
+              WebkitUserDrag: "none"
             }
           );
 
@@ -1738,9 +1895,7 @@ function kartiYuvayaGonder(
           kart.remove();
 
 
-          if (
-            slot
-          ) {
+          if (slot) {
 
             slot.classList.add(
               "bos"
@@ -1766,8 +1921,7 @@ function kartiYuvayaGonder(
           }
 
 
-          secimKilidi =
-            false;
+          secimKilidi = false;
 
 
           secimDurumunuKontrolEt();
@@ -1778,10 +1932,9 @@ function kartiYuvayaGonder(
 }
 
 
-/* =========================
-   KALAN 6 SANATÇIYI
-   ARTAN YUVAYA GÖNDER
-========================= */
+/* =====================================================
+   KALAN 6 SANATÇIYI ARTAN YUVAYA GÖNDER
+===================================================== */
 
 function kalanSanatcilariArtanYuvayaGonder() {
 
@@ -1867,40 +2020,16 @@ function kalanSanatcilariArtanYuvayaGonder() {
           Object.assign(
             ucanKart.style,
             {
-              position:
-                "absolute",
-
-              left:
-                kartLeft +
-                "px",
-
-              top:
-                kartTop +
-                "px",
-
-              width:
-                kartRect.width +
-                "px",
-
-              height:
-                kartRect.height +
-                "px",
-
-              zIndex:
-                9000 +
-                index,
-
-              pointerEvents:
-                "none",
-
-              userSelect:
-                "none",
-
-              WebkitUserDrag:
-                "none",
-
-              objectFit:
-                "fill"
+              position: "absolute",
+              left: kartLeft + "px",
+              top: kartTop + "px",
+              width: kartRect.width + "px",
+              height: kartRect.height + "px",
+              zIndex: 9000 + index,
+              pointerEvents: "none",
+              userSelect: "none",
+              WebkitUserDrag: "none",
+              objectFit: "fill"
             }
           );
 
@@ -1916,13 +2045,11 @@ function kalanSanatcilariArtanYuvayaGonder() {
 
 
           const desteKaymaX =
-            index *
-            0.8;
+            index * 0.8;
 
 
           const desteKaymaY =
-            index *
-            -0.6;
+            index * -0.6;
 
 
           gsap.to(
@@ -1949,15 +2076,9 @@ function kalanSanatcilariArtanYuvayaGonder() {
                 ) *
                 0.35,
 
-              duration:
-                0.7,
-
-              delay:
-                index *
-                0.10,
-
-              ease:
-                "power3.inOut",
+              duration: 0.7,
+              delay: index * 0.10,
+              ease: "power3.inOut",
 
               onComplete:
                 () => {
@@ -1979,8 +2100,7 @@ function kalanSanatcilariArtanYuvayaGonder() {
                   Object.assign(
                     artanKart.style,
                     {
-                      position:
-                        "absolute",
+                      position: "absolute",
 
                       left:
                         (
@@ -2004,21 +2124,11 @@ function kalanSanatcilariArtanYuvayaGonder() {
                         yuvaRect.height +
                         "px",
 
-                      zIndex:
-                        20 +
-                        index,
-
-                      pointerEvents:
-                        "none",
-
-                      userSelect:
-                        "none",
-
-                      WebkitUserDrag:
-                        "none",
-
-                      objectFit:
-                        "fill",
+                      zIndex: 20 + index,
+                      pointerEvents: "none",
+                      userSelect: "none",
+                      WebkitUserDrag: "none",
+                      objectFit: "fill",
 
                       transform:
                         `rotate(${(
@@ -2073,19 +2183,19 @@ function kalanSanatcilariArtanYuvayaGonder() {
 }
 
 
-/* =========================
+/* =====================================================
    ÖZEL KART SEÇİMİNİ BAŞLAT
-========================= */
+===================================================== */
 
 function ozelKartSeciminiBaslat() {
 
-  secilenOzelKartlar =
-    [];
+  oyunAsamasi =
+    "ozel-kart-secimi";
 
 
-  artanOzelKartlar =
-    [];
+  secilenOzelKartlar = [];
 
+  artanOzelKartlar = [];
 
   ozelKartSecimKilidi =
     false;
@@ -2163,30 +2273,16 @@ function ozelKartSeciminiBaslat() {
   gsap.fromTo(
     kart,
     {
-      opacity:
-        0,
-
-      scale:
-        0.75,
-
-      y:
-        30
+      opacity: 0,
+      scale: 0.75,
+      y: 30
     },
     {
-      opacity:
-        1,
-
-      scale:
-        1,
-
-      y:
-        0,
-
-      duration:
-        0.5,
-
-      ease:
-        "back.out(1.5)"
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      duration: 0.5,
+      ease: "back.out(1.5)"
     }
   );
 
@@ -2246,20 +2342,11 @@ function dedektifKartiniSec(
   gsap.to(
     kart,
     {
-      scale:
-        0.75,
-
-      opacity:
-        0,
-
-      y:
-        -25,
-
-      duration:
-        0.35,
-
-      ease:
-        "power2.in",
+      scale: 0.75,
+      opacity: 0,
+      y: -25,
+      duration: 0.35,
+      ease: "power2.in",
 
       onComplete:
         () => {
@@ -2372,33 +2459,17 @@ function digerOzelKartlariDiz() {
   gsap.fromTo(
     ".kapaliOzelKart",
     {
-      opacity:
-        0,
-
-      y:
-        30,
-
-      scale:
-        0.9
+      opacity: 0,
+      y: 30,
+      scale: 0.9
     },
     {
-      opacity:
-        1,
-
-      y:
-        0,
-
-      scale:
-        1,
-
-      duration:
-        0.4,
-
-      stagger:
-        0.035,
-
-      ease:
-        "power2.out"
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      duration: 0.4,
+      stagger: 0.035,
+      ease: "power2.out"
     }
   );
 }
@@ -2416,9 +2487,7 @@ function kapaliOzelKartSec(
   if (
     ozelKartSecimKilidi
   ) {
-
     return;
-
   }
 
 
@@ -2426,9 +2495,7 @@ function kapaliOzelKartSec(
     kart.dataset.secildi ===
     "evet"
   ) {
-
     return;
-
   }
 
 
@@ -2436,9 +2503,7 @@ function kapaliOzelKartSec(
     secilenOzelKartlar.length >=
     12
   ) {
-
     return;
-
   }
 
 
@@ -2465,20 +2530,11 @@ function kapaliOzelKartSec(
   gsap.to(
     kart,
     {
-      opacity:
-        0,
-
-      scale:
-        0.72,
-
-      y:
-        -15,
-
-      duration:
-        0.25,
-
-      ease:
-        "power2.in",
+      opacity: 0,
+      scale: 0.72,
+      y: -15,
+      duration: 0.25,
+      ease: "power2.in",
 
       onComplete:
         () => {
@@ -2512,10 +2568,9 @@ function kapaliOzelKartSec(
 }
 
 
-/* =========================
-   KALAN ÖZEL KARTLARI
-   ARTAN YUVAYA GÖNDER
-========================= */
+/* =====================================================
+   KALAN ÖZEL KARTLARI ARTAN YUVAYA GÖNDER
+===================================================== */
 
 function artanOzelKartlariYuvayaGonder() {
 
@@ -2531,11 +2586,9 @@ function artanOzelKartlariYuvayaGonder() {
     kalanKartlar.map(
       (kart) => (
         {
-          id:
-            kart.dataset.id,
-
-          dosya:
-            kart.dataset.dosya
+          id: kart.dataset.id,
+          tip: "ozel",
+          dosya: kart.dataset.dosya
         }
       )
     );
@@ -2562,8 +2615,7 @@ function artanOzelKartlariYuvayaGonder() {
       .getBoundingClientRect();
 
 
-  let tamamlanan =
-    0;
+  let tamamlanan = 0;
 
 
   kalanKartlar.forEach(
@@ -2591,28 +2643,13 @@ function artanOzelKartlariYuvayaGonder() {
       Object.assign(
         ucanKart.style,
         {
-          position:
-            "fixed",
-
-          left:
-            kartRect.left +
-            "px",
-
-          top:
-            kartRect.top +
-            "px",
-
-          width:
-            kartRect.width +
-            "px",
-
-          height:
-            kartRect.height +
-            "px",
-
-          zIndex:
-            9100 +
-            index
+          position: "fixed",
+          left: kartRect.left + "px",
+          top: kartRect.top + "px",
+          width: kartRect.width + "px",
+          height: kartRect.height + "px",
+          zIndex: 9100 + index,
+          pointerEvents: "none"
         }
       );
 
@@ -2627,13 +2664,11 @@ function artanOzelKartlariYuvayaGonder() {
 
 
       const desteKaymaX =
-        index *
-        0.7;
+        index * 0.7;
 
 
       const desteKaymaY =
-        index *
-        -0.55;
+        index * -0.55;
 
 
       gsap.to(
@@ -2660,8 +2695,7 @@ function artanOzelKartlariYuvayaGonder() {
             ) *
             0.28,
 
-          duration:
-            0.72,
+          duration: 0.72,
 
           delay:
             index *
@@ -2690,8 +2724,7 @@ function artanOzelKartlariYuvayaGonder() {
               Object.assign(
                 artanKart.style,
                 {
-                  position:
-                    "fixed",
+                  position: "fixed",
 
                   left:
                     (
@@ -2721,6 +2754,9 @@ function artanOzelKartlariYuvayaGonder() {
 
                   objectFit:
                     "fill",
+
+                  pointerEvents:
+                    "none",
 
                   transform:
                     `rotate(${(
@@ -2760,9 +2796,9 @@ function artanOzelKartlariYuvayaGonder() {
 }
 
 
-/* =========================
+/* =====================================================
    ÖZEL KART SEÇİMİNİ BİTİR
-========================= */
+===================================================== */
 
 function ozelKartSeciminiBitir() {
 
@@ -2795,15 +2831,1547 @@ function ozelKartSeciminiBitir() {
           "aktif"
         );
 
+
+      setTimeout(
+        () => {
+
+          ortakDesteyiHazirla();
+
+        },
+        500
+      );
+
     },
-    900
+    800
   );
 }
 
 
-/* =========================
+/* =====================================================
+   48 KARTLIK ORTAK DESTEYİ HAZIRLA
+===================================================== */
+
+function ortakDesteyiHazirla() {
+
+  oyunAsamasi =
+    "ortak-deste-hazirlaniyor";
+
+
+  ortakDesteHazir =
+    false;
+
+
+  document
+    .querySelectorAll(
+      ".ortakDesteGorselKarti"
+    )
+    .forEach(
+      (kart) =>
+        kart.remove()
+    );
+
+
+  /* 36 ESER */
+
+  const eserler =
+    eserKartlari.map(
+      (kart) => (
+        {
+          ...kart
+        }
+      )
+    );
+
+
+  /* SADECE SEÇİLEN 12 ÖZEL */
+
+  const secilenOzeller =
+    secilenOzelKartlar.map(
+      (kart) => (
+        {
+          ...kart,
+          tip: "ozel"
+        }
+      )
+    );
+
+
+  /* 36 + 12 = 48 */
+
+  ortakDeste =
+    karistir(
+      [
+        ...eserler,
+        ...secilenOzeller
+      ]
+    );
+
+
+  window.ortakDeste =
+    ortakDeste;
+
+
+  console.log(
+    "ORTAK DESTE OLUŞTU:",
+    ortakDeste
+  );
+
+
+  console.log(
+    "ORTAK DESTE KART SAYISI:",
+    ortakDeste.length
+  );
+
+
+  if (
+    ortakDeste.length !==
+    48
+  ) {
+
+    console.error(
+      "ORTAK DESTE 48 KART OLMADI!",
+      ortakDeste.length
+    );
+
+  }
+
+
+  ortakDesteAnimasyonunuBaslat();
+}
+
+
+/* =====================================================
+   ORTAK DESTE GÖRSELİNİ OLUŞTUR
+===================================================== */
+
+function ortakDesteAnimasyonunuBaslat() {
+
+  if (
+    !ortakDesteYuvasi
+  ) {
+
+    console.error(
+      "Ortak deste yuvası bulunamadı."
+    );
+
+    return;
+  }
+
+
+  secimYazisiGoster(
+    "ORTAK DESTE HAZIRLANIYOR"
+  );
+
+
+  /*
+    48 görseli üst üste koymaya gerek yok.
+
+    Gerçek deste JS tarafında 48 kart.
+
+    Görselde 10 adet kart arkası
+    deste kalınlığı hissi verecek.
+  */
+
+  const gorselKartSayisi =
+    10;
+
+
+  const yuvaRect =
+    ortakDesteYuvasi
+      .getBoundingClientRect();
+
+
+  const merkezX =
+    window.innerWidth / 2 -
+    yuvaRect.width / 2;
+
+
+  const merkezY =
+    window.innerHeight / 2 -
+    yuvaRect.height / 2;
+
+
+  let tamamlanan =
+    0;
+
+
+  for (
+    let i = 0;
+    i < gorselKartSayisi;
+    i++
+  ) {
+
+    const kart =
+      document.createElement(
+        "img"
+      );
+
+
+    kart.src =
+      "images/kart-arkasi.png";
+
+
+    kart.className =
+      "ortakDesteGorselKarti";
+
+
+    Object.assign(
+      kart.style,
+      {
+        position: "fixed",
+
+        left:
+          (
+            merkezX +
+            i * 1.2
+          ) +
+          "px",
+
+        top:
+          (
+            merkezY -
+            i * 0.8
+          ) +
+          "px",
+
+        width:
+          yuvaRect.width +
+          "px",
+
+        height:
+          yuvaRect.height +
+          "px",
+
+        zIndex:
+          9300 +
+          i,
+
+        objectFit:
+          "fill",
+
+        pointerEvents:
+          "none",
+
+        userSelect:
+          "none",
+
+        WebkitUserDrag:
+          "none",
+
+        filter:
+          "drop-shadow(0 7px 6px rgba(0,0,0,0.45))"
+      }
+    );
+
+
+    document.body.appendChild(
+      kart
+    );
+
+
+    gsap.fromTo(
+      kart,
+      {
+        opacity: 0,
+        scale: 0.75,
+
+        rotation:
+          -12 +
+          Math.random() *
+          24
+      },
+      {
+        opacity: 1,
+        scale: 1,
+
+        rotation:
+          (
+            i -
+            gorselKartSayisi / 2
+          ) *
+          0.3,
+
+        duration: 0.35,
+
+        delay:
+          i *
+          0.04,
+
+        ease:
+          "back.out(1.4)"
+      }
+    );
+
+  }
+
+
+  const kartlar =
+    Array.from(
+      document.querySelectorAll(
+        ".ortakDesteGorselKarti"
+      )
+    );
+
+
+  setTimeout(
+    () => {
+
+      /*
+        Ortada küçük shuffle hissi.
+      */
+
+      kartlar.forEach(
+        (kart, index) => {
+
+          gsap.to(
+            kart,
+            {
+              x:
+                (
+                  index %
+                  2 ===
+                  0
+                )
+                  ? -35
+                  : 35,
+
+              rotation:
+                (
+                  index %
+                  2 ===
+                  0
+                )
+                  ? -5
+                  : 5,
+
+              duration:
+                0.28,
+
+              delay:
+                index *
+                0.025,
+
+              yoyo:
+                true,
+
+              repeat:
+                1,
+
+              ease:
+                "power2.inOut"
+            }
+          );
+
+        }
+      );
+
+    },
+    500
+  );
+
+
+  setTimeout(
+    () => {
+
+      kartlar.forEach(
+        (kart, index) => {
+
+          gsap.to(
+            kart,
+            {
+              left:
+                yuvaRect.left +
+                index *
+                0.6,
+
+              top:
+                yuvaRect.top -
+                index *
+                0.45,
+
+              width:
+                yuvaRect.width,
+
+              height:
+                yuvaRect.height,
+
+              x: 0,
+
+              rotation:
+                (
+                  index -
+                  4.5
+                ) *
+                0.18,
+
+              duration:
+                0.75,
+
+              delay:
+                index *
+                0.035,
+
+              ease:
+                "power3.inOut",
+
+              onComplete:
+                () => {
+
+                  tamamlanan++;
+
+
+                  if (
+                    tamamlanan ===
+                    kartlar.length
+                  ) {
+
+                    ortakDesteHazir =
+                      true;
+
+
+                    oyunAsamasi =
+                      "baslangic-zari";
+
+
+                    secimYazisiniGizle();
+
+
+                    console.log(
+                      "48 kartlık ortak deste hazır."
+                    );
+
+
+                    setTimeout(
+                      () => {
+
+                        baslangicZarSisteminiBaslat();
+
+                      },
+                      500
+                    );
+
+                  }
+
+                }
+            }
+          );
+
+        }
+      );
+
+    },
+    1200
+  );
+}
+
+
+/* =====================================================
+   ZAR STİLLERİNİ JS İÇİNDEN EKLE
+===================================================== */
+
+function zarStilleriniEkle() {
+
+  if (
+    document.getElementById(
+      "zarSistemiStilleri"
+    )
+  ) {
+    return;
+  }
+
+
+  const stil =
+    document.createElement(
+      "style"
+    );
+
+
+  stil.id =
+    "zarSistemiStilleri";
+
+
+  stil.textContent = `
+
+    #baslangicZarKatmani {
+      position: absolute;
+      inset: 0;
+      z-index: 12000;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: rgba(0, 0, 0, 0.60);
+
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+    }
+
+
+    #baslangicZarKutusu {
+      position: relative;
+
+      width: min(58%, 1050px);
+
+      padding: 3.2% 4%;
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(244, 227, 187, 0.98),
+          rgba(218, 188, 126, 0.98)
+        );
+
+      border: 4px solid #8a621e;
+
+      border-radius: 24px;
+
+      box-shadow:
+        0 20px 60px
+        rgba(0, 0, 0, 0.55);
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      text-align: center;
+
+      color: #5b3d11;
+    }
+
+
+    #zarBaslik {
+      font-size:
+        clamp(
+          22px,
+          2.2vw,
+          44px
+        );
+
+      font-weight: bold;
+
+      margin-bottom: 3%;
+
+      letter-spacing: 1px;
+    }
+
+
+    #zarAciklama {
+      font-size:
+        clamp(
+          14px,
+          1.25vw,
+          24px
+        );
+
+      font-weight: bold;
+
+      margin-bottom: 4%;
+    }
+
+
+    #zarOyuncular {
+      display: flex;
+
+      gap: 5%;
+
+      justify-content: center;
+      align-items: stretch;
+    }
+
+
+    .zarOyuncuPaneli {
+      flex: 1;
+
+      padding: 4%;
+
+      background:
+        rgba(255, 250, 235, 0.72);
+
+      border:
+        2px solid
+        rgba(122, 90, 22, 0.55);
+
+      border-radius: 18px;
+
+      transition:
+        transform 0.25s ease,
+        opacity 0.25s ease,
+        filter 0.25s ease;
+    }
+
+
+    .zarOyuncuPaneli.pasif {
+      opacity: 0.50;
+
+      filter:
+        grayscale(0.35);
+    }
+
+
+    .zarOyuncuPaneli.aktif {
+      transform:
+        scale(1.04);
+
+      box-shadow:
+        0 8px 24px
+        rgba(0, 0, 0, 0.20);
+    }
+
+
+    .zarOyuncuAdi {
+      font-size:
+        clamp(
+          15px,
+          1.35vw,
+          26px
+        );
+
+      font-weight: bold;
+
+      margin-bottom: 8%;
+    }
+
+
+    .zarGorseli {
+      width:
+        clamp(
+          70px,
+          8vw,
+          145px
+        );
+
+      height:
+        clamp(
+          70px,
+          8vw,
+          145px
+        );
+
+      margin:
+        0 auto 8%;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      background: #fff7dc;
+
+      border:
+        4px solid #9d742b;
+
+      border-radius: 20%;
+
+      box-shadow:
+        0 8px 18px
+        rgba(0, 0, 0, 0.30);
+
+      font-size:
+        clamp(
+          55px,
+          7vw,
+          125px
+        );
+
+      line-height: 1;
+
+      user-select: none;
+    }
+
+
+    .zarAtButonu {
+      padding:
+        12px 24px;
+
+      border: none;
+
+      border-radius: 12px;
+
+      background:
+        #6b4916;
+
+      color: #fff4d4;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size:
+        clamp(
+          13px,
+          1vw,
+          20px
+        );
+
+      font-weight: bold;
+
+      cursor: pointer;
+
+      touch-action:
+        manipulation;
+
+      -webkit-tap-highlight-color:
+        transparent;
+
+      user-select: none;
+
+      transition:
+        transform 0.12s ease,
+        filter 0.12s ease,
+        opacity 0.2s ease;
+    }
+
+
+    .zarAtButonu:active {
+      transform:
+        scale(0.94)
+        translateY(3px);
+
+      filter:
+        brightness(0.82);
+    }
+
+
+    .zarAtButonu:disabled {
+      opacity: 0.35;
+
+      cursor: default;
+    }
+
+
+    .zarSonucMetni {
+      min-height: 1.4em;
+
+      margin-top: 6%;
+
+      font-size:
+        clamp(
+          14px,
+          1.1vw,
+          22px
+        );
+
+      font-weight: bold;
+    }
+
+
+    #zarGenelSonuc {
+      min-height: 1.5em;
+
+      margin-top: 4%;
+
+      font-size:
+        clamp(
+          17px,
+          1.5vw,
+          30px
+        );
+
+      font-weight: bold;
+    }
+
+
+    @media (max-aspect-ratio: 4 / 3) {
+
+      #baslangicZarKutusu {
+        width: 66%;
+      }
+
+    }
+
+  `;
+
+
+  document.head.appendChild(
+    stil
+  );
+}
+
+
+/* =====================================================
+   BAŞLANGIÇ ZAR SİSTEMİNİ BAŞLAT
+===================================================== */
+
+function baslangicZarSisteminiBaslat() {
+
+  oyunAsamasi =
+    "baslangic-zari";
+
+
+  oyuncu1ZarSonucu =
+    null;
+
+  oyuncu2ZarSonucu =
+    null;
+
+  zarSirasi =
+    1;
+
+  zarAtisKilidi =
+    false;
+
+
+  zarStilleriniEkle();
+
+
+  const eskiKatman =
+    document.getElementById(
+      "baslangicZarKatmani"
+    );
+
+
+  if (eskiKatman) {
+
+    eskiKatman.remove();
+
+  }
+
+
+  const katman =
+    document.createElement(
+      "div"
+    );
+
+
+  katman.id =
+    "baslangicZarKatmani";
+
+
+  katman.innerHTML = `
+
+    <div id="baslangicZarKutusu">
+
+      <div id="zarBaslik">
+        BAŞLANGIÇ ZARI
+      </div>
+
+      <div id="zarAciklama">
+        En yüksek zarı atan oyuncu oyuna başlayacak.
+      </div>
+
+      <div id="zarOyuncular">
+
+        <div
+          id="zarOyuncu1Panel"
+          class="zarOyuncuPaneli aktif"
+        >
+
+          <div class="zarOyuncuAdi">
+            1. OYUNCU
+          </div>
+
+          <div
+            id="zarGorsel1"
+            class="zarGorseli"
+          >
+            ⚀
+          </div>
+
+          <button
+            id="zarAtButonu1"
+            class="zarAtButonu"
+          >
+            ZAR AT
+          </button>
+
+          <div
+            id="zarSonuc1"
+            class="zarSonucMetni"
+          ></div>
+
+        </div>
+
+
+        <div
+          id="zarOyuncu2Panel"
+          class="zarOyuncuPaneli pasif"
+        >
+
+          <div class="zarOyuncuAdi">
+            2. OYUNCU
+          </div>
+
+          <div
+            id="zarGorsel2"
+            class="zarGorseli"
+          >
+            ⚀
+          </div>
+
+          <button
+            id="zarAtButonu2"
+            class="zarAtButonu"
+            disabled
+          >
+            ZAR AT
+          </button>
+
+          <div
+            id="zarSonuc2"
+            class="zarSonucMetni"
+          ></div>
+
+        </div>
+
+      </div>
+
+      <div id="zarGenelSonuc"></div>
+
+    </div>
+
+  `;
+
+
+  oynanisEkrani.appendChild(
+    katman
+  );
+
+
+  const buton1 =
+    document.getElementById(
+      "zarAtButonu1"
+    );
+
+
+  const buton2 =
+    document.getElementById(
+      "zarAtButonu2"
+    );
+
+
+  buton1.addEventListener(
+    "click",
+    () => {
+
+      baslangicZariAt(
+        1
+      );
+
+    }
+  );
+
+
+  buton2.addEventListener(
+    "click",
+    () => {
+
+      baslangicZariAt(
+        2
+      );
+
+    }
+  );
+
+
+  gsap.fromTo(
+    katman,
+    {
+      opacity: 0
+    },
+    {
+      opacity: 1,
+      duration: 0.35
+    }
+  );
+
+
+  gsap.fromTo(
+    "#baslangicZarKutusu",
+    {
+      scale: 0.82,
+      y: 35
+    },
+    {
+      scale: 1,
+      y: 0,
+      duration: 0.5,
+      ease: "back.out(1.5)"
+    }
+  );
+}
+
+
+/* =====================================================
+   ZAR AT
+===================================================== */
+
+function baslangicZariAt(
+  oyuncu
+) {
+
+  if (
+    zarAtisKilidi
+  ) {
+    return;
+  }
+
+
+  if (
+    oyuncu !==
+    zarSirasi
+  ) {
+    return;
+  }
+
+
+  zarAtisKilidi =
+    true;
+
+
+  butonSesiCal();
+
+
+  const zarGorseli =
+    document.getElementById(
+      `zarGorsel${oyuncu}`
+    );
+
+
+  const buton =
+    document.getElementById(
+      `zarAtButonu${oyuncu}`
+    );
+
+
+  const sonucMetni =
+    document.getElementById(
+      `zarSonuc${oyuncu}`
+    );
+
+
+  buton.disabled =
+    true;
+
+
+  sonucMetni.textContent =
+    "Atılıyor...";
+
+
+  const zarSembolleri = [
+    "⚀",
+    "⚁",
+    "⚂",
+    "⚃",
+    "⚄",
+    "⚅"
+  ];
+
+
+  let sayac = 0;
+
+
+  const hizliDegisim =
+    setInterval(
+      () => {
+
+        const rastgele =
+          Math.floor(
+            Math.random() *
+            6
+          );
+
+
+        zarGorseli.textContent =
+          zarSembolleri[
+            rastgele
+          ];
+
+
+        sayac++;
+
+
+        gsap.fromTo(
+          zarGorseli,
+          {
+            rotation:
+              -18,
+
+            scale:
+              0.90,
+
+            y:
+              -6
+          },
+          {
+            rotation:
+              18,
+
+            scale:
+              1.06,
+
+            y:
+              0,
+
+            duration:
+              0.10,
+
+            ease:
+              "power1.inOut"
+          }
+        );
+
+
+        if (
+          sayac >=
+          14
+        ) {
+
+          clearInterval(
+            hizliDegisim
+          );
+
+
+          zarAtisiniBitir(
+            oyuncu,
+            zarGorseli,
+            sonucMetni,
+            zarSembolleri
+          );
+
+        }
+
+      },
+      80
+    );
+}
+
+
+/* =====================================================
+   ZAR ATIŞINI BİTİR
+===================================================== */
+
+function zarAtisiniBitir(
+  oyuncu,
+  zarGorseli,
+  sonucMetni,
+  zarSembolleri
+) {
+
+  const sonuc =
+    Math.floor(
+      Math.random() *
+      6
+    ) +
+    1;
+
+
+  zarGorseli.textContent =
+    zarSembolleri[
+      sonuc -
+      1
+    ];
+
+
+  sonucMetni.textContent =
+    `${sonuc} GELDİ`;
+
+
+  gsap.fromTo(
+    zarGorseli,
+    {
+      scale: 1.35,
+      rotation: -25,
+      y: -25
+    },
+    {
+      scale: 1,
+      rotation: 0,
+      y: 0,
+
+      duration: 0.55,
+
+      ease:
+        "bounce.out"
+    }
+  );
+
+
+  if (
+    oyuncu === 1
+  ) {
+
+    oyuncu1ZarSonucu =
+      sonuc;
+
+
+    zarSirasi =
+      2;
+
+
+    const panel1 =
+      document.getElementById(
+        "zarOyuncu1Panel"
+      );
+
+
+    const panel2 =
+      document.getElementById(
+        "zarOyuncu2Panel"
+      );
+
+
+    panel1
+      .classList
+      .remove("aktif");
+
+
+    panel1
+      .classList
+      .add("pasif");
+
+
+    panel2
+      .classList
+      .remove("pasif");
+
+
+    panel2
+      .classList
+      .add("aktif");
+
+
+    const buton2 =
+      document.getElementById(
+        "zarAtButonu2"
+      );
+
+
+    buton2.disabled =
+      false;
+
+
+    zarAtisKilidi =
+      false;
+
+
+    return;
+
+  }
+
+
+  oyuncu2ZarSonucu =
+    sonuc;
+
+
+  zarAtisKilidi =
+    false;
+
+
+  baslangicZarlariniKarsilastir();
+}
+
+
+/* =====================================================
+   ZAR SONUÇLARINI KARŞILAŞTIR
+===================================================== */
+
+function baslangicZarlariniKarsilastir() {
+
+  const sonucYazisi =
+    document.getElementById(
+      "zarGenelSonuc"
+    );
+
+
+  if (
+    oyuncu1ZarSonucu ===
+    oyuncu2ZarSonucu
+  ) {
+
+    sonucYazisi.textContent =
+      `EŞİTLİK! ${oyuncu1ZarSonucu} - ${oyuncu2ZarSonucu} — TEKRAR ATILIYOR`;
+
+
+    setTimeout(
+      () => {
+
+        baslangicZarlariniSifirla();
+
+      },
+      1400
+    );
+
+
+    return;
+  }
+
+
+  if (
+    oyuncu1ZarSonucu >
+    oyuncu2ZarSonucu
+  ) {
+
+    aktifOyuncu =
+      1;
+
+  } else {
+
+    aktifOyuncu =
+      2;
+
+  }
+
+
+  sonucYazisi.textContent =
+    `${aktifOyuncu}. OYUNCU BAŞLIYOR!`;
+
+
+  oyunAsamasi =
+    "kart-cekme";
+
+
+  console.log(
+    "İlk başlayan oyuncu:",
+    aktifOyuncu
+  );
+
+
+  setTimeout(
+    () => {
+
+      baslangicZarEkraniniKapat();
+
+    },
+    1500
+  );
+}
+
+
+/* =====================================================
+   EŞİTLİKTE ZARLARI SIFIRLA
+===================================================== */
+
+function baslangicZarlariniSifirla() {
+
+  oyuncu1ZarSonucu =
+    null;
+
+  oyuncu2ZarSonucu =
+    null;
+
+  zarSirasi =
+    1;
+
+  zarAtisKilidi =
+    false;
+
+
+  const zar1 =
+    document.getElementById(
+      "zarGorsel1"
+    );
+
+
+  const zar2 =
+    document.getElementById(
+      "zarGorsel2"
+    );
+
+
+  const sonuc1 =
+    document.getElementById(
+      "zarSonuc1"
+    );
+
+
+  const sonuc2 =
+    document.getElementById(
+      "zarSonuc2"
+    );
+
+
+  const genel =
+    document.getElementById(
+      "zarGenelSonuc"
+    );
+
+
+  const buton1 =
+    document.getElementById(
+      "zarAtButonu1"
+    );
+
+
+  const buton2 =
+    document.getElementById(
+      "zarAtButonu2"
+    );
+
+
+  const panel1 =
+    document.getElementById(
+      "zarOyuncu1Panel"
+    );
+
+
+  const panel2 =
+    document.getElementById(
+      "zarOyuncu2Panel"
+    );
+
+
+  zar1.textContent =
+    "⚀";
+
+
+  zar2.textContent =
+    "⚀";
+
+
+  sonuc1.textContent =
+    "";
+
+
+  sonuc2.textContent =
+    "";
+
+
+  genel.textContent =
+    "";
+
+
+  buton1.disabled =
+    false;
+
+
+  buton2.disabled =
+    true;
+
+
+  panel1
+    .classList
+    .remove("pasif");
+
+
+  panel1
+    .classList
+    .add("aktif");
+
+
+  panel2
+    .classList
+    .remove("aktif");
+
+
+  panel2
+    .classList
+    .add("pasif");
+}
+
+
+/* =====================================================
+   BAŞLANGIÇ ZAR EKRANINI KAPAT
+===================================================== */
+
+function baslangicZarEkraniniKapat() {
+
+  const katman =
+    document.getElementById(
+      "baslangicZarKatmani"
+    );
+
+
+  if (!katman) {
+
+    kartCekmeAsamasiniBaslat();
+
+    return;
+  }
+
+
+  gsap.to(
+    katman,
+    {
+      opacity: 0,
+      duration: 0.35,
+
+      onComplete:
+        () => {
+
+          katman.remove();
+
+
+          kartCekmeAsamasiniBaslat();
+
+        }
+    }
+  );
+}
+
+
+/* =====================================================
+   KART ÇEKME AŞAMASINA GEÇ
+===================================================== */
+
+function kartCekmeAsamasiniBaslat() {
+
+  oyunAsamasi =
+    "kart-cekme";
+
+
+  secimYazisiGoster(
+    `${aktifOyuncu}. OYUNCU — ORTAK DESTEDEN KART ÇEK`
+  );
+
+
+  /*
+    ŞİMDİLİK burada duruyoruz.
+
+    Bir sonraki aşamada
+    ortak destenin üst kartına
+    tıklayınca:
+
+    ortakDeste.pop()
+
+    çalışacak.
+
+    Sonra kart büyük açılacak
+    ve kartın türüne göre
+    işlem yapacağız.
+  */
+
+
+  document
+    .querySelectorAll(
+      ".ortakDesteGorselKarti"
+    )
+    .forEach(
+      (kart) => {
+
+        kart.style.pointerEvents =
+          "auto";
+
+        kart.style.cursor =
+          "pointer";
+
+      }
+    );
+
+
+  console.log(
+    "Kart çekme aşaması başladı."
+  );
+
+
+  console.log(
+    "Aktif oyuncu:",
+    aktifOyuncu
+  );
+
+
+  console.log(
+    "Ortak destede kalan kart:",
+    ortakDeste.length
+  );
+}
+
+
+/* =====================================================
    KART ÖNİZLEME
-========================= */
+===================================================== */
 
 function kartOnizlemeAc(
   kaynakKart
@@ -2812,9 +4380,7 @@ function kartOnizlemeAc(
   if (
     onizlemeAcik
   ) {
-
     return;
-
   }
 
 
@@ -2862,8 +4428,7 @@ function kartOnizlemeAc(
   Object.assign(
     onizlemeKart.style,
     {
-      position:
-        "fixed",
+      position: "fixed",
 
       left:
         kaynakRect.left +
@@ -2881,20 +4446,11 @@ function kartOnizlemeAc(
         kaynakRect.height +
         "px",
 
-      zIndex:
-        10001,
-
-      opacity:
-        "1",
-
-      cursor:
-        "pointer",
-
-      userSelect:
-        "none",
-
-      WebkitUserDrag:
-        "none"
+      zIndex: 10001,
+      opacity: "1",
+      cursor: "pointer",
+      userSelect: "none",
+      WebkitUserDrag: "none"
     }
   );
 
@@ -2963,15 +4519,11 @@ function kartOnizlemeAc(
   gsap.fromTo(
     katman,
     {
-      opacity:
-        0
+      opacity: 0
     },
     {
-      opacity:
-        1,
-
-      duration:
-        0.3
+      opacity: 1,
+      duration: 0.3
     }
   );
 
@@ -2979,26 +4531,13 @@ function kartOnizlemeAc(
   gsap.to(
     onizlemeKart,
     {
-      left:
-        hedefLeft,
-
-      top:
-        hedefTop,
-
-      width:
-        hedefGenislik,
-
-      height:
-        hedefYukseklik,
-
-      rotation:
-        0,
-
-      duration:
-        0.55,
-
-      ease:
-        "back.out(1.25)"
+      left: hedefLeft,
+      top: hedefTop,
+      width: hedefGenislik,
+      height: hedefYukseklik,
+      rotation: 0,
+      duration: 0.55,
+      ease: "back.out(1.25)"
     }
   );
 
@@ -3008,9 +4547,7 @@ function kartOnizlemeAc(
     if (
       !onizlemeAcik
     ) {
-
       return;
-
     }
 
 
@@ -3029,11 +4566,8 @@ function kartOnizlemeAc(
     gsap.to(
       katman,
       {
-        opacity:
-          0,
-
-        duration:
-          0.25
+        opacity: 0,
+        duration: 0.25
       }
     );
 
@@ -3053,8 +4587,7 @@ function kartOnizlemeAc(
         height:
           guncelKaynakRect.height,
 
-        duration:
-          0.45,
+        duration: 0.45,
 
         ease:
           "power3.inOut",
@@ -3067,7 +4600,6 @@ function kartOnizlemeAc(
 
 
             onizlemeKart.remove();
-
 
             katman.remove();
 
@@ -3083,7 +4615,6 @@ function kartOnizlemeAc(
     (event) => {
 
       event.stopPropagation();
-
 
       onizlemeyiKapat();
 
@@ -3102,9 +4633,9 @@ function kartOnizlemeAc(
 }
 
 
-/* =========================
+/* =====================================================
    SANATÇI SEÇİM DURUMU
-========================= */
+===================================================== */
 
 function secimDurumunuKontrolEt() {
 
@@ -3169,25 +4700,18 @@ function secimDurumunuKontrolEt() {
 }
 
 
-/* =========================
+/* =====================================================
    DEVAM
-========================= */
+===================================================== */
 
 devamButonu.addEventListener(
   "click",
   () => {
 
-    /*
-      HER ŞEY YÜKLENMEDEN
-      ASLA DEVAM ETTİRME.
-    */
-
     if (
       !oyunHazir
     ) {
-
       return;
-
     }
 
 
@@ -3244,9 +4768,9 @@ devamButonu.addEventListener(
 );
 
 
-/* =========================
+/* =====================================================
    BAŞLA
-========================= */
+===================================================== */
 
 baslaButonu.addEventListener(
   "click",
@@ -3317,9 +4841,9 @@ baslaButonu.addEventListener(
 );
 
 
-/* =========================
+/* =====================================================
    NASIL OYNANIR
-========================= */
+===================================================== */
 
 nasilOynanirButonu.addEventListener(
   "click",
@@ -3336,8 +4860,8 @@ nasilOynanirButonu.addEventListener(
 );
 
 
-/* =========================
+/* =====================================================
    OYUNU YÜKLE
-========================= */
+===================================================== */
 
 oyunuOncedenYukle();
