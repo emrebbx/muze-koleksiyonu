@@ -516,7 +516,10 @@ let oyuncu2DepoKartlari = [];
 
 let bekleyenOzelKart = null;
 let copDeste = [];
+let oyuncu1OzelKartlari = [];
+let oyuncu2OzelKartlari = [];
 
+let ekstraKartCekmeSayisi = 0;
 
 /* =========================
    SES
@@ -4733,19 +4736,20 @@ function cekilenKartiBuyukGoster(
                 oyun burada bekler.
               */
 
-              bekleyenOzelKart =
-                kartBilgisi;
+bekleyenOzelKart =
+  kartBilgisi;
 
 
-              secimYazisiGoster(
-                "ÖZEL KART ÇEKİLDİ"
-              );
+secimYazisiGoster(
+  "ÖZEL KART ÇEKİLDİ"
+);
 
 
-              console.log(
-                "Özel kart sistemi daha sonra bağlanacak:",
-                kartBilgisi
-              );
+ozelKartKararlariniGoster(
+  kartBilgisi,
+  kart,
+  katman
+);
 
             },
             850
@@ -5564,12 +5568,900 @@ function eseriCopeGonder(
 }
 
 
+/* =====================================================
+   ÖZEL KART KARAR EKRANI
+===================================================== */
 
+function ozelKartKararlariniGoster(
+  kartBilgisi,
+  kartElementi,
+  katman
+) {
+
+  const eskiButonlar =
+    document.getElementById(
+      "ozelKartKararButonlari"
+    );
+
+
+  if (eskiButonlar) {
+    eskiButonlar.remove();
+  }
+
+
+  const kutu =
+    document.createElement(
+      "div"
+    );
+
+
+  kutu.id =
+    "ozelKartKararButonlari";
+
+
+  Object.assign(
+    kutu.style,
+    {
+      position: "fixed",
+
+      left: "50%",
+      bottom: "6%",
+
+      transform:
+        "translateX(-50%)",
+
+      display: "flex",
+
+      gap: "14px",
+
+      justifyContent:
+        "center",
+
+      alignItems:
+        "center",
+
+      zIndex:
+        "60010",
+
+      pointerEvents:
+        "auto"
+    }
+  );
+
+
+  document.body.appendChild(
+    kutu
+  );
+
+
+  function butonOlustur(
+    metin
+  ) {
+
+    const buton =
+      document.createElement(
+        "button"
+      );
+
+
+    buton.textContent =
+      metin;
+
+
+    Object.assign(
+      buton.style,
+      {
+        padding:
+          "14px 24px",
+
+        border:
+          "2px solid #c7a15a",
+
+        borderRadius:
+          "12px",
+
+        background:
+          "#3a2512",
+
+        color:
+          "#f5e7c4",
+
+        fontFamily:
+          'Georgia, "Times New Roman", serif',
+
+        fontSize:
+          "clamp(13px, 1.05vw, 20px)",
+
+        fontWeight:
+          "bold",
+
+        cursor:
+          "pointer",
+
+        touchAction:
+          "manipulation",
+
+        WebkitTapHighlightColor:
+          "transparent",
+
+        userSelect:
+          "none",
+
+        boxShadow:
+          "0 6px 15px rgba(0,0,0,0.4)"
+      }
+    );
+
+
+    kutu.appendChild(
+      buton
+    );
+
+
+    return buton;
+  }
+
+
+  const kullanButonu =
+    butonOlustur(
+      "KULLAN"
+    );
+
+
+  const yuvayaKoyButonu =
+    butonOlustur(
+      "ÖZEL KART YUVANA KOY"
+    );
+
+
+  const copeAtButonu =
+    butonOlustur(
+      "ÇÖPE AT"
+    );
+
+
+  const ozelKartlar =
+    aktifOyuncu === 1
+      ? oyuncu1OzelKartlari
+      : oyuncu2OzelKartlari;
+
+
+  /*
+    İKİ YUVA DA DOLUYSA
+    YUVAYA KOY BUTONU PASİF.
+  */
+
+  if (
+    ozelKartlar.length >= 2
+  ) {
+
+    yuvayaKoyButonu.disabled =
+      true;
+
+
+    yuvayaKoyButonu.style.opacity =
+      "0.35";
+
+
+    yuvayaKoyButonu.style.cursor =
+      "default";
+
+  }
+
+
+  kullanButonu.addEventListener(
+    "click",
+    () => {
+
+      butonSesiCal();
+
+
+      kutu.remove();
+
+
+      ozelKartiKullan(
+        kartBilgisi,
+        kartElementi,
+        katman
+      );
+
+    }
+  );
+
+
+  yuvayaKoyButonu.addEventListener(
+    "click",
+    () => {
+
+      if (
+        yuvayaKoyButonu.disabled
+      ) {
+        return;
+      }
+
+
+      butonSesiCal();
+
+
+      kutu.remove();
+
+
+      ozelKartiYuvayaGonder(
+        kartBilgisi,
+        kartElementi,
+        katman
+      );
+
+    }
+  );
+
+
+  copeAtButonu.addEventListener(
+    "click",
+    () => {
+
+      butonSesiCal();
+
+
+      kutu.remove();
+
+
+      ozelKartiCopeGonder(
+        kartBilgisi,
+        kartElementi,
+        katman,
+        true
+      );
+
+    }
+  );
+}
+
+
+/* =====================================================
+   ÖZEL KARTI KULLAN
+===================================================== */
+
+function ozelKartiKullan(
+  kartBilgisi,
+  kartElementi,
+  katman
+) {
+
+  /*
+    ŞİMDİLİK SADECE
+    +2 KART ÇEK ÇALIŞIYOR.
+  */
+
+  if (
+    kartBilgisi.id ===
+    "arti-iki-kart"
+  ) {
+
+    ekstraKartCekmeSayisi =
+      2;
+
+
+    secimYazisiGoster(
+      `${aktifOyuncu}. OYUNCU — 2 EKSTRA KART ÇEKECEK`
+    );
+
+
+    /*
+      KULLANILAN ÖZEL KART
+      ÖN YÜZÜ AÇIK ŞEKİLDE
+      ÇÖPLÜĞE GİDER.
+
+      AMA TUR HEMEN BİTMEZ.
+    */
+
+    ozelKartiCopeGonder(
+      kartBilgisi,
+      kartElementi,
+      katman,
+      false,
+      () => {
+
+        kartCekmeKilidi =
+          false;
+
+
+        kartCekmeAsamasiniBaslat();
+
+      }
+    );
+
+
+    return;
+  }
+
+
+  /*
+    HENÜZ KODLANMAMIŞ
+    ÖZEL KARTLAR.
+
+    Şimdilik kullanmaya basılırsa
+    çöpe gidip tur biter.
+  */
+
+  console.log(
+    "Henüz özel etkisi yazılmadı:",
+    kartBilgisi.id
+  );
+
+
+  ozelKartiCopeGonder(
+    kartBilgisi,
+    kartElementi,
+    katman,
+    true
+  );
+}
+
+
+/* =====================================================
+   ÖZEL KARTI YUVAYA GÖNDER
+===================================================== */
+
+function ozelKartiYuvayaGonder(
+  kartBilgisi,
+  kartElementi,
+  katman
+) {
+
+  const oyuncuOzelKartlari =
+    aktifOyuncu === 1
+      ? oyuncu1OzelKartlari
+      : oyuncu2OzelKartlari;
+
+
+  if (
+    oyuncuOzelKartlari.length >=
+    2
+  ) {
+
+    secimYazisiGoster(
+      "ÖZEL KART YUVAN DOLU"
+    );
+
+
+    ozelKartKararlariniGoster(
+      kartBilgisi,
+      kartElementi,
+      katman
+    );
+
+
+    return;
+  }
+
+
+  let hedefYuva;
+
+
+  if (
+    aktifOyuncu === 1
+  ) {
+
+    hedefYuva =
+      oyuncuOzelKartlari.length === 0
+
+        ? document.getElementById(
+            "altOzelKartBir"
+          )
+
+        : document.getElementById(
+            "altOzelKartIki"
+          );
+
+  } else {
+
+    hedefYuva =
+      oyuncuOzelKartlari.length === 0
+
+        ? document.getElementById(
+            "ustOzelKartBir"
+          )
+
+        : document.getElementById(
+            "ustOzelKartIki"
+          );
+
+  }
+
+
+  if (!hedefYuva) {
+
+    ozelKartiCopeGonder(
+      kartBilgisi,
+      kartElementi,
+      katman,
+      true
+    );
+
+
+    return;
+  }
+
+
+  oyuncuOzelKartlari.push(
+    kartBilgisi
+  );
+
+
+  const hedefRect =
+    hedefYuva
+      .getBoundingClientRect();
+
+
+  gsap.to(
+    katman,
+    {
+      opacity: 0,
+      duration: 0.25
+    }
+  );
+
+
+  gsap.to(
+    kartElementi,
+    {
+      left:
+        hedefRect.left,
+
+      top:
+        hedefRect.top,
+
+      width:
+        hedefRect.width,
+
+      height:
+        hedefRect.height,
+
+      rotation:
+        0,
+
+      duration:
+        0.7,
+
+      ease:
+        "power3.inOut",
+
+      onComplete:
+        () => {
+
+          const sahneRect =
+            oynanisEkrani
+              .getBoundingClientRect();
+
+
+          const kapaliKart =
+            document.createElement(
+              "img"
+            );
+
+
+          kapaliKart.src =
+            "images/kart-arkasi.png";
+
+
+          kapaliKart.className =
+            "oyuncuOzelKartKarti";
+
+
+          kapaliKart.dataset.id =
+            kartBilgisi.id;
+
+
+          kapaliKart.dataset.gercekDosya =
+            kartBilgisi.dosya;
+
+
+          Object.assign(
+            kapaliKart.style,
+            {
+              position:
+                "absolute",
+
+              left:
+                (
+                  hedefRect.left -
+                  sahneRect.left
+                ) +
+                "px",
+
+              top:
+                (
+                  hedefRect.top -
+                  sahneRect.top
+                ) +
+                "px",
+
+              width:
+                hedefRect.width +
+                "px",
+
+              height:
+                hedefRect.height +
+                "px",
+
+              zIndex:
+                "9",
+
+              objectFit:
+                "fill",
+
+              cursor:
+                "pointer",
+
+              pointerEvents:
+                "auto",
+
+              userSelect:
+                "none",
+
+              WebkitUserDrag:
+                "none",
+
+              filter:
+                "drop-shadow(0 6px 6px rgba(0,0,0,0.45))"
+            }
+          );
+
+
+          kapaliKart.addEventListener(
+            "click",
+            (event) => {
+
+              event.stopPropagation();
+
+
+              kartOnizlemeAc(
+                kapaliKart,
+                kartBilgisi.dosya
+              );
+
+            }
+          );
+
+
+          oynanisEkrani
+            .appendChild(
+              kapaliKart
+            );
+
+
+          kartElementi.remove();
+
+          katman.remove();
+
+
+          bekleyenOzelKart =
+            null;
+
+
+          turuBitir();
+
+        }
+    }
+  );
+}
+
+
+/* =====================================================
+   ÖZEL KARTI ÇÖPE GÖNDER
+===================================================== */
+
+function ozelKartiCopeGonder(
+  kartBilgisi,
+  kartElementi,
+  katman,
+  turBitsin = true,
+  tamamlaninca = null
+) {
+
+  const copYuvasi =
+    document.getElementById(
+      "copYuvasi"
+    );
+
+
+  if (!copYuvasi) {
+
+    kartElementi.remove();
+
+    katman.remove();
+
+
+    if (tamamlaninca) {
+      tamamlaninca();
+    } else if (turBitsin) {
+      turuBitir();
+    }
+
+
+    return;
+  }
+
+
+  const hedefRect =
+    copYuvasi
+      .getBoundingClientRect();
+
+
+  const sahneRect =
+    oynanisEkrani
+      .getBoundingClientRect();
+
+
+  copDeste.push(
+    kartBilgisi
+  );
+
+
+  window.copDeste =
+    copDeste;
+
+
+  const copIndex =
+    copDeste.length - 1;
+
+
+  const kaymaX =
+    copIndex *
+    0.45;
+
+
+  const kaymaY =
+    copIndex *
+    -0.35;
+
+
+  gsap.to(
+    katman,
+    {
+      opacity:
+        0,
+
+      duration:
+        0.25
+    }
+  );
+
+
+  gsap.to(
+    kartElementi,
+    {
+      left:
+        hedefRect.left +
+        kaymaX,
+
+      top:
+        hedefRect.top +
+        kaymaY,
+
+      width:
+        hedefRect.width,
+
+      height:
+        hedefRect.height,
+
+      rotation:
+        (
+          copIndex %
+          5 -
+          2
+        ) *
+        0.35,
+
+      duration:
+        0.65,
+
+      ease:
+        "power3.inOut",
+
+      onComplete:
+        () => {
+
+          const copKarti =
+            document.createElement(
+              "img"
+            );
+
+
+          copKarti.src =
+            kartBilgisi.dosya;
+
+
+          copKarti.className =
+            "coptekiKart";
+
+
+          copKarti.dataset.id =
+            kartBilgisi.id;
+
+
+          copKarti.dataset.tip =
+            "ozel";
+
+
+          Object.assign(
+            copKarti.style,
+            {
+              position:
+                "absolute",
+
+              left:
+                (
+                  hedefRect.left -
+                  sahneRect.left +
+                  kaymaX
+                ) +
+                "px",
+
+              top:
+                (
+                  hedefRect.top -
+                  sahneRect.top +
+                  kaymaY
+                ) +
+                "px",
+
+              width:
+                hedefRect.width +
+                "px",
+
+              height:
+                hedefRect.height +
+                "px",
+
+              zIndex:
+                40 +
+                copIndex,
+
+              objectFit:
+                "fill",
+
+              cursor:
+                "pointer",
+
+              pointerEvents:
+                "auto",
+
+              userSelect:
+                "none",
+
+              WebkitUserDrag:
+                "none",
+
+              transform:
+                `rotate(${(
+                  copIndex % 5 -
+                  2
+                ) * 0.35}deg)`,
+
+              filter:
+                "drop-shadow(0 5px 5px rgba(0,0,0,0.42))"
+            }
+          );
+
+
+          copKarti.addEventListener(
+            "click",
+            (event) => {
+
+              event.stopPropagation();
+
+
+              kartOnizlemeAc(
+                copKarti
+              );
+
+            }
+          );
+
+
+          oynanisEkrani
+            .appendChild(
+              copKarti
+            );
+
+
+          kartElementi.remove();
+
+          katman.remove();
+
+
+          bekleyenOzelKart =
+            null;
+
+
+          if (tamamlaninca) {
+
+            tamamlaninca();
+
+            return;
+          }
+
+
+          if (turBitsin) {
+
+            turuBitir();
+
+          }
+
+        }
+    }
+  );
+}
 /* =====================================================
    TURU BİTİR / SIRAYI DEĞİŞTİR
 ===================================================== */
 
 function turuBitir() {
+
+  kartCekmeKilidi =
+    true;
+
+
+  setTimeout(
+    () => {
+
+      /*
+        +2 KART ÇEK ETKİSİ AKTİFSE
+        AYNI OYUNCU DEVAM EDER.
+      */
+
+      if (
+        ekstraKartCekmeSayisi > 0
+      ) {
+
+        ekstraKartCekmeSayisi--;
+
+
+        kartCekmeKilidi =
+          false;
+
+
+        if (
+          ekstraKartCekmeSayisi > 0
+        ) {
+
+          secimYazisiGoster(
+            `${aktifOyuncu}. OYUNCU — ${ekstraKartCekmeSayisi} EKSTRA KART DAHA ÇEK`
+          );
+
+        }
+
+
+        kartCekmeAsamasiniBaslat();
+
+        return;
+      }
+
+
+      aktifOyuncu =
+        aktifOyuncu === 1
+          ? 2
+          : 1;
+
+
+      kartCekmeKilidi =
+        false;
+
+
+      console.log(
+        "Yeni aktif oyuncu:",
+        aktifOyuncu
+      );
+
+
+      kartCekmeAsamasiniBaslat();
+
+    },
+    450
+  );
+}
 
   kartCekmeKilidi =
     true;
