@@ -1307,7 +1307,7 @@ body {
   position: absolute;
 
   left: 50%;
-  top: 28%;
+  top: 30.5%;
 
   transform:
     translateX(-50%);
@@ -1585,8 +1585,6 @@ body {
 
 
   #ozelKartSayac {
-    top: 30%;
-
     font-size:
       clamp(
         10px,
@@ -1665,6 +1663,8 @@ body {
 
 
   #ozelKartSayac {
+    top: 28%;
+
     font-size:
       clamp(
         14px,
