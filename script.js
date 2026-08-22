@@ -20,6 +20,9 @@ const baslaButonu =
 const nasilOynanirButonu =
   document.getElementById("nasilOynanirButonu");
 
+const yuklemeYuzdesi =
+  document.getElementById("yuklemeYuzdesi");
+
 
 /* =========================
    SANATÇI SEÇİM ELEMANLARI
@@ -140,6 +143,8 @@ let artanOzelKartlar = [];
 
 let ozelKartSecimKilidi = false;
 
+let oyunHazir = false;
+
 
 /* =========================
    SES
@@ -154,17 +159,82 @@ const anaMenuMuzik =
 const oyunMuzik =
   new Audio("sounds/oyun-muzik.mp3");
 
+const butonTik =
+  new Audio("sounds/buton-tik.mp3");
+
 anaMenuMuzik.loop = true;
 oyunMuzik.loop = true;
 
 anaMenuMuzik.volume = 0;
 oyunMuzik.volume = 0;
 
-const butonTik =
-  new Audio("sounds/buton-tik.mp3");
-
 butonTik.volume = BUTON_SESI;
 
+anaMenuMuzik.preload = "auto";
+oyunMuzik.preload = "auto";
+butonTik.preload = "auto";
+
+
+/* =========================
+   AÇILIŞ PRELOAD DOSYALARI
+========================= */
+
+const yuklenecekGorseller = [
+
+  /* ANA EKRAN */
+  "images/eu-games-logo.png",
+  "images/devam-etmek-icin-dokun.png",
+
+  /* ANA MENÜ */
+  "images/ana-menu-arkaplan.webp",
+  "images/muze-koleksiyonu-logo.png",
+  "images/basla.png",
+  "images/nasil-oynanir.png",
+
+  /* OYUN ALANI */
+  "images/oyun-arkaplan.png",
+
+  "images/sanatci-1.png",
+  "images/sanatci-2.png",
+  "images/sanatci-3.png",
+
+  "images/eser-bir.png",
+  "images/eser-iki.png",
+  "images/eser-uc.png",
+
+  "images/artan-ozel-yuva.png",
+  "images/artan-sanatci-yuva.png",
+
+  "images/cop-yuva.png",
+  "images/ortak-deste-yuva.png",
+
+  "images/ozel-kart-secim.png",
+
+  "images/kart-arkasi.png",
+
+  /* SANATÇILAR */
+  ...sanatcilar.map(
+    (sanatci) =>
+      sanatci.dosya
+  ),
+
+  /* ÖZEL KARTLAR */
+  ...ozelKartlar.map(
+    (kart) =>
+      kart.dosya
+  )
+];
+
+
+/* TEKRAR EDEN DOSYALARI TEMİZLE */
+
+const benzersizGorseller =
+  [...new Set(yuklenecekGorseller)];
+
+
+/* =========================
+   BUTON SESİ
+========================= */
 
 function butonSesiCal() {
 
@@ -184,6 +254,383 @@ function butonSesiCal() {
 
 
 /* =========================
+   TEK GÖRSELİ PRELOAD ET
+========================= */
+
+function gorselYukle(
+  dosya
+) {
+
+  return new Promise(
+    (resolve) => {
+
+      const resim =
+        new Image();
+
+      let tamamlandi =
+        false;
+
+
+      function bitir() {
+
+        if (tamamlandi) {
+          return;
+        }
+
+        tamamlandi = true;
+
+        resolve();
+      }
+
+
+      resim.onload =
+        bitir;
+
+
+      resim.onerror =
+        () => {
+
+          console.warn(
+            "Görsel yüklenemedi:",
+            dosya
+          );
+
+          bitir();
+        };
+
+
+      resim.src =
+        dosya;
+
+
+      if (
+        resim.complete
+      ) {
+
+        bitir();
+
+      }
+
+    }
+  );
+}
+
+
+/* =========================
+   TEK SESİ PRELOAD ET
+========================= */
+
+function sesYukle(
+  ses,
+  isim
+) {
+
+  return new Promise(
+    (resolve) => {
+
+      let tamamlandi =
+        false;
+
+
+      function bitir() {
+
+        if (tamamlandi) {
+          return;
+        }
+
+        tamamlandi = true;
+
+        ses.removeEventListener(
+          "canplaythrough",
+          bitir
+        );
+
+        ses.removeEventListener(
+          "canplay",
+          bitir
+        );
+
+        resolve();
+      }
+
+
+      if (
+        ses.readyState >= 3
+      ) {
+
+        bitir();
+
+        return;
+      }
+
+
+      ses.addEventListener(
+        "canplaythrough",
+        bitir,
+        {
+          once: true
+        }
+      );
+
+
+      ses.addEventListener(
+        "canplay",
+        bitir,
+        {
+          once: true
+        }
+      );
+
+
+      ses.addEventListener(
+        "error",
+        () => {
+
+          console.warn(
+            "Ses yüklenemedi:",
+            isim
+          );
+
+          bitir();
+
+        },
+        {
+          once: true
+        }
+      );
+
+
+      ses.load();
+
+
+      /*
+        Bazı mobil tarayıcılar canplaythrough
+        olayını geç verebilir.
+
+        Bu yüzden oyun sonsuza kadar
+        %99'da kalmasın.
+      */
+
+      setTimeout(
+        () => {
+
+          bitir();
+
+        },
+        10000
+      );
+
+    }
+  );
+}
+
+
+/* =========================
+   WINDOW LOAD BEKLE
+========================= */
+
+function tarayiciTamYuklendiMi() {
+
+  if (
+    document.readyState ===
+    "complete"
+  ) {
+
+    return Promise.resolve();
+
+  }
+
+
+  return new Promise(
+    (resolve) => {
+
+      window.addEventListener(
+        "load",
+        resolve,
+        {
+          once: true
+        }
+      );
+
+    }
+  );
+}
+
+
+/* =========================
+   OYUN DOSYALARINI PRELOAD ET
+========================= */
+
+async function oyunuOncedenYukle() {
+
+  oyunHazir =
+    false;
+
+
+  devamButonu
+    .classList
+    .remove(
+      "hazir"
+    );
+
+
+  yuklemeYuzdesi.textContent =
+    "0%";
+
+
+  const sesler = [
+    {
+      ses:
+        anaMenuMuzik,
+
+      isim:
+        "ana-menu-muzik.mp3"
+    },
+    {
+      ses:
+        oyunMuzik,
+
+      isim:
+        "oyun-muzik.mp3"
+    },
+    {
+      ses:
+        butonTik,
+
+      isim:
+        "buton-tik.mp3"
+    }
+  ];
+
+
+  const toplamDosya =
+    benzersizGorseller.length +
+    sesler.length;
+
+
+  let yuklenenDosya =
+    0;
+
+
+  function ilerlemeGuncelle() {
+
+    yuklenenDosya++;
+
+
+    /*
+      Burada bilerek en fazla %99 gösteriyoruz.
+
+      Tarayıcının kendi window.load olayı da
+      tamamlanınca %100 yapacağız.
+    */
+
+    const yuzde =
+      Math.min(
+        99,
+        Math.floor(
+          (
+            yuklenenDosya /
+            toplamDosya
+          ) *
+          100
+        )
+      );
+
+
+    yuklemeYuzdesi.textContent =
+      `${yuzde}%`;
+  }
+
+
+  const gorselIsleri =
+    benzersizGorseller.map(
+      async (dosya) => {
+
+        await gorselYukle(
+          dosya
+        );
+
+        ilerlemeGuncelle();
+
+      }
+    );
+
+
+  const sesIsleri =
+    sesler.map(
+      async (sesBilgisi) => {
+
+        await sesYukle(
+          sesBilgisi.ses,
+          sesBilgisi.isim
+        );
+
+        ilerlemeGuncelle();
+
+      }
+    );
+
+
+  await Promise.all(
+    [
+      ...gorselIsleri,
+      ...sesIsleri
+    ]
+  );
+
+
+  /*
+    Assetler hazır olsa bile tarayıcı
+    sayfayı tamamen yüklememiş olabilir.
+  */
+
+  await tarayiciTamYuklendiMi();
+
+
+  yuklemeYuzdesi.textContent =
+    "100%";
+
+
+  oyunHazir =
+    true;
+
+
+  /*
+    %100 kısa bir an görünsün,
+    sonra devam butonu gelsin.
+  */
+
+  setTimeout(
+    () => {
+
+      yuklemeYuzdesi.style.opacity =
+        "0";
+
+
+      setTimeout(
+        () => {
+
+          yuklemeYuzdesi.style.visibility =
+            "hidden";
+
+
+          devamButonu
+            .classList
+            .add(
+              "hazir"
+            );
+
+        },
+        300
+      );
+
+    },
+    450
+  );
+}
+
+
+/* =========================
    RANDOM KARIŞTIRMA
 ========================= */
 
@@ -192,9 +639,13 @@ function karistir(dizi) {
   const yeniDizi =
     [...dizi];
 
+
   for (
-    let i = yeniDizi.length - 1;
+    let i =
+      yeniDizi.length - 1;
+
     i > 0;
+
     i--
   ) {
 
@@ -203,6 +654,7 @@ function karistir(dizi) {
         Math.random() *
         (i + 1)
       );
+
 
     [
       yeniDizi[i],
@@ -213,6 +665,7 @@ function karistir(dizi) {
     ];
 
   }
+
 
   return yeniDizi;
 }
@@ -246,6 +699,7 @@ function muzikAc(
         1
       );
 
+
     muzik.volume =
       baslangicSes +
       (
@@ -255,7 +709,9 @@ function muzikAc(
       ilerleme;
 
 
-    if (ilerleme < 1) {
+    if (
+      ilerleme < 1
+    ) {
 
       requestAnimationFrame(
         animasyon
@@ -308,7 +764,9 @@ function muzikKapat(
           (1 - ilerleme);
 
 
-        if (ilerleme < 1) {
+        if (
+          ilerleme < 1
+        ) {
 
           requestAnimationFrame(
             animasyon
@@ -318,9 +776,11 @@ function muzikKapat(
 
           muzik.pause();
 
-          muzik.currentTime = 0;
+          muzik.currentTime =
+            0;
 
-          muzik.volume = 0;
+          muzik.volume =
+            0;
 
           resolve();
 
@@ -360,9 +820,11 @@ function secimYazisiniOlustur() {
     yazi.id =
       "secimYazisi";
 
-    oynanisEkrani.appendChild(
-      yazi
-    );
+
+    oynanisEkrani
+      .appendChild(
+        yazi
+      );
 
   }
 
@@ -378,8 +840,10 @@ function secimYazisiGoster(
   const yazi =
     secimYazisiniOlustur();
 
+
   yazi.textContent =
     metin;
+
 
   gsap.killTweensOf(
     yazi
@@ -415,14 +879,15 @@ function secimYazisiniGizle() {
     );
 
 
-  if (!yazi) return;
+  if (!yazi) {
+    return;
+  }
 
 
   gsap.to(
     yazi,
     {
       opacity: 0,
-
       duration: 0.3
     }
   );
@@ -441,10 +906,17 @@ function gsapDesteKaristir(
     (resolve) => {
 
       const solDeste =
-        desteKartlari.slice(0, 6);
+        desteKartlari.slice(
+          0,
+          6
+        );
+
 
       const sagDeste =
-        desteKartlari.slice(6, 12);
+        desteKartlari.slice(
+          6,
+          12
+        );
 
 
       desteKartlari.forEach(
@@ -454,14 +926,18 @@ function gsapDesteKaristir(
             kart,
             {
               x:
-                index * 1.2,
+                index *
+                1.2,
 
               y:
-                index * -0.35,
+                index *
+                -0.35,
 
-              rotation: 0,
+              rotation:
+                0,
 
-              scale: 1,
+              scale:
+                1,
 
               transformOrigin:
                 "50% 100%",
@@ -478,10 +954,11 @@ function gsapDesteKaristir(
       const tl =
         gsap.timeline(
           {
-            defaults: {
-              ease:
-                "power2.inOut"
-            },
+            defaults:
+              {
+                ease:
+                  "power2.inOut"
+              },
 
             onComplete:
               resolve
@@ -492,9 +969,14 @@ function gsapDesteKaristir(
       tl.to(
         desteKartlari,
         {
-          y: "-=20",
-          duration: 0.25,
-          stagger: 0.01
+          y:
+            "-=20",
+
+          duration:
+            0.25,
+
+          stagger:
+            0.01
         }
       );
 
@@ -512,11 +994,14 @@ function gsapDesteKaristir(
               -10 -
               index * 0.5,
 
-          rotation: -5,
+          rotation:
+            -5,
 
-          duration: 0.45,
+          duration:
+            0.45,
 
-          stagger: 0.025
+          stagger:
+            0.025
         }
       );
 
@@ -534,11 +1019,14 @@ function gsapDesteKaristir(
               -10 -
               index * 0.5,
 
-          rotation: 5,
+          rotation:
+            5,
 
-          duration: 0.45,
+          duration:
+            0.45,
 
-          stagger: 0.025
+          stagger:
+            0.025
         },
         "<"
       );
@@ -557,11 +1045,14 @@ function gsapDesteKaristir(
               8 -
               index * 0.5,
 
-          rotation: -8,
+          rotation:
+            -8,
 
-          scaleY: 0.96,
+          scaleY:
+            0.96,
 
-          duration: 0.35
+          duration:
+            0.35
         }
       );
 
@@ -579,11 +1070,14 @@ function gsapDesteKaristir(
               8 -
               index * 0.5,
 
-          rotation: 8,
+          rotation:
+            8,
 
-          scaleY: 0.96,
+          scaleY:
+            0.96,
 
-          duration: 0.35
+          duration:
+            0.35
         },
         "<"
       );
@@ -610,18 +1104,22 @@ function gsapDesteKaristir(
               i * 2,
 
             y:
-              -i * 0.8,
+              -i *
+              0.8,
 
-            rotation: -1.5,
+            rotation:
+              -1.5,
 
-            duration: 0.18,
+            duration:
+              0.18,
 
             ease:
               "power1.out"
           },
           "riffle+=" +
           (
-            i * 0.055
+            i *
+            0.055
           )
         );
 
@@ -634,18 +1132,22 @@ function gsapDesteKaristir(
               i * 2,
 
             y:
-              -i * 0.8,
+              -i *
+              0.8,
 
-            rotation: 1.5,
+            rotation:
+              1.5,
 
-            duration: 0.18,
+            duration:
+              0.18,
 
             ease:
               "power1.out"
           },
           "riffle+=" +
           (
-            i * 0.055 +
+            i *
+            0.055 +
             0.028
           )
         );
@@ -658,19 +1160,25 @@ function gsapDesteKaristir(
         {
           x:
             (index) =>
-              index * 0.9,
+              index *
+              0.9,
 
           y:
             (index) =>
-              index * -0.28,
+              index *
+              -0.28,
 
-          rotation: 0,
+          rotation:
+            0,
 
-          scaleY: 1,
+          scaleY:
+            1,
 
-          duration: 0.4,
+          duration:
+            0.4,
 
-          stagger: 0.012,
+          stagger:
+            0.012,
 
           ease:
             "back.out(1.25)"
@@ -689,12 +1197,17 @@ function gsapDesteKaristir(
 
 async function sanatciKartlariniKaristir() {
 
-  aktifOyuncu = 1;
+  aktifOyuncu =
+    1;
 
-  oyuncu1Secimleri = [];
-  oyuncu2Secimleri = [];
+  oyuncu1Secimleri =
+    [];
 
-  secimKilidi = false;
+  oyuncu2Secimleri =
+    [];
+
+  secimKilidi =
+    false;
 
 
   document
@@ -806,6 +1319,7 @@ function onIkiKartiDiz(
           "div"
         );
 
+
       slot.className =
         "kapaliKartSlotu";
 
@@ -912,7 +1426,9 @@ function sanatciKartiSec(
   }
 
 
-  secimKilidi = true;
+  secimKilidi =
+    true;
+
 
   kart.dataset.secildi =
     "evet";
@@ -921,49 +1437,54 @@ function sanatciKartiSec(
   gsap.to(
     kart,
     {
-      scaleX: 0,
+      scaleX:
+        0,
 
-      duration: 0.2,
+      duration:
+        0.2,
 
       ease:
         "power2.in",
 
-      onComplete: () => {
+      onComplete:
+        () => {
 
-        kart.src =
-          sanatci.dosya;
+          kart.src =
+            sanatci.dosya;
 
 
-        gsap.to(
-          kart,
-          {
-            scaleX: 1,
+          gsap.to(
+            kart,
+            {
+              scaleX:
+                1,
 
-            duration: 0.22,
+              duration:
+                0.22,
 
-            ease:
-              "back.out(1.5)",
+              ease:
+                "back.out(1.5)",
 
-            onComplete:
-              () => {
+              onComplete:
+                () => {
 
-                setTimeout(
-                  () => {
+                  setTimeout(
+                    () => {
 
-                    kartiYuvayaGonder(
-                      kart,
-                      sanatci
-                    );
+                      kartiYuvayaGonder(
+                        kart,
+                        sanatci
+                      );
 
-                  },
-                  300
-                );
+                    },
+                    300
+                  );
 
-              }
-          }
-        );
+                }
+            }
+          );
 
-      }
+        }
     }
   );
 }
@@ -989,6 +1510,7 @@ function kartiYuvayaGonder(
     hedefIndex =
       oyuncu1Secimleri.length;
 
+
     hedefYuva =
       oyuncu1SanatciYuvalari[
         hedefIndex
@@ -998,6 +1520,7 @@ function kartiYuvayaGonder(
 
     hedefIndex =
       oyuncu2Secimleri.length;
+
 
     hedefYuva =
       oyuncu2SanatciYuvalari[
@@ -1009,7 +1532,8 @@ function kartiYuvayaGonder(
 
   if (!hedefYuva) {
 
-    secimKilidi = false;
+    secimKilidi =
+      false;
 
     return;
 
@@ -1018,6 +1542,7 @@ function kartiYuvayaGonder(
 
   const kartRect =
     kart.getBoundingClientRect();
+
 
   const yuvaRect =
     hedefYuva.getBoundingClientRect();
@@ -1031,6 +1556,7 @@ function kartiYuvayaGonder(
 
   ucanKart.src =
     sanatci.dosya;
+
 
   ucanKart.className =
     "ucanSanatciKarti";
@@ -1094,11 +1620,14 @@ function kartiYuvayaGonder(
       height:
         yuvaRect.height,
 
-      rotation: 0,
+      rotation:
+        0,
 
-      opacity: 1,
+      opacity:
+        1,
 
-      duration: 0.65,
+      duration:
+        0.65,
 
       ease:
         "power3.inOut",
@@ -1119,6 +1648,7 @@ function kartiYuvayaGonder(
 
           yerlesenKart.src =
             sanatci.dosya;
+
 
           yerlesenKart.className =
             "yerlesenSanatciKarti";
@@ -1183,6 +1713,7 @@ function kartiYuvayaGonder(
 
                 event.stopPropagation();
 
+
                 kartOnizlemeAc(
                   yerlesenKart
                 );
@@ -1207,7 +1738,9 @@ function kartiYuvayaGonder(
           kart.remove();
 
 
-          if (slot) {
+          if (
+            slot
+          ) {
 
             slot.classList.add(
               "bos"
@@ -1233,7 +1766,8 @@ function kartiYuvayaGonder(
           }
 
 
-          secimKilidi = false;
+          secimKilidi =
+            false;
 
 
           secimDurumunuKontrolEt();
@@ -1288,6 +1822,7 @@ function kalanSanatcilariArtanYuvayaGonder() {
         yuvaRect.left -
         sahneRect.left;
 
+
       const yuvaTop =
         yuvaRect.top -
         sahneRect.top;
@@ -1309,6 +1844,7 @@ function kalanSanatcilariArtanYuvayaGonder() {
             kartRect.left -
             sahneRect.left;
 
+
           const kartTop =
             kartRect.top -
             sahneRect.top;
@@ -1322,6 +1858,7 @@ function kalanSanatcilariArtanYuvayaGonder() {
 
           ucanKart.src =
             "images/kart-arkasi.png";
+
 
           ucanKart.className =
             "artanSanatciUcanKart";
@@ -1368,9 +1905,10 @@ function kalanSanatcilariArtanYuvayaGonder() {
           );
 
 
-          oynanisEkrani.appendChild(
-            ucanKart
-          );
+          oynanisEkrani
+            .appendChild(
+              ucanKart
+            );
 
 
           kart.style.visibility =
@@ -1378,10 +1916,13 @@ function kalanSanatcilariArtanYuvayaGonder() {
 
 
           const desteKaymaX =
-            index * 0.8;
+            index *
+            0.8;
+
 
           const desteKaymaY =
-            index * -0.6;
+            index *
+            -0.6;
 
 
           gsap.to(
@@ -1408,7 +1949,8 @@ function kalanSanatcilariArtanYuvayaGonder() {
                 ) *
                 0.35,
 
-              duration: 0.7,
+              duration:
+                0.7,
 
               delay:
                 index *
@@ -1428,6 +1970,7 @@ function kalanSanatcilariArtanYuvayaGonder() {
 
                   artanKart.src =
                     "images/kart-arkasi.png";
+
 
                   artanKart.className =
                     "artanSanatciKarti";
@@ -1506,6 +2049,7 @@ function kalanSanatcilariArtanYuvayaGonder() {
                     kapaliKartSirasi.innerHTML =
                       "";
 
+
                     kapaliKartSirasi
                       .classList
                       .remove(
@@ -1535,15 +2079,21 @@ function kalanSanatcilariArtanYuvayaGonder() {
 
 function ozelKartSeciminiBaslat() {
 
-  secilenOzelKartlar = [];
+  secilenOzelKartlar =
+    [];
 
-  artanOzelKartlar = [];
 
-  ozelKartSecimKilidi = false;
+  artanOzelKartlar =
+    [];
+
+
+  ozelKartSecimKilidi =
+    false;
 
 
   window.secilenOzelKartlar =
     secilenOzelKartlar;
+
 
   window.artanOzelKartlar =
     artanOzelKartlar;
@@ -1561,6 +2111,7 @@ function ozelKartSeciminiBaslat() {
 
   dedektifSecimAlani.innerHTML =
     "";
+
 
   ozelKartSecimSirasi.innerHTML =
     "";
@@ -1594,31 +2145,45 @@ function ozelKartSeciminiBaslat() {
   kart.id =
     "dedektifZorunluKart";
 
+
   kart.src =
     dedektif.dosya;
+
 
   kart.alt =
     "Dedektif Soruşturması";
 
 
-  dedektifSecimAlani.appendChild(
-    kart
-  );
+  dedektifSecimAlani
+    .appendChild(
+      kart
+    );
 
 
   gsap.fromTo(
     kart,
     {
-      opacity: 0,
-      scale: 0.75,
-      y: 30
+      opacity:
+        0,
+
+      scale:
+        0.75,
+
+      y:
+        30
     },
     {
-      opacity: 1,
-      scale: 1,
-      y: 0,
+      opacity:
+        1,
 
-      duration: 0.5,
+      scale:
+        1,
+
+      y:
+        0,
+
+      duration:
+        0.5,
 
       ease:
         "back.out(1.5)"
@@ -1652,7 +2217,9 @@ function dedektifKartiniSec(
   if (
     ozelKartSecimKilidi
   ) {
+
     return;
+
   }
 
 
@@ -1679,11 +2246,17 @@ function dedektifKartiniSec(
   gsap.to(
     kart,
     {
-      scale: 0.75,
-      opacity: 0,
-      y: -25,
+      scale:
+        0.75,
 
-      duration: 0.35,
+      opacity:
+        0,
+
+      y:
+        -25,
+
+      duration:
+        0.35,
 
       ease:
         "power2.in",
@@ -1693,7 +2266,9 @@ function dedektifKartiniSec(
 
           kart.remove();
 
+
           digerOzelKartlariDiz();
+
 
           ozelKartSecimKilidi =
             false;
@@ -1732,6 +2307,7 @@ function digerOzelKartlariDiz() {
           "div"
         );
 
+
       slot.className =
         "ozelKartSlotu";
 
@@ -1745,17 +2321,22 @@ function digerOzelKartlariDiz() {
       kart.src =
         "images/kart-arkasi.png";
 
+
       kart.className =
         "kapaliOzelKart";
+
 
       kart.dataset.id =
         ozelKart.id;
 
+
       kart.dataset.dosya =
         ozelKart.dosya;
 
+
       kart.dataset.secildi =
         "hayir";
+
 
       kart.dataset.sira =
         index;
@@ -1791,18 +2372,30 @@ function digerOzelKartlariDiz() {
   gsap.fromTo(
     ".kapaliOzelKart",
     {
-      opacity: 0,
-      y: 30,
-      scale: 0.9
+      opacity:
+        0,
+
+      y:
+        30,
+
+      scale:
+        0.9
     },
     {
-      opacity: 1,
-      y: 0,
-      scale: 1,
+      opacity:
+        1,
 
-      duration: 0.4,
+      y:
+        0,
 
-      stagger: 0.035,
+      scale:
+        1,
+
+      duration:
+        0.4,
+
+      stagger:
+        0.035,
 
       ease:
         "power2.out"
@@ -1823,7 +2416,9 @@ function kapaliOzelKartSec(
   if (
     ozelKartSecimKilidi
   ) {
+
     return;
+
   }
 
 
@@ -1831,7 +2426,9 @@ function kapaliOzelKartSec(
     kart.dataset.secildi ===
     "evet"
   ) {
+
     return;
+
   }
 
 
@@ -1839,7 +2436,9 @@ function kapaliOzelKartSec(
     secilenOzelKartlar.length >=
     12
   ) {
+
     return;
+
   }
 
 
@@ -1866,11 +2465,17 @@ function kapaliOzelKartSec(
   gsap.to(
     kart,
     {
-      opacity: 0,
-      scale: 0.72,
-      y: -15,
+      opacity:
+        0,
 
-      duration: 0.25,
+      scale:
+        0.72,
+
+      y:
+        -15,
+
+      duration:
+        0.25,
 
       ease:
         "power2.in",
@@ -1924,13 +2529,15 @@ function artanOzelKartlariYuvayaGonder() {
 
   artanOzelKartlar =
     kalanKartlar.map(
-      (kart) => ({
-        id:
-          kart.dataset.id,
+      (kart) => (
+        {
+          id:
+            kart.dataset.id,
 
-        dosya:
-          kart.dataset.dosya
-      })
+          dosya:
+            kart.dataset.dosya
+        }
+      )
     );
 
 
@@ -1955,7 +2562,8 @@ function artanOzelKartlariYuvayaGonder() {
       .getBoundingClientRect();
 
 
-  let tamamlanan = 0;
+  let tamamlanan =
+    0;
 
 
   kalanKartlar.forEach(
@@ -1974,6 +2582,7 @@ function artanOzelKartlariYuvayaGonder() {
 
       ucanKart.src =
         "images/kart-arkasi.png";
+
 
       ucanKart.className =
         "artanOzelUcanKart";
@@ -2018,10 +2627,13 @@ function artanOzelKartlariYuvayaGonder() {
 
 
       const desteKaymaX =
-        index * 0.7;
+        index *
+        0.7;
+
 
       const desteKaymaY =
-        index * -0.55;
+        index *
+        -0.55;
 
 
       gsap.to(
@@ -2048,7 +2660,8 @@ function artanOzelKartlariYuvayaGonder() {
             ) *
             0.28,
 
-          duration: 0.72,
+          duration:
+            0.72,
 
           delay:
             index *
@@ -2068,6 +2681,7 @@ function artanOzelKartlariYuvayaGonder() {
 
               artanKart.src =
                 "images/kart-arkasi.png";
+
 
               artanKart.className =
                 "artanOzelKarti";
@@ -2198,11 +2812,14 @@ function kartOnizlemeAc(
   if (
     onizlemeAcik
   ) {
+
     return;
+
   }
 
 
-  onizlemeAcik = true;
+  onizlemeAcik =
+    true;
 
 
   butonSesiCal();
@@ -2236,6 +2853,7 @@ function kartOnizlemeAc(
 
   onizlemeKart.id =
     "kartOnizlemeKart";
+
 
   onizlemeKart.src =
     kaynakKart.src;
@@ -2318,6 +2936,7 @@ function kartOnizlemeAc(
     hedefGenislik =
       maksimumGenislik;
 
+
     hedefYukseklik =
       hedefGenislik /
       kartOrani;
@@ -2344,11 +2963,15 @@ function kartOnizlemeAc(
   gsap.fromTo(
     katman,
     {
-      opacity: 0
+      opacity:
+        0
     },
     {
-      opacity: 1,
-      duration: 0.3
+      opacity:
+        1,
+
+      duration:
+        0.3
     }
   );
 
@@ -2368,9 +2991,11 @@ function kartOnizlemeAc(
       height:
         hedefYukseklik,
 
-      rotation: 0,
+      rotation:
+        0,
 
-      duration: 0.55,
+      duration:
+        0.55,
 
       ease:
         "back.out(1.25)"
@@ -2383,11 +3008,14 @@ function kartOnizlemeAc(
     if (
       !onizlemeAcik
     ) {
+
       return;
+
     }
 
 
-    onizlemeAcik = false;
+    onizlemeAcik =
+      false;
 
 
     butonSesiCal();
@@ -2401,8 +3029,11 @@ function kartOnizlemeAc(
     gsap.to(
       katman,
       {
-        opacity: 0,
-        duration: 0.25
+        opacity:
+          0,
+
+        duration:
+          0.25
       }
     );
 
@@ -2422,7 +3053,8 @@ function kartOnizlemeAc(
         height:
           guncelKaynakRect.height,
 
-        duration: 0.45,
+        duration:
+          0.45,
 
         ease:
           "power3.inOut",
@@ -2433,7 +3065,9 @@ function kartOnizlemeAc(
             kaynakKart.style.opacity =
               "1";
 
+
             onizlemeKart.remove();
+
 
             katman.remove();
 
@@ -2449,6 +3083,7 @@ function kartOnizlemeAc(
     (event) => {
 
       event.stopPropagation();
+
 
       onizlemeyiKapat();
 
@@ -2479,7 +3114,8 @@ function secimDurumunuKontrolEt() {
     3
   ) {
 
-    aktifOyuncu = 2;
+    aktifOyuncu =
+      2;
 
 
     secimYazisiGoster(
@@ -2498,7 +3134,8 @@ function secimDurumunuKontrolEt() {
     3
   ) {
 
-    secimKilidi = true;
+    secimKilidi =
+      true;
 
 
     secimYazisiGoster(
@@ -2540,6 +3177,20 @@ devamButonu.addEventListener(
   "click",
   () => {
 
+    /*
+      HER ŞEY YÜKLENMEDEN
+      ASLA DEVAM ETTİRME.
+    */
+
+    if (
+      !oyunHazir
+    ) {
+
+      return;
+
+    }
+
+
     butonSesiCal();
 
 
@@ -2557,8 +3208,12 @@ devamButonu.addEventListener(
       );
 
 
-    anaMenuMuzik.currentTime = 0;
-    anaMenuMuzik.volume = 0;
+    anaMenuMuzik.currentTime =
+      0;
+
+
+    anaMenuMuzik.volume =
+      0;
 
 
     anaMenuMuzik
@@ -2600,8 +3255,12 @@ baslaButonu.addEventListener(
     butonSesiCal();
 
 
-    oyunMuzik.currentTime = 0;
-    oyunMuzik.volume = 0;
+    oyunMuzik.currentTime =
+      0;
+
+
+    oyunMuzik.volume =
+      0;
 
 
     oyunMuzik
@@ -2675,3 +3334,10 @@ nasilOynanirButonu.addEventListener(
 
   }
 );
+
+
+/* =========================
+   OYUNU YÜKLE
+========================= */
+
+oyunuOncedenYukle();
