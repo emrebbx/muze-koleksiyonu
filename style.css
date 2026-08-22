@@ -12,7 +12,9 @@ html,
 body {
   width: 100%;
   height: 100%;
+
   background: #000;
+
   overflow: hidden;
 }
 
@@ -216,8 +218,6 @@ body {
   -webkit-user-drag: none;
 }
 
-
-/* YÜKLEME BİTTİĞİNDE */
 
 #devamButonu.hazir {
   opacity: 1;
@@ -582,7 +582,7 @@ body {
 
 
 /* =========================
-   ÜST ÜÇLÜLERİN KONUMU
+   ÜST ÜÇLÜLER
 ========================= */
 
 .ustEserGrubu1 {
@@ -602,7 +602,7 @@ body {
 
 
 /* =========================
-   ALT ÜÇLÜLERİN KONUMU
+   ALT ÜÇLÜLER
 ========================= */
 
 .altEserGrubu1 {
@@ -764,6 +764,86 @@ body {
   -webkit-user-drag: none;
 
   pointer-events: none;
+}
+
+
+/* =====================================================
+   DEPO VE ÖZEL KART YUVALARI
+===================================================== */
+
+.depoYuvasi,
+.oyuncuOzelKartYuvasi {
+  position: absolute;
+
+  width: 6.6%;
+  height: auto;
+
+  z-index: 2;
+
+  user-select: none;
+  -webkit-user-drag: none;
+
+  pointer-events: none;
+}
+
+
+/* =========================
+   2. OYUNCU - ÜST DEPO
+========================= */
+
+#ustDepoBir {
+  left: 5%;
+  top: 10%;
+}
+
+#ustDepoIki {
+  left: 12%;
+  top: 10%;
+}
+
+
+/* =========================
+   2. OYUNCU - ÜST ÖZEL KART
+========================= */
+
+#ustOzelKartBir {
+  left: 81%;
+  top: 10%;
+}
+
+#ustOzelKartIki {
+  left: 88%;
+  top: 10%;
+}
+
+
+/* =========================
+   1. OYUNCU - ALT DEPO
+========================= */
+
+#altDepoBir {
+  left: 5%;
+  top: 76%;
+}
+
+#altDepoIki {
+  left: 12%;
+  top: 76%;
+}
+
+
+/* =========================
+   1. OYUNCU - ALT ÖZEL KART
+========================= */
+
+#altOzelKartBir {
+  left: 81%;
+  top: 76%;
+}
+
+#altOzelKartIki {
+  left: 88%;
+  top: 76%;
 }
 
 
