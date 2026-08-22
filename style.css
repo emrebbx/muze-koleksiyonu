@@ -1268,7 +1268,7 @@ body {
   transform:
     translateX(-50%);
 
-  width: 34%;
+  width: 65%;
 
   color: #7A5A16;
 
@@ -1279,18 +1279,18 @@ body {
 
   font-size:
     clamp(
-      10px,
-      0.9vw,
-      17px
+      12px,
+      1.05vw,
+      20px
     );
 
-  line-height: 1.25;
+  line-height: 1.35;
 
   font-weight: bold;
 
   text-align: center;
 
-  overflow-wrap: break-word;
+  white-space: nowrap;
 
   text-shadow:
     0 1px 2px
@@ -1565,20 +1565,6 @@ body {
       );
 
     letter-spacing: 1px;
-  }
-
-
-  #ozelKartAciklama {
-    width: 34%;
-
-    font-size:
-      clamp(
-        9px,
-        0.9vw,
-        14px
-      );
-
-    line-height: 1.18;
   }
 
 
