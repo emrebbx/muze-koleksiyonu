@@ -448,9 +448,6 @@ body {
 
 /* =====================================================
    ÜST 9 ESER ANA GRUBU
-
-   BUNUN left/top DEĞERİNİ DEĞİŞTİRİRSEN
-   SADECE ÜSTTEKİ 9 ESER BİRLİKTE HAREKET EDER.
 ===================================================== */
 
 #ustEserAlani {
@@ -470,16 +467,14 @@ body {
 
 /* =====================================================
    ALT 9 ESER ANA GRUBU
-
-   BUNUN left/top DEĞERİNİ DEĞİŞTİRİRSEN
-   SADECE ALTTAKİ 9 ESER BİRLİKTE HAREKET EDER.
+   KESİN TOP: 63%
 ===================================================== */
 
 #altEserAlani {
   position: absolute;
 
   left: 0%;
-  top: 0%;
+  top: 63%;
 
   width: 100%;
   height: 100%;
@@ -565,7 +560,7 @@ body {
 
 /* =====================================================
    ÜST 9 ESER
-   HER BİRİ TAMAMEN BAĞIMSIZ
+   HER BİRİ BAĞIMSIZ
 ===================================================== */
 
 
@@ -634,7 +629,7 @@ body {
 
 /* =====================================================
    ALT 9 ESER
-   HER BİRİ TAMAMEN BAĞIMSIZ
+   HER BİRİ BAĞIMSIZ
 ===================================================== */
 
 
