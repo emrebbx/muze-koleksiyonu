@@ -261,7 +261,6 @@ body {
 
 /* =========================
    ANA MENÜ ARKAPLAN
-   2704 × 1900
 ========================= */
 
 #anaMenuArkaplan {
@@ -1269,7 +1268,7 @@ body {
   transform:
     translateX(-50%);
 
-  width: 65%;
+  width: 34%;
 
   color: #7A5A16;
 
@@ -1280,16 +1279,18 @@ body {
 
   font-size:
     clamp(
-      12px,
-      1.05vw,
-      20px
+      10px,
+      0.9vw,
+      17px
     );
 
-  line-height: 1.35;
+  line-height: 1.25;
 
   font-weight: bold;
 
   text-align: center;
+
+  overflow-wrap: break-word;
 
   text-shadow:
     0 1px 2px
@@ -1568,16 +1569,16 @@ body {
 
 
   #ozelKartAciklama {
-    width: 48%;
+    width: 34%;
 
     font-size:
       clamp(
         9px,
-        1vw,
-        15px
+        0.9vw,
+        14px
       );
 
-    line-height: 1.2;
+    line-height: 1.18;
   }
 
 
