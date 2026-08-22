@@ -505,6 +505,8 @@ let oyuncu2ZarSonucu = null;
 
 let zarSirasi = 1;
 let zarAtisKilidi = false;
+
+
 /* =====================================================
    KART ÇEKME / DEPO DURUMU
 ===================================================== */
@@ -515,11 +517,14 @@ let oyuncu1DepoKartlari = [];
 let oyuncu2DepoKartlari = [];
 
 let bekleyenOzelKart = null;
+
 let copDeste = [];
+
 let oyuncu1OzelKartlari = [];
 let oyuncu2OzelKartlari = [];
 
 let ekstraKartCekmeSayisi = 0;
+
 
 /* =========================
    SES
@@ -548,8 +553,6 @@ butonTik.volume = BUTON_SESI;
 anaMenuMuzik.preload = "auto";
 oyunMuzik.preload = "auto";
 butonTik.preload = "auto";
-
-
 /* =====================================================
    AÇILIŞ PRELOAD DOSYALARI
 ===================================================== */
@@ -1778,7 +1781,10 @@ function kartiYuvayaGonder(
       width: kartRect.width + "px",
       height: kartRect.height + "px",
       zIndex: 9999,
+
+      /* UÇAN KART TIKLAMAYI ENGELLEMESİN */
       pointerEvents: "none",
+
       opacity: "1"
     }
   );
@@ -1856,7 +1862,13 @@ function kartiYuvayaGonder(
 
               zIndex: 5,
               opacity: "1",
+
+              /*
+                YERLEŞMİŞ SANATÇI KARTI
+                ÖNİZLEME İÇİN TIKLANABİLİR.
+              */
               pointerEvents: "auto",
+
               cursor: "pointer",
               objectFit: "fill",
               userSelect: "none",
@@ -1889,6 +1901,16 @@ function kartiYuvayaGonder(
 
           ucanKart.remove();
 
+
+          /*
+            ÖNEMLİ:
+            SADECE KART SİLİNİYOR.
+
+            SLOT SİLİNMİYOR.
+            BÖYLECE 12 KARTLIK BAŞLANGIÇ
+            DİZİLİMİNDEKİ BOŞLUK KORUNUYOR
+            VE DİĞER KARTLAR KAYMIYOR.
+          */
 
           const slot =
             kart.parentElement;
@@ -2028,7 +2050,10 @@ function kalanSanatcilariArtanYuvayaGonder() {
               width: kartRect.width + "px",
               height: kartRect.height + "px",
               zIndex: 9000 + index,
+
+              /* SADECE ANİMASYON GÖRSELİ */
               pointerEvents: "none",
+
               userSelect: "none",
               WebkitUserDrag: "none",
               objectFit: "fill"
@@ -2127,7 +2152,13 @@ function kalanSanatcilariArtanYuvayaGonder() {
                         "px",
 
                       zIndex: 20 + index,
+
+                      /*
+                        ARTAN SANATÇI DESTESİ
+                        OYUN TIKLAMALARINI ENGELLEMESİN.
+                      */
                       pointerEvents: "none",
+
                       userSelect: "none",
                       WebkitUserDrag: "none",
                       objectFit: "fill",
@@ -2183,8 +2214,6 @@ function kalanSanatcilariArtanYuvayaGonder() {
     }
   );
 }
-
-
 /* =====================================================
    ÖZEL KART SEÇİMİNİ BAŞLAT
 ===================================================== */
@@ -2315,9 +2344,7 @@ function dedektifKartiniSec(
   if (
     ozelKartSecimKilidi
   ) {
-
     return;
-
   }
 
 
@@ -2608,7 +2635,6 @@ function artanOzelKartlariYuvayaGonder() {
     ozelKartSeciminiBitir();
 
     return;
-
   }
 
 
@@ -2651,6 +2677,8 @@ function artanOzelKartlariYuvayaGonder() {
           width: kartRect.width + "px",
           height: kartRect.height + "px",
           zIndex: 9100 + index,
+
+          /* SADECE ANİMASYON GÖRSELİ */
           pointerEvents: "none"
         }
       );
@@ -2757,6 +2785,10 @@ function artanOzelKartlariYuvayaGonder() {
                   objectFit:
                     "fill",
 
+                  /*
+                    ARTAN ÖZEL KART DESTESİ
+                    TIKLAMALARI ENGELLEMESİN.
+                  */
                   pointerEvents:
                     "none",
 
@@ -3036,6 +3068,7 @@ function ortakDesteAnimasyonunuBaslat() {
         objectFit:
           "fill",
 
+        /* HAZIRLANIRKEN TIKLANMASIN */
         pointerEvents:
           "none",
 
@@ -3246,8 +3279,6 @@ function ortakDesteAnimasyonunuBaslat() {
     1200
   );
 }
-
-
 /* =====================================================
    ZAR STİLLERİNİ JS İÇİNDEN EKLE
 ===================================================== */
@@ -3615,9 +3646,7 @@ function baslangicZarSisteminiBaslat() {
 
 
   if (eskiKatman) {
-
     eskiKatman.remove();
-
   }
 
 
@@ -3715,15 +3744,6 @@ function baslangicZarSisteminiBaslat() {
 
   `;
 
-
-  /*
-    ÖNEMLİ:
-    Zar artık oyun ekranının içine değil
-    doğrudan BODY üzerine ekleniyor.
-
-    Böylece ortak deste ve diğer bütün
-    oyun elemanlarının üstünde kalır.
-  */
 
   document.body.appendChild(
     katman
@@ -3886,27 +3906,16 @@ function baslangicZariAt(
         gsap.fromTo(
           zarGorseli,
           {
-            rotation:
-              -18,
-
-            scale:
-              0.90,
-
-            y:
-              -6
+            rotation: -18,
+            scale: 0.90,
+            y: -6
           },
           {
-            rotation:
-              18,
+            rotation: 18,
+            scale: 1.06,
+            y: 0,
 
-            scale:
-              1.06,
-
-            y:
-              0,
-
-            duration:
-              0.10,
+            duration: 0.10,
 
             ease:
               "power1.inOut"
@@ -3960,8 +3969,7 @@ function zarAtisiniBitir(
 
   zarGorseli.textContent =
     zarSembolleri[
-      sonuc -
-      1
+      sonuc - 1
     ];
 
 
@@ -4015,22 +4023,30 @@ function zarAtisiniBitir(
 
     panel1
       .classList
-      .remove("aktif");
+      .remove(
+        "aktif"
+      );
 
 
     panel1
       .classList
-      .add("pasif");
+      .add(
+        "pasif"
+      );
 
 
     panel2
       .classList
-      .remove("pasif");
+      .remove(
+        "pasif"
+      );
 
 
     panel2
       .classList
-      .add("aktif");
+      .add(
+        "aktif"
+      );
 
 
     const buton2 =
@@ -4048,7 +4064,6 @@ function zarAtisiniBitir(
 
 
     return;
-
   }
 
 
@@ -4099,20 +4114,11 @@ function baslangicZarlariniKarsilastir() {
   }
 
 
-  if (
+  aktifOyuncu =
     oyuncu1ZarSonucu >
     oyuncu2ZarSonucu
-  ) {
-
-    aktifOyuncu =
-      1;
-
-  } else {
-
-    aktifOyuncu =
-      2;
-
-  }
+      ? 1
+      : 2;
 
 
   sonucYazisi.textContent =
@@ -4243,22 +4249,30 @@ function baslangicZarlariniSifirla() {
 
   panel1
     .classList
-    .remove("pasif");
+    .remove(
+      "pasif"
+    );
 
 
   panel1
     .classList
-    .add("aktif");
+    .add(
+      "aktif"
+    );
 
 
   panel2
     .classList
-    .remove("aktif");
+    .remove(
+      "aktif"
+    );
 
 
   panel2
     .classList
-    .add("pasif");
+    .add(
+      "pasif"
+    );
 }
 
 
@@ -4335,8 +4349,10 @@ function kartCekmeAsamasiniBaslat() {
       kart.style.pointerEvents =
         "none";
 
+
       kart.style.cursor =
         "default";
+
 
       kart.onclick =
         null;
@@ -4367,6 +4383,7 @@ function kartCekmeAsamasiniBaslat() {
   ustKart.style.pointerEvents =
     "auto";
 
+
   ustKart.style.cursor =
     "pointer";
 
@@ -4395,6 +4412,7 @@ function kartCekmeAsamasiniBaslat() {
     ortakDeste.length
   );
 }
+
 
 /* =====================================================
    ORTAK DESTEDEN KART ÇEK
@@ -4500,8 +4518,12 @@ function cekilenKartiBuyukGoster(
 
   const kaynakRect =
     kaynakKart
-      ? kaynakKart.getBoundingClientRect()
-      : ortakDesteYuvasi.getBoundingClientRect();
+
+      ? kaynakKart
+          .getBoundingClientRect()
+
+      : ortakDesteYuvasi
+          .getBoundingClientRect();
 
 
   const katman =
@@ -4669,15 +4691,11 @@ function cekilenKartiBuyukGoster(
   gsap.fromTo(
     katman,
     {
-      opacity:
-        0
+      opacity: 0
     },
     {
-      opacity:
-        1,
-
-      duration:
-        0.25
+      opacity: 1,
+      duration: 0.25
     }
   );
 
@@ -4728,28 +4746,25 @@ function cekilenKartiBuyukGoster(
 
 
               /*
-                ÖZEL KART MEKANİKLERİNİ
-                DAHA SONRA YAZACAĞIZ.
-
-                Şimdilik özel kart gelirse
-                kart ekranda kalır ve
-                oyun burada bekler.
+                ÖZEL KARTSA
+                PARÇA 5'TEKİ KARAR
+                SİSTEMİNE GİDİYOR.
               */
 
-bekleyenOzelKart =
-  kartBilgisi;
+              bekleyenOzelKart =
+                kartBilgisi;
 
 
-secimYazisiGoster(
-  "ÖZEL KART ÇEKİLDİ"
-);
+              secimYazisiGoster(
+                "ÖZEL KART ÇEKİLDİ"
+              );
 
 
-ozelKartKararlariniGoster(
-  kartBilgisi,
-  kart,
-  katman
-);
+              ozelKartKararlariniGoster(
+                kartBilgisi,
+                kart,
+                katman
+              );
 
             },
             850
@@ -4801,9 +4816,9 @@ function cekilenEseriYonet(
       );
 
 
-  /* =================================
+  /* ===============================
      KENDİ SANATÇISININ ESERİ
-  ================================= */
+  =============================== */
 
   if (
     kendiSanatciIndex !==
@@ -4833,9 +4848,7 @@ function cekilenEseriYonet(
       );
 
 
-    if (
-      !hedefYuva
-    ) {
+    if (!hedefYuva) {
 
       console.error(
         "Eser yuvası bulunamadı:",
@@ -4848,6 +4861,7 @@ function cekilenEseriYonet(
         kartElementi,
         katman
       );
+
 
       return;
     }
@@ -4871,9 +4885,9 @@ function cekilenEseriYonet(
   }
 
 
-  /* =================================
+  /* ===============================
      RAKİBİN SANATÇISININ ESERİ
-  ================================= */
+  =============================== */
 
   if (
     rakipSanatciIndex !==
@@ -4896,9 +4910,9 @@ function cekilenEseriYonet(
   }
 
 
-  /* =================================
-     HİÇBİR OYUNCUDA OLMAYAN SANATÇI
-  ================================= */
+  /* ===============================
+     HİÇBİR OYUNCUDA YOK
+  =============================== */
 
   console.log(
     "SEÇİLMEYEN SANATÇININ ESERİ → ÇÖP"
@@ -4932,11 +4946,8 @@ function eseriKoleksiyonaGonder(
   gsap.to(
     katman,
     {
-      opacity:
-        0,
-
-      duration:
-        0.25
+      opacity: 0,
+      duration: 0.25
     }
   );
 
@@ -4997,6 +5008,10 @@ function eseriKoleksiyonaGonder(
 
           yerlesenKart.dataset.eserSirasi =
             kartBilgisi.eserSirasi;
+
+
+          yerlesenKart.dataset.gercekDosya =
+            kartBilgisi.dosya;
 
 
           Object.assign(
@@ -5060,7 +5075,8 @@ function eseriKoleksiyonaGonder(
 
 
                 kartOnizlemeAc(
-                  yerlesenKart
+                  yerlesenKart,
+                  kartBilgisi.dosya
                 );
 
               }
@@ -5103,8 +5119,8 @@ function rakipEseriniDepoyaGonder(
 
 
   /*
-    DEPO DOLUYSA:
-    ÇEKİLEN YENİ KART DİREKT ÇÖPE.
+    DEPO 2 KART DOLUYSA
+    YENİ GELEN ESER ÇÖPE GİDER.
   */
 
   if (
@@ -5137,9 +5153,11 @@ function rakipEseriniDepoyaGonder(
 
     hedefYuva =
       depoKartlari.length === 0
+
         ? document.getElementById(
             "altDepoBir"
           )
+
         : document.getElementById(
             "altDepoIki"
           );
@@ -5148,9 +5166,11 @@ function rakipEseriniDepoyaGonder(
 
     hedefYuva =
       depoKartlari.length === 0
+
         ? document.getElementById(
             "ustDepoBir"
           )
+
         : document.getElementById(
             "ustDepoIki"
           );
@@ -5158,15 +5178,14 @@ function rakipEseriniDepoyaGonder(
   }
 
 
-  if (
-    !hedefYuva
-  ) {
+  if (!hedefYuva) {
 
     eseriCopeGonder(
       kartBilgisi,
       kartElementi,
       katman
     );
+
 
     return;
   }
@@ -5185,11 +5204,8 @@ function rakipEseriniDepoyaGonder(
   gsap.to(
     katman,
     {
-      opacity:
-        0,
-
-      duration:
-        0.25
+      opacity: 0,
+      duration: 0.25
     }
   );
 
@@ -5233,8 +5249,9 @@ function rakipEseriniDepoyaGonder(
 
 
           /*
-            DEPO KAPALI OLACAĞI İÇİN
-            OYUN ALANINDA KART ARKASI GÖRÜNÜR.
+            DEPO MASADA KAPALI GÖRÜNÜR.
+            TIKLANINCA GERÇEK KART
+            BÜYÜK ÖNİZLEMEDE AÇILIR.
           */
 
           depoKarti.src =
@@ -5287,8 +5304,18 @@ function rakipEseriniDepoyaGonder(
               objectFit:
                 "fill",
 
+              /*
+                ÖNEMLİ:
+                DEPODAKİ KARTA TIKLAYABİLELİM.
+              */
               pointerEvents:
-                "none",
+                "auto",
+
+              cursor:
+                "pointer",
+
+              touchAction:
+                "manipulation",
 
               userSelect:
                 "none",
@@ -5298,6 +5325,22 @@ function rakipEseriniDepoyaGonder(
 
               filter:
                 "drop-shadow(0 6px 6px rgba(0,0,0,0.45))"
+            }
+          );
+
+
+          depoKarti.addEventListener(
+            "click",
+            (event) => {
+
+              event.stopPropagation();
+
+
+              kartOnizlemeAc(
+                depoKarti,
+                kartBilgisi.dosya
+              );
+
             }
           );
 
@@ -5340,9 +5383,12 @@ function eseriCopeGonder(
   if (!copYuvasi) {
 
     kartElementi.remove();
+
     katman.remove();
 
+
     turuBitir();
+
 
     return;
   }
@@ -5359,11 +5405,10 @@ function eseriCopeGonder(
 
 
   /*
-    GERÇEK ÇÖPLÜK SIRASI
+    ÇÖPLÜK GERÇEK SIRASI.
 
-    push kullandığımız için:
-    ilk atılan kart index 0,
-    son atılan kart en sonda kalır.
+    İLK ATILAN ALTA,
+    SON ATILAN EN ÜSTE.
   */
 
   copDeste.push(
@@ -5376,21 +5421,18 @@ function eseriCopeGonder(
 
 
   const copIndex =
-    copDeste.length - 1;
+    copDeste.length -
+    1;
 
-
-  /*
-    Kartlar tamamen aynı noktada
-    görünmesin diye çok küçük
-    deste kayması veriyoruz.
-  */
 
   const kaymaX =
-    copIndex * 0.45;
+    copIndex *
+    0.45;
 
 
   const kaymaY =
-    copIndex * -0.35;
+    copIndex *
+    -0.35;
 
 
   gsap.to(
@@ -5421,7 +5463,8 @@ function eseriCopeGonder(
 
       rotation:
         (
-          copIndex % 5 -
+          copIndex %
+          5 -
           2
         ) *
         0.35,
@@ -5445,7 +5488,7 @@ function eseriCopeGonder(
 
 
           /*
-            ÇÖPTE KART ÖN YÜZÜ AÇIK.
+            ÇÖPLÜKTE ÖN YÜZÜ AÇIK.
           */
 
           copKarti.src =
@@ -5462,6 +5505,10 @@ function eseriCopeGonder(
 
           copKarti.dataset.tip =
             kartBilgisi.tip;
+
+
+          copKarti.dataset.gercekDosya =
+            kartBilgisi.dosya;
 
 
           Object.assign(
@@ -5494,6 +5541,10 @@ function eseriCopeGonder(
                 hedefRect.height +
                 "px",
 
+              /*
+                SON ATILAN KART
+                EN ÜSTTE OLUR.
+              */
               zIndex:
                 40 +
                 copIndex,
@@ -5507,6 +5558,9 @@ function eseriCopeGonder(
               cursor:
                 "pointer",
 
+              touchAction:
+                "manipulation",
+
               userSelect:
                 "none",
 
@@ -5515,7 +5569,8 @@ function eseriCopeGonder(
 
               transform:
                 `rotate(${(
-                  copIndex % 5 -
+                  copIndex %
+                  5 -
                   2
                 ) * 0.35}deg)`,
 
@@ -5525,19 +5580,16 @@ function eseriCopeGonder(
           );
 
 
-          /*
-            ÇÖPTEKİ KARTA TIKLAYINCA
-            BÜYÜK ÖNİZLEME AÇILABİLİR.
-          */
-
           copKarti.addEventListener(
             "click",
             (event) => {
 
               event.stopPropagation();
 
+
               kartOnizlemeAc(
-                copKarti
+                copKarti,
+                kartBilgisi.dosya
               );
 
             }
@@ -5551,6 +5603,7 @@ function eseriCopeGonder(
 
 
           kartElementi.remove();
+
           katman.remove();
 
 
@@ -5566,8 +5619,6 @@ function eseriCopeGonder(
     }
   );
 }
-
-
 /* =====================================================
    ÖZEL KART KARAR EKRANI
 ===================================================== */
@@ -5585,7 +5636,9 @@ function ozelKartKararlariniGoster(
 
 
   if (eskiButonlar) {
+
     eskiButonlar.remove();
+
   }
 
 
@@ -5605,7 +5658,8 @@ function ozelKartKararlariniGoster(
       position: "fixed",
 
       left: "50%",
-      bottom: "6%",
+
+      bottom: "5%",
 
       transform:
         "translateX(-50%)",
@@ -5619,6 +5673,9 @@ function ozelKartKararlariniGoster(
 
       alignItems:
         "center",
+
+      flexWrap:
+        "wrap",
 
       zIndex:
         "60010",
@@ -5720,19 +5777,20 @@ function ozelKartKararlariniGoster(
     );
 
 
-  const ozelKartlar =
+  const oyuncuOzelKartlari =
     aktifOyuncu === 1
       ? oyuncu1OzelKartlari
       : oyuncu2OzelKartlari;
 
 
   /*
-    İKİ YUVA DA DOLUYSA
-    YUVAYA KOY BUTONU PASİF.
+    ÖZEL KART ALANINDA
+    EN FAZLA 2 KART TUTULABİLİR.
   */
 
   if (
-    ozelKartlar.length >= 2
+    oyuncuOzelKartlari.length >=
+    2
   ) {
 
     yuvayaKoyButonu.disabled =
@@ -5776,7 +5834,9 @@ function ozelKartKararlariniGoster(
       if (
         yuvayaKoyButonu.disabled
       ) {
+
         return;
+
       }
 
 
@@ -5829,30 +5889,40 @@ function ozelKartiKullan(
 ) {
 
   /*
-    ŞİMDİLİK SADECE
-    +2 KART ÇEK ÇALIŞIYOR.
+    ŞİMDİLİK AKTİF OLARAK
+    +2 KART ÇEK KODLANDI.
+
+    DİĞER ÖZEL KARTLARI
+    TEK TEK BURAYA EKLEYECEĞİZ.
   */
+
 
   if (
     kartBilgisi.id ===
     "arti-iki-kart"
   ) {
 
-    ekstraKartCekmeSayisi =
+    /*
+      += KULLANIYORUZ.
+
+      İLERİDE +2 ETKİSİ ÜST ÜSTE
+      GELİRSE KAYBOLMASIN.
+    */
+
+    ekstraKartCekmeSayisi +=
       2;
 
 
     secimYazisiGoster(
-      `${aktifOyuncu}. OYUNCU — 2 EKSTRA KART ÇEKECEK`
+      `${aktifOyuncu}. OYUNCU — 2 EKSTRA KART ÇEK`
     );
 
 
     /*
-      KULLANILAN ÖZEL KART
-      ÖN YÜZÜ AÇIK ŞEKİLDE
-      ÇÖPLÜĞE GİDER.
+      KULLANILAN +2 KARTI
+      ÖN YÜZÜ AÇIK ÇÖPLÜĞE GİDER.
 
-      AMA TUR HEMEN BİTMEZ.
+      FAKAT TUR BİTMEZ.
     */
 
     ozelKartiCopeGonder(
@@ -5877,15 +5947,18 @@ function ozelKartiKullan(
 
 
   /*
-    HENÜZ KODLANMAMIŞ
-    ÖZEL KARTLAR.
+    HENÜZ ETKİSİ YAZILMAYAN
+    ÖZEL KARTLAR İÇİN ŞİMDİLİK:
 
-    Şimdilik kullanmaya basılırsa
-    çöpe gidip tur biter.
+    KULLAN'A BASILIRSA
+    KART ÇÖPE GİDER VE TUR BİTER.
+
+    SONRA BUNLARI TEK TEK
+    GERÇEK ETKİLERİYLE DEĞİŞTİRECEĞİZ.
   */
 
   console.log(
-    "Henüz özel etkisi yazılmadı:",
+    "Henüz özel etkisi kodlanmadı:",
     kartBilgisi.id
   );
 
@@ -5939,12 +6012,21 @@ function ozelKartiYuvayaGonder(
   let hedefYuva;
 
 
+  /*
+    1. OYUNCU =
+    ALT TARAF
+
+    2. OYUNCU =
+    ÜST TARAF
+  */
+
   if (
     aktifOyuncu === 1
   ) {
 
     hedefYuva =
-      oyuncuOzelKartlari.length === 0
+      oyuncuOzelKartlari.length ===
+      0
 
         ? document.getElementById(
             "altOzelKartBir"
@@ -5957,7 +6039,8 @@ function ozelKartiYuvayaGonder(
   } else {
 
     hedefYuva =
-      oyuncuOzelKartlari.length === 0
+      oyuncuOzelKartlari.length ===
+      0
 
         ? document.getElementById(
             "ustOzelKartBir"
@@ -5970,7 +6053,18 @@ function ozelKartiYuvayaGonder(
   }
 
 
+  /*
+    HTML'DE YUVA BULUNAMAZSA
+    KARTIN KAYBOLMAMASI İÇİN
+    ÇÖPLÜĞE GÖNDERİYORUZ.
+  */
+
   if (!hedefYuva) {
+
+    console.error(
+      "Özel kart yuvası bulunamadı."
+    );
+
 
     ozelKartiCopeGonder(
       kartBilgisi,
@@ -5998,6 +6092,7 @@ function ozelKartiYuvayaGonder(
     katman,
     {
       opacity: 0,
+
       duration: 0.25
     }
   );
@@ -6022,7 +6117,7 @@ function ozelKartiYuvayaGonder(
         0,
 
       duration:
-        0.7,
+        0.70,
 
       ease:
         "power3.inOut",
@@ -6041,6 +6136,11 @@ function ozelKartiYuvayaGonder(
             );
 
 
+          /*
+            MASADA ÖZEL KART
+            KAPALI DURACAK.
+          */
+
           kapaliKart.src =
             "images/kart-arkasi.png";
 
@@ -6052,6 +6152,13 @@ function ozelKartiYuvayaGonder(
           kapaliKart.dataset.id =
             kartBilgisi.id;
 
+
+          /*
+            GERÇEK DOSYAYI SAKLIYORUZ.
+
+            BÖYLECE KARTA TIKLAYINCA
+            ÖN YÜZÜNÜ GÖREBİLECEĞİZ.
+          */
 
           kapaliKart.dataset.gercekDosya =
             kartBilgisi.dosya;
@@ -6097,6 +6204,9 @@ function ozelKartiYuvayaGonder(
               pointerEvents:
                 "auto",
 
+              touchAction:
+                "manipulation",
+
               userSelect:
                 "none",
 
@@ -6108,6 +6218,12 @@ function ozelKartiYuvayaGonder(
             }
           );
 
+
+          /*
+            KAPALI ÖZEL KARTA
+            TIKLAYINCA ÖN YÜZÜ
+            BÜYÜK GÖSTER.
+          */
 
           kapaliKart.addEventListener(
             "click",
@@ -6166,6 +6282,11 @@ function ozelKartiCopeGonder(
     );
 
 
+  /*
+    ÇÖP YUVASI BULUNAMAZSA
+    YİNE DE OYUN KİLİTLENMESİN.
+  */
+
   if (!copYuvasi) {
 
     kartElementi.remove();
@@ -6173,10 +6294,22 @@ function ozelKartiCopeGonder(
     katman.remove();
 
 
+    bekleyenOzelKart =
+      null;
+
+
     if (tamamlaninca) {
+
       tamamlaninca();
-    } else if (turBitsin) {
+
+      return;
+    }
+
+
+    if (turBitsin) {
+
       turuBitir();
+
     }
 
 
@@ -6194,6 +6327,14 @@ function ozelKartiCopeGonder(
       .getBoundingClientRect();
 
 
+  /*
+    ESER VE ÖZEL KARTLAR
+    AYNI ÇÖPLÜK DİZİSİNDE.
+
+    BÖYLECE GERÇEK ATILMA
+    SIRASI KORUNUYOR.
+  */
+
   copDeste.push(
     kartBilgisi
   );
@@ -6204,7 +6345,8 @@ function ozelKartiCopeGonder(
 
 
   const copIndex =
-    copDeste.length - 1;
+    copDeste.length -
+    1;
 
 
   const kaymaX =
@@ -6220,11 +6362,9 @@ function ozelKartiCopeGonder(
   gsap.to(
     katman,
     {
-      opacity:
-        0,
+      opacity: 0,
 
-      duration:
-        0.25
+      duration: 0.25
     }
   );
 
@@ -6254,6 +6394,9 @@ function ozelKartiCopeGonder(
         ) *
         0.35,
 
+      opacity:
+        1,
+
       duration:
         0.65,
 
@@ -6269,6 +6412,11 @@ function ozelKartiCopeGonder(
             );
 
 
+          /*
+            ÇÖPLÜKTE ÖZEL KART
+            ÖN YÜZÜ AÇIK.
+          */
+
           copKarti.src =
             kartBilgisi.dosya;
 
@@ -6283,6 +6431,10 @@ function ozelKartiCopeGonder(
 
           copKarti.dataset.tip =
             "ozel";
+
+
+          copKarti.dataset.gercekDosya =
+            kartBilgisi.dosya;
 
 
           Object.assign(
@@ -6328,6 +6480,9 @@ function ozelKartiCopeGonder(
               pointerEvents:
                 "auto",
 
+              touchAction:
+                "manipulation",
+
               userSelect:
                 "none",
 
@@ -6336,7 +6491,8 @@ function ozelKartiCopeGonder(
 
               transform:
                 `rotate(${(
-                  copIndex % 5 -
+                  copIndex %
+                  5 -
                   2
                 ) * 0.35}deg)`,
 
@@ -6354,7 +6510,8 @@ function ozelKartiCopeGonder(
 
 
               kartOnizlemeAc(
-                copKarti
+                copKarti,
+                kartBilgisi.dosya
               );
 
             }
@@ -6376,6 +6533,12 @@ function ozelKartiCopeGonder(
             null;
 
 
+          console.log(
+            "ÇÖPLÜK:",
+            copDeste
+          );
+
+
           if (tamamlaninca) {
 
             tamamlaninca();
@@ -6394,6 +6557,8 @@ function ozelKartiCopeGonder(
     }
   );
 }
+
+
 /* =====================================================
    TURU BİTİR / SIRAYI DEĞİŞTİR
 ===================================================== */
@@ -6408,12 +6573,15 @@ function turuBitir() {
     () => {
 
       /*
-        +2 KART ÇEK ETKİSİ AKTİFSE
+        +2 KART ÇEK ETKİSİ VARSA
+        SIRA RAKİBE GEÇMEZ.
+
         AYNI OYUNCU DEVAM EDER.
       */
 
       if (
-        ekstraKartCekmeSayisi > 0
+        ekstraKartCekmeSayisi >
+        0
       ) {
 
         ekstraKartCekmeSayisi--;
@@ -6424,11 +6592,18 @@ function turuBitir() {
 
 
         if (
-          ekstraKartCekmeSayisi > 0
+          ekstraKartCekmeSayisi >
+          0
         ) {
 
           secimYazisiGoster(
             `${aktifOyuncu}. OYUNCU — ${ekstraKartCekmeSayisi} EKSTRA KART DAHA ÇEK`
+          );
+
+        } else {
+
+          secimYazisiGoster(
+            `${aktifOyuncu}. OYUNCU — SON EKSTRA KARTINI ÇEKTİ`
           );
 
         }
@@ -6436,9 +6611,16 @@ function turuBitir() {
 
         kartCekmeAsamasiniBaslat();
 
+
         return;
       }
 
+
+      /*
+        EKSTRA ÇEKİŞ YOKSA
+        NORMAL ŞEKİLDE
+        SIRA DEĞİŞİR.
+      */
 
       aktifOyuncu =
         aktifOyuncu === 1
@@ -6462,6 +6644,8 @@ function turuBitir() {
     450
   );
 }
+
+
 /* =====================================================
    KART ÖNİZLEME
 ===================================================== */
@@ -6474,6 +6658,7 @@ function kartOnizlemeAc(
   if (
     onizlemeAcik
   ) {
+
     return;
   }
 
@@ -6500,6 +6685,39 @@ function kartOnizlemeAc(
     "kartOnizlemeKatmani";
 
 
+  Object.assign(
+    katman.style,
+    {
+      position:
+        "fixed",
+
+      inset:
+        "0",
+
+      width:
+        "100vw",
+
+      height:
+        "100vh",
+
+      background:
+        "rgba(0,0,0,0.70)",
+
+      backdropFilter:
+        "blur(3px)",
+
+      WebkitBackdropFilter:
+        "blur(3px)",
+
+      zIndex:
+        "65000",
+
+      cursor:
+        "pointer"
+    }
+  );
+
+
   document.body.appendChild(
     katman
   );
@@ -6515,16 +6733,29 @@ function kartOnizlemeAc(
     "kartOnizlemeKart";
 
 
-onizlemeKart.src =
-  gercekDosya ||
-  kaynakKart.dataset.gercekDosya ||
-  kaynakKart.src;
+  /*
+    KART KAPALIYSA:
+
+    gercekDosya
+    veya
+    dataset.gercekDosya
+
+    KULLANILIR.
+
+    AÇIK KARTSA NORMAL SRC KULLANILIR.
+  */
+
+  onizlemeKart.src =
+    gercekDosya ||
+    kaynakKart.dataset.gercekDosya ||
+    kaynakKart.src;
 
 
   Object.assign(
     onizlemeKart.style,
     {
-      position: "fixed",
+      position:
+        "fixed",
 
       left:
         kaynakRect.left +
@@ -6542,11 +6773,29 @@ onizlemeKart.src =
         kaynakRect.height +
         "px",
 
-      zIndex: 10001,
-      opacity: "1",
-      cursor: "pointer",
-      userSelect: "none",
-      WebkitUserDrag: "none"
+      zIndex:
+        "65001",
+
+      opacity:
+        "1",
+
+      cursor:
+        "pointer",
+
+      objectFit:
+        "fill",
+
+      touchAction:
+        "manipulation",
+
+      userSelect:
+        "none",
+
+      WebkitUserDrag:
+        "none",
+
+      filter:
+        "drop-shadow(0 24px 30px rgba(0,0,0,0.75))"
     }
   );
 
@@ -6555,6 +6804,11 @@ onizlemeKart.src =
     onizlemeKart
   );
 
+
+  /*
+    KAYNAK KARTI GEÇİCİ OLARAK
+    GÖRÜNMEZ YAPIYORUZ.
+  */
 
   kaynakKart.style.opacity =
     "0";
@@ -6619,7 +6873,8 @@ onizlemeKart.src =
     },
     {
       opacity: 1,
-      duration: 0.3
+
+      duration: 0.25
     }
   );
 
@@ -6627,13 +6882,26 @@ onizlemeKart.src =
   gsap.to(
     onizlemeKart,
     {
-      left: hedefLeft,
-      top: hedefTop,
-      width: hedefGenislik,
-      height: hedefYukseklik,
-      rotation: 0,
-      duration: 0.55,
-      ease: "back.out(1.25)"
+      left:
+        hedefLeft,
+
+      top:
+        hedefTop,
+
+      width:
+        hedefGenislik,
+
+      height:
+        hedefYukseklik,
+
+      rotation:
+        0,
+
+      duration:
+        0.50,
+
+      ease:
+        "back.out(1.25)"
     }
   );
 
@@ -6643,6 +6911,7 @@ onizlemeKart.src =
     if (
       !onizlemeAcik
     ) {
+
       return;
     }
 
@@ -6663,6 +6932,7 @@ onizlemeKart.src =
       katman,
       {
         opacity: 0,
+
         duration: 0.25
       }
     );
@@ -6683,7 +6953,8 @@ onizlemeKart.src =
         height:
           guncelKaynakRect.height,
 
-        duration: 0.45,
+        duration:
+          0.45,
 
         ease:
           "power3.inOut",
@@ -6702,7 +6973,6 @@ onizlemeKart.src =
           }
       }
     );
-
   }
 
 
@@ -6711,6 +6981,7 @@ onizlemeKart.src =
     (event) => {
 
       event.stopPropagation();
+
 
       onizlemeyiKapat();
 
@@ -6751,7 +7022,6 @@ function secimDurumunuKontrolEt() {
 
 
     return;
-
   }
 
 
@@ -6791,13 +7061,12 @@ function secimDurumunuKontrolEt() {
       },
       500
     );
-
   }
 }
 
 
 /* =====================================================
-   DEVAM
+   DEVAM BUTONU
 ===================================================== */
 
 devamButonu.addEventListener(
@@ -6807,6 +7076,7 @@ devamButonu.addEventListener(
     if (
       !oyunHazir
     ) {
+
       return;
     }
 
@@ -6859,13 +7129,12 @@ devamButonu.addEventListener(
 
         }
       );
-
   }
 );
 
 
 /* =====================================================
-   BAŞLA
+   BAŞLA BUTONU
 ===================================================== */
 
 baslaButonu.addEventListener(
@@ -6932,7 +7201,6 @@ baslaButonu.addEventListener(
       },
       400
     );
-
   }
 );
 
@@ -6951,7 +7219,6 @@ nasilOynanirButonu.addEventListener(
     console.log(
       "Nasıl Oynanır butonuna basıldı!"
     );
-
   }
 );
 
