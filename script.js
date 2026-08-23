@@ -1279,41 +1279,60 @@ function rakibinTamamlanmisUygunEserleri() {
 
 
 /* =====================================================
-   DEPO YUVASI DOLU MU?
+   DEPO YUVASI DOLU MU — GÜVENLİ SÜRÜM
 ===================================================== */
 
 function depoYuvasiDoluMu(
   yuvaId
 ) {
 
-  return Boolean(
-    document.querySelector(
-      `.depodakiEserKarti[data-yuva-id="${yuvaId}"]`
-    )
-  );
-}
+  /*
+    1) DOM'DA GERÇEK KART VAR MI?
+  */
 
+  const domDolu =
+    Boolean(
+      document.querySelector(
+        `.depodakiEserKarti[data-yuva-id="${yuvaId}"]`
+      )
+    );
 
-/* =====================================================
-   DEPO YUVASI KİLİTLİ Mİ?
-===================================================== */
-
-function depoYuvasiKilitliMi(
-  yuvaId
-) {
 
   if (
-    !depoKilidiDurumu
+    domDolu
   ) {
 
-    return false;
+    return true;
   }
 
 
-  return (
-    depoKilidiDurumu.yuvaId ===
-    yuvaId
-  );
+  /*
+    2) OYUN VERİSİNDE KART VAR MI?
+
+    DOM animasyonu sırasında henüz
+    oluşmamış olsa bile veri kontrolü
+    depoyu boş sanmamızı engeller.
+  */
+
+  const oyuncu =
+    yuvaId.startsWith(
+      "alt"
+    )
+      ? 1
+      : 2;
+
+
+  const veriDolu =
+    oyuncununDeposu(
+      oyuncu
+    ).some(
+      (kart) =>
+        kart.yuvaId ===
+        yuvaId
+    );
+
+
+  return veriDolu;
 }
 
 
