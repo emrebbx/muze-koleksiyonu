@@ -51,7 +51,7 @@ body {
 
 
 /* =========================
-   TÜM EKRANLAR
+   TÜM EKRANLAR — GÜVENLİ SÜRÜM
 ========================= */
 
 .ekran {
@@ -64,14 +64,20 @@ body {
   opacity: 0;
   visibility: hidden;
 
+  /* GÖRÜNMEYEN EKRAN ASLA TIKLAMA ALMASIN */
+  pointer-events: none;
+
   transition:
-    opacity 0.7s ease,
-    visibility 0.7s ease;
+    opacity 0.35s ease;
 }
+
 
 .ekran.aktif {
   opacity: 1;
   visibility: visible;
+
+  /* SADECE AKTİF EKRAN TIKLAMA ALSIN */
+  pointer-events: auto;
 }
 
 
