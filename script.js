@@ -22207,6 +22207,82 @@ function ilkOyunDurumunuHazirla() {
 
 
 /* =====================================================
+   EKRAN GEÇİŞLERİ — PAKET 1
+===================================================== */
+
+let oyunBaslatiliyor =
+  false;
+
+let oyunAktif =
+  false;
+
+
+/* =========================
+   TEK EKRAN GÖSTER
+========================= */
+
+function ekranGoster(
+  hedefEkran
+) {
+
+  document
+    .querySelectorAll(
+      ".ekran"
+    )
+    .forEach(
+      (ekran) => {
+
+        ekran.classList.remove(
+          "aktif"
+        );
+
+        ekran.style.pointerEvents =
+          "none";
+      }
+    );
+
+
+  if (
+    hedefEkran
+  ) {
+
+    hedefEkran.classList.add(
+      "aktif"
+    );
+
+    hedefEkran.style.pointerEvents =
+      "auto";
+  }
+}
+
+
+/* =========================
+   MÜZİĞİ ANINDA DURDUR
+========================= */
+
+function muzigiTamDurdur(
+  muzik
+) {
+
+  if (
+    !muzik
+  ) {
+
+    return;
+  }
+
+
+  muzik.pause();
+
+  muzik.currentTime =
+    0;
+
+  muzik.volume =
+    0;
+}
+
+
+/* =====================================================
    DEVAM BUTONU
 ===================================================== */
 
@@ -22222,26 +22298,32 @@ devamButonu.addEventListener(
     }
 
 
+    if (
+      oyunAktif ||
+      oyunBaslatiliyor
+    ) {
+
+      return;
+    }
+
+
     butonSesiCal();
 
 
-    acilisEkrani
-      .classList
-      .remove(
-        "aktif"
-      );
+    /* OYUN MÜZİĞİ KESİNLİKLE ÇALMASIN */
+
+    muzigiTamDurdur(
+      oyunMuzik
+    );
 
 
-    anaMenu
-      .classList
-      .add(
-        "aktif"
-      );
+    ekranGoster(
+      anaMenu
+    );
 
 
     anaMenuMuzik.currentTime =
       0;
-
 
     anaMenuMuzik.volume =
       0;
@@ -22280,65 +22362,104 @@ baslaButonu.addEventListener(
   "click",
   async () => {
 
+    /*
+      ÇİFT TIKLAMA /
+      OYUN ÜSTÜNE OYUN
+      BAŞLATMAYI ENGELLE
+    */
+
+    if (
+      oyunBaslatiliyor ||
+      oyunAktif
+    ) {
+
+      return;
+    }
+
+
+    oyunBaslatiliyor =
+      true;
+
+
     butonSesiCal();
 
 
     /*
-      YENİ OTURUM BAŞLIYOR.
+      ÖNCE MENÜ MÜZİĞİ BİTSİN.
+
+      ESKİ KODDA OYUN MÜZİĞİ
+      ÖNCE BAŞLIYORDU VE 1 SANİYE
+      İKİ MÜZİK BİRLİKTE ÇALIYORDU.
     */
+
+    await muzikKapat(
+      anaMenuMuzik,
+      700
+    );
+
+
+    muzigiTamDurdur(
+      anaMenuMuzik
+    );
+
+
+    /* =========================
+       YENİ OYUN VERİLERİ
+    ========================= */
 
     ilkOyunDurumunuHazirla();
 
 
+    /* =========================
+       SADECE OYNANIŞ EKRANI
+    ========================= */
+
+    ekranGoster(
+      oynanisEkrani
+    );
+
+
+    /* =========================
+       OYUN MÜZİĞİ
+    ========================= */
+
     oyunMuzik.currentTime =
       0;
-
 
     oyunMuzik.volume =
       0;
 
 
-    oyunMuzik
-      .play()
-      .catch(
-        (hata) => {
+    try {
 
-          console.log(
-            "Oyun müziği başlatılamadı:",
-            hata
-          );
-        }
+      await oyunMuzik.play();
+
+
+      muzikAc(
+        oyunMuzik,
+        MUZIK_SESI,
+        1500
       );
 
+    } catch (
+      hata
+    ) {
 
-    await muzikKapat(
-      anaMenuMuzik,
-      1000
-    );
-
-
-    anaMenu
-      .classList
-      .remove(
-        "aktif"
+      console.log(
+        "Oyun müziği başlatılamadı:",
+        hata
       );
-
-
-    oynanisEkrani
-      .classList
-      .add(
-        "aktif"
-      );
-
-
-    muzikAc(
-      oyunMuzik,
-      MUZIK_SESI,
-      1500
-    );
+    }
 
 
     genelDokunmaUyumlulugunuKur();
+
+
+    oyunAktif =
+      true;
+
+    oyunBaslatiliyor =
+      false;
 
 
     setTimeout(
@@ -22359,31 +22480,30 @@ baslaButonu.addEventListener(
 
 nasilOynanirButonu.addEventListener(
   "click",
-  () => {
+  (event) => {
+
+    event.preventDefault();
+
+    event.stopPropagation();
+
 
     butonSesiCal();
 
 
+    /*
+      PAKET 7'DE GERÇEK
+      NASIL OYNANIR EKRANI
+      BAĞLANACAK.
+
+      ŞİMDİLİK MÜZİĞE
+      VE OYUNA DOKUNMUYOR.
+    */
+
     console.log(
-      "Nasıl Oynanır butonuna basıldı!"
+      "Nasıl Oynanır ekranı daha sonra bağlanacak."
     );
   }
 );
-
-
-/* =====================================================
-   PENCERE BOYUTU DEĞİŞTİĞİNDE
-   ETKİLEŞİMLERİ TAZELE
-===================================================== */
-
-window.addEventListener(
-  "resize",
-  () => {
-
-    aktifOyuncuArayuzunuYenile();
-  }
-);
-
 
 /* =====================================================
    SAYFA SEKMEDEN GERİ GELDİĞİNDE
